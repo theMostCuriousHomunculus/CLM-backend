@@ -21,6 +21,7 @@ export default async function (parent, args, context, info) {
   } else {
     card = controller[zone].find(crd => crd._id.toString() === cardID);
     card.controller = account._id;
+    card.index = player[zone].length;
 
     if (!card.visibility.some(plrID => plrID.toString() === account._id.toString())) card.visibility.push(account._id);
     

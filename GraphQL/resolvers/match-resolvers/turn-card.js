@@ -26,7 +26,7 @@ export default async function (parent, args, context, info) {
   } else if (!card.face_down && card.visibility.length === match.players.length) {
     match.log.push(`${account.name} turned ${card.name} face-down.`);
   } else {
-    // the card was turned face up or face down in a player's hand or on their library; nothing needs to be logged
+    // nothing should be logged
   }
 
   card.face_down = !card.face_down;

@@ -22,14 +22,16 @@ export default async function (parent, args, context, info) {
         controller: account._id,
         counters: [],
         image: card.image,
+        index: match.stack.length - 1,
         isCopyToken: true,
         name: card.name,
         owner: account._id,
+        scryfall_id: card.scryfall_id,
         visibility: [...card.visibility]
       });
     }
   } else if (zone === 'battlefield') {
-    card  = controller[zone].find(crd => crd._id.toString() === cardID);
+    card  = controller.battlefield.find(crd => crd._id.toString() === cardID);
     for (let i = 0; i < numberOfCopies; i++) {
       player.battlefield.push({
         back_image: card.back_image,
@@ -37,9 +39,11 @@ export default async function (parent, args, context, info) {
         controller: account._id,
         counters: [],
         image: card.image,
+        index: player.battlefield.length - 1,
         isCopyToken: true,
         name: card.name,
         owner: account._id,
+        scryfall_id: card.scryfall_id,
         visibility: [...card.visibility],
         x_coordinate: i,
         y_coordinate: i

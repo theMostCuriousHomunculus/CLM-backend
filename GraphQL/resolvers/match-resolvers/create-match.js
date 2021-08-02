@@ -62,7 +62,7 @@ export default async function (parent, args, context, info) {
               visibility: [player.account],
               x_coordinate: 0,
               y_coordinate: 0,
-              z_index: 0
+              index: 0
             });
           }
         });
@@ -113,7 +113,7 @@ export default async function (parent, args, context, info) {
             visibility: [player._id],
             x_coordinate: 0,
             y_coordinate: 0,
-            z_index: 0
+            index: 0
           });
         }
       });

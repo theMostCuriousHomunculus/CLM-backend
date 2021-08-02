@@ -17,13 +17,13 @@ export default async function (parent, args, context, info) {
       card.face_down = false;
       card.face_down_image = 'standard';
       card.flipped = false;
-      card.library_position = null;
+      card.index = null;
       card.tapped = false;
       card.targets = [];
       card.visibility = [card.owner];
       card.x_coordinate = 0;
       card.y_coordinate = 0;
-      card.z_index = 0;
+      card.index = 0;
 
       if (card.sideboarded) {
         match.players.find(p => p.account.toString() === card.owner.toString()).sideboard.push(card);

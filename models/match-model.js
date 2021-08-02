@@ -47,8 +47,8 @@ const matchCardSchema = new mongoose.Schema({
     required: true,
     type: Boolean
   },
-  library_position: {
-    required: false,
+  index: {
+    required: true,
     type: Number
   },
   mana_cost: String,
@@ -97,11 +97,6 @@ const matchCardSchema = new mongoose.Schema({
     required: true,
     type: Number,
     validate: [coordinateBoundaries, `{PATH} must be in the interval [0, 100).`]
-  },
-  z_index: {
-    default: 0,
-    required: true,
-    type: Number
   }
 });
 

@@ -16,13 +16,12 @@ export default async function (parent, args, context, info) {
       card.face_down = true;
       card.face_down_image = 'standard';
       card.flipped = false;
-      card.library_position = null;
+      card.index = 0;
       card.tapped = false;
       card.targets = [];
       card.visibility = [];
       card.x_coordinate = 0;
       card.y_coordinate = 0;
-      card.z_index = 0;
     }
 
     allMaindeckedCards.push(card);
@@ -48,10 +47,11 @@ export default async function (parent, args, context, info) {
   for (let i = 0; i < 7; i++) {
     player.hand[i].visibility = [account._id];
     player.hand[i].face_down = false;
+    player.hand[i].index = i;
   }
 
   for (let i = 0; i < allMaindeckedCards.length; i++) {
-    allMaindeckedCards[i].library_position = i;
+    allMaindeckedCards[i].index = i;
   }
 
   player.library = allMaindeckedCards;

@@ -172,7 +172,6 @@ const typeDefs = `
     cardID: String!
     xCoordinate: Float!
     yCoordinate: Float!
-    zIndex: Int!
   }
 
   input EditAccountInput {
@@ -262,6 +261,7 @@ const typeDefs = `
     back_image: String
     image: String!
     name: String!
+    scryfall_id: String!
   }
 
   input TransferCardInput {
@@ -399,7 +399,7 @@ const typeDefs = `
     flipped: Boolean
     image: String
     isCopyToken: Boolean
-    library_position: Int
+    index: Int
     mana_cost: String
     name: String
     owner: AccountType
@@ -411,7 +411,6 @@ const typeDefs = `
     visibility: [AccountType]
     x_coordinate: Float
     y_coordinate: Float
-    z_index: Int
   }
 
   type MatchPlayerType {

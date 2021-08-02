@@ -45,7 +45,7 @@ export default async function (req, res, next) {
       const match = await Match.findById(req.header('MatchID'));
       
       for (const plr of match.players) {
-        plr.library.sort((a,b) => a.library_position - b.library_position);
+        plr.library.sort((a,b) => a.index - b.index);
       }
 
       req.match = match;

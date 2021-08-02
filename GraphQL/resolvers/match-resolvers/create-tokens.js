@@ -14,9 +14,11 @@ export default async function (parent, args, context, info) {
       controller: account._id,
       counters: [],
       image: token.image,
+      index: player.battlefield.length - 1,
       isCopyToken: true,
       name: token.name,
       owner: account._id,
+      scryfall_id: token.scryfall_id,
       visibility: match.players.map(plr => plr.account),
       x_coordinate: i,
       y_coordinate: i

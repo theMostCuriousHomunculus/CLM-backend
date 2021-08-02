@@ -14,6 +14,9 @@ export default async function (parent, args, context, info) {
     card = match.stack.find(crd => crd._id.toString() === cardID);
     
     if (card.isCopyToken) {
+      for (const crd of match.stack) {
+        if (crd.index > card.index) crd.index -= 1;
+      }
       match.stack = match.stack.filter(crd => crd._id.toString() !== cardID);
     } else {
       throw new Error("Cannot destroy cards that are not copies or tokens.")
@@ -23,6 +26,9 @@ export default async function (parent, args, context, info) {
     card = player[zone].find(crd => crd._id.toString() === cardID);
 
     if (card.isCopyToken) {
+      for (const crd of player[zone]) {
+        if (crd.index > card.index) crd.index -= 1;
+      }
       player[zone] = player[zone].filter(crd => crd._id.toString() !== cardID);
     } else {
       throw new Error("Cannot destroy cards that are not copies or tokens.")

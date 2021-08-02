@@ -6,12 +6,17 @@ export default async function (parent, args, context, info) {
 
   if (!player) throw new HttpError("You are only a spectator.", 401);
 
-  const { input: { cardID, xCoordinate, yCoordinate, zIndex } } = args;
+  const { input: { cardID, xCoordinate, yCoordinate } } = args;
   const card = player.battlefield.find(crd => crd._id.toString() === cardID);
 
   card.x_coordinate = xCoordinate;
   card.y_coordinate = yCoordinate;
-  card.z_index = zIndex;
+
+  for (const crd of player.battlefield) {
+    if (crd.index > card.index) crd.index -= 1;
+  }
+
+  card.index = player.battlefield.length - 1;
 
   await match.save();
   pubsub.publish(match._id.toString(), { subscribeMatch: match });
