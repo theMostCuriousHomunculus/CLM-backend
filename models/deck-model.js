@@ -59,7 +59,7 @@ const deckSchema = new mongoose.Schema({
     type: String
   },
   format: {
-    enum: ['Legacy', 'Modern', 'Pauper', 'Pioneer', 'Standard', 'Vintage'],
+    enum: ['Classy', 'Legacy', 'Modern', 'Pauper', 'Pioneer', 'Standard', 'Vintage'],
     required: false,
     type: String
   },

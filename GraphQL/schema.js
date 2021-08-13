@@ -43,6 +43,7 @@ const typeDefs = `
   }
 
   enum FormatEnum {
+    Classy
     Legacy
     Modern
     Pauper
