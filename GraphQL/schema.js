@@ -182,6 +182,7 @@ const typeDefs = `
     name: String
     other_user_id: String
     password: String
+    return_other: Boolean
   }
 
   input EditCardInput {

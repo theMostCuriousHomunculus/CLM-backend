@@ -7,7 +7,7 @@ export default async function (parent, args, context, info) {
 
   if (!account) throw new HttpError("You must be logged in to perform this action.", 401);
 
-  const { input: { action, avatar, email, name, other_user_id, password } } = args;
+  const { input: { action, avatar, email, name, other_user_id, password, return_other } } = args;
 
   try {
     const mutableFields = ['avatar', 'email', 'name', 'password'];
@@ -18,8 +18,10 @@ export default async function (parent, args, context, info) {
       }
     }
 
+    let otherUser;
+
     if (other_user_id && other_user_id !== 'null' && other_user_id !== 'undefined') {
-      const otherUser = await Account.findById(other_user_id);
+      otherUser = await Account.findById(other_user_id);
 
       if (!otherUser) {
         throw new HttpError("We are unable to process your request because the other user does not exist in our database.", 403);
@@ -75,7 +77,12 @@ export default async function (parent, args, context, info) {
 
     await account.save();
     
-    return account;
+    if (return_other) {
+      return otherUser;
+    } else {
+      return account;
+    }
+
   } catch (error) {
 
     if (error.code === 11000) {
