@@ -190,6 +190,7 @@ const typeDefs = `
     componentID: ID!
     back_image: String
     collector_number: Int!
+    color_identity: [String!]
     image: String!
     mtgo_id: Int
     scryfall_id: String!
