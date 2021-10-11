@@ -1,23 +1,23 @@
 import mongoose from 'mongoose';
 
 const deckCardSchema = new mongoose.Schema({
-  back_image: String,
+  // back_image: String,
   cmc: {
     required: true,
     type: Number
   },
-  collector_number: {
-    required: true,
-    type: Number
-  },
+  // collector_number: {
+  //   required: true,
+  //   type: Number
+  // },
   color_identity: [String],
-  image: {
-    required: true,
-    type: String
-  },
-  keywords: [String],
-  mana_cost: String,
-  mtgo_id: Number,
+  // image: {
+  //   required: true,
+  //   type: String
+  // },
+  // keywords: [String],
+  // mana_cost: String,
+  // mtgo_id: Number,
   name: {
     required: true,
     type: String
@@ -30,15 +30,15 @@ const deckCardSchema = new mongoose.Schema({
     required: true,
     type: String
   },
-  set: {
-    required: true,
-    type: String
-  },
-  set_name: {
-    require: true,
-    type: String
-  },
-  tcgplayer_id: Number,
+  // set: {
+  //   required: true,
+  //   type: String
+  // },
+  // set_name: {
+  //   require: true,
+  //   type: String
+  // },
+  // tcgplayer_id: Number,
   type_line: {
     required: true,
     type: String

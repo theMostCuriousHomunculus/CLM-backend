@@ -188,15 +188,10 @@ const typeDefs = `
   input EditCardInput {
     cardID: ID!
     componentID: ID!
-    back_image: String
-    collector_number: Int!
+    cmc: Int!
     color_identity: [String!]
-    image: String!
-    mtgo_id: Int
     scryfall_id: String!
-    set: String!
-    set_name: String!
-    tcgplayer_id: Int
+    type_line: String!
   }
 
   input EditCubeInput {
