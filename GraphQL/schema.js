@@ -478,6 +478,7 @@ const typeDefs = `
     editRotation(input: EditRotationInput!): CubeType
     addCardsToDeck(input: AddCardsToDeckInput!): DeckType
     changeCardPrinting(input: String!): DeckType
+    cloneDeck: DeckType!
     createDeck(input: DeckInput!): DeckType
     deleteDeck: Boolean
     editDeck(input: DeckInput!): DeckType

@@ -40,6 +40,7 @@ import subscribeCube from './cube-resolvers/subscribe-cube.js';
 
 // deck
 import addCardsToDeck from './deck-resolvers/add-cards-to-deck.js';
+import cloneDeck from './deck-resolvers/clone-deck.js';
 import createDeck from './deck-resolvers/create-deck.js';
 import deleteDeck from './deck-resolvers/delete-deck.js';
 import editDeck from './deck-resolvers/edit-deck.js';
@@ -187,6 +188,7 @@ export default {
     editRotation,
   // deck
     addCardsToDeck,
+    cloneDeck,
     createDeck,
     deleteDeck,
     editDeck,
