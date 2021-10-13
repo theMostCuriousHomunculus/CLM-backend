@@ -464,6 +464,7 @@ const typeDefs = `
     deleteComment(input: DeleteCommentInput!): Boolean
     editBlogPost(input: BlogPostInput!): BlogPostType
     addCardToCube(input: AddCardToCubeInput!): CubeType
+    cloneCube: CubeType!
     createCube(input: CreateCubeInput!): CubeType!
     createModule(name: String!): CubeType
     createRotation(name: String!): CubeType

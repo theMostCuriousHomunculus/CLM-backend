@@ -22,6 +22,7 @@ import subscribeBlogPost from './blog-resolvers/subscribe-blog-post.js';
 
 // cube
 import addCardToCube from './cube-resolvers/add-card-to-cube.js';
+import cloneCube from './cube-resolvers/clone-cube.js';
 import createCube from './cube-resolvers/create-cube.js';
 import createModule from './cube-resolvers/create-module.js';
 import createRotation from './cube-resolvers/create-rotation.js';
@@ -172,6 +173,7 @@ export default {
     editBlogPost,
   // cube
     addCardToCube,
+    cloneCube,
     createCube,
     createModule,
     createRotation,
