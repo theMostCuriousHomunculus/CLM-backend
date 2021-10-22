@@ -94,6 +94,7 @@ const cubeSchema = new mongoose.Schema({
     trim: true,
     type: String
   },
+  published: Boolean,
   rotations: [rotationSchema],
   sideboard: [cubeCardSchema]
 });

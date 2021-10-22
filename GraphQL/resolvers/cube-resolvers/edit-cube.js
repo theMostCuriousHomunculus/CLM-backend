@@ -2,7 +2,8 @@ import HttpError from '../../../models/http-error.js';
 
 const validCubeProperties = [
   'description',
-  'name'
+  'name',
+  'published'
 ];
 
 export default async function (parent, args, context, info) {

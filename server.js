@@ -5,11 +5,21 @@ import { createServer } from 'http';
 import context from './context.js';
 import graphqlHandler from './GraphQL/GRAPHQL-handler.js';
 
-mongoose.connect(process.env.DB_CONNECTION, {
-  useCreateIndex: true,
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
+mongoose.connect(
+  `mongodb://${process.env.MONGODB_USERNAME ? process.env.MONGODB_USERNAME + ':' + process.env.MONGODB_PASSWORD +'@mongodb' : 'localhost'}:27017/cube-manager-api${process.env.MONGODB_USERNAME ? '?authSource=admin' : ''}`,
+  {
+    useCreateIndex: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  },
+  (error) => {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Connected to MongoDB');
+    }
+  }
+);
 
 const app = express();
 

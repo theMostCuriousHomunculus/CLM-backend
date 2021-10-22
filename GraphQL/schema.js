@@ -202,6 +202,7 @@ const typeDefs = `
   input EditCubeInput {
     description: String
     name: String
+    published: Boolean
   }
 
   input EditModuleInput {
@@ -359,6 +360,7 @@ const typeDefs = `
     mainboard: [CollectionCardType]
     modules: [ModuleType]
     name: String
+    published: Boolean
     rotations: [RotationType]
     sideboard: [CollectionCardType]
   }

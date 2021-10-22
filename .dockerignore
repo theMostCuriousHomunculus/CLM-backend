@@ -1,0 +1,6 @@
+node_modules
+Dockerfile
+secret.js
+.git
+.jest.config.json
+.nodemon.json
