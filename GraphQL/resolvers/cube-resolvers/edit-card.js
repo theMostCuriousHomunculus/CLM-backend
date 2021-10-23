@@ -18,13 +18,7 @@ export default async function (parent, args, context, info) {
   }
     
   for (let property of validCardProperties) {
-    if (typeof input[property.name] !== 'undefined') {
-      if (property.specialNumeric && isNaN(input[property.name])) {
-        card[property.name] = 0;
-      } else {
-        card[property.name] = input[property.name];
-      }
-    }
+    card[property] = input[property];
   }
 
   await cube.save();

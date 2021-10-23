@@ -189,6 +189,7 @@ const typeDefs = `
     cardID: ID!
     componentID: ID!
     back_image: String
+    cmc: Int!
     collector_number: Int!
     color_identity: [String!]
     image: String!
@@ -198,6 +199,7 @@ const typeDefs = `
     set: String!
     set_name: String!
     tcgplayer_id: Int
+    type_line: String!
   }
 
   input EditCubeInput {
