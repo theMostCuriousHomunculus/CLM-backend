@@ -193,6 +193,7 @@ const typeDefs = `
     color_identity: [String!]
     image: String!
     mtgo_id: Int
+    notes: String!
     scryfall_id: String!
     set: String!
     set_name: String!
@@ -326,6 +327,7 @@ const typeDefs = `
     mana_cost: String
     mtgo_id: Int
     name: String
+    notes: String
     oracle_id: String
     scryfall_id: String
     set: String

@@ -40,6 +40,10 @@ export default [
     specialNumeric: false
   },
   {
+    name: 'notes',
+    specialNumeric: false
+  },
+  {
     name: 'oracle_id',
     specialNumeric: false
   },

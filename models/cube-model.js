@@ -22,6 +22,12 @@ const cubeCardSchema = new mongoose.Schema({
     required: true,
     type: String
   },
+  notes: {
+    default: '',
+    maxlength: 1000,
+    trim: true,
+    type: String,
+  },
   oracle_id: {
     required: true,
     type: String
