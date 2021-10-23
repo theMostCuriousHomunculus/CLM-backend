@@ -6,7 +6,7 @@ import context from './context.js';
 import graphqlHandler from './GraphQL/GRAPHQL-handler.js';
 
 mongoose.connect(
-  `mongodb://${process.env.MONGODB_USERNAME ? process.env.MONGODB_USERNAME + ':' + process.env.MONGODB_PASSWORD +'@mongodb' : 'localhost'}:27017/cube-manager-api${process.env.MONGODB_USERNAME ? '?authSource=admin' : ''}`,
+  process.env.DB_CONNECTION,
   {
     useCreateIndex: true,
     useNewUrlParser: true,
