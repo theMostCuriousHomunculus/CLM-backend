@@ -7,10 +7,12 @@ import formatScryfallCardData from '../../../utils/format-scryfall-card-data.js'
 // TODO: import deck list from scryfall, tappedout or mtggoldfish
 
 export default async function (parent, args, context, info) {
+  if (!context.account)
+    throw new HttpError('You must be logged in to create a deck.', 401);
 
-  if (!context.account) throw new HttpError("You must be logged in to create a deck.", 401);
-
-  const { input: { description, existingListID, format, name } } = args;
+  const {
+    input: { description, existingListID, format, name }
+  } = args;
   const deckInfo = {
     creator: context.account._id,
     description,
@@ -22,10 +24,16 @@ export default async function (parent, args, context, info) {
   const identifierArray = [];
 
   if (existingListID) {
-    const listResponse = await axios.get(`https://api.scryfall.com/decks/${existingListID}/export/csv`);
+    const listResponse = await axios.get(
+      `https://api.scryfall.com/decks/${existingListID}/export/csv`
+    );
     CSVString.forEach(listResponse.data, ',', function (card, index) {
       if (index > 0 && card[0] && card[1] && card[16]) {
-        copiesArray.push({ component: card[0], copies: parseInt(card[1]), scryfall_id: card[16] });
+        copiesArray.push({
+          component: card[0],
+          copies: parseInt(card[1]),
+          scryfall_id: card[16]
+        });
         identifierArray.push({ id: card[16] });
       }
     });
@@ -34,21 +42,32 @@ export default async function (parent, args, context, info) {
     const numberOfScryfallRequests = Math.ceil(identifierArray.length / 75);
     const scryfallRequestArrays = [];
 
-    for (let requestNumber = 1; requestNumber <= numberOfScryfallRequests; requestNumber++) {
+    for (
+      let requestNumber = 1;
+      requestNumber <= numberOfScryfallRequests;
+      requestNumber++
+    ) {
       scryfallRequestArrays.push(identifierArray.splice(0, 75));
     }
 
     for (let request of scryfallRequestArrays) {
-      const scryfallResponse = await axios.post('https://api.scryfall.com/cards/collection', {
-        identifiers: request
-      });
+      const scryfallResponse = await axios.post(
+        'https://api.scryfall.com/cards/collection',
+        {
+          identifiers: request
+        }
+      );
 
       for (let data of scryfallResponse.data.data) {
         data = await formatScryfallCardData(data);
-        const allCopyIndexes = copiesArray.reduce((accumulator, current, index) => {
-          if (current.scryfall_id === data.scryfall_id) accumulator.push(index);
-          return accumulator;
-        }, []);
+        const allCopyIndexes = copiesArray.reduce(
+          (accumulator, current, index) => {
+            if (current.scryfall_id === data.scryfall_id)
+              accumulator.push(index);
+            return accumulator;
+          },
+          []
+        );
 
         for (const copyIndex of allCopyIndexes) {
           copiesArray[copyIndex] = {
@@ -60,7 +79,8 @@ export default async function (parent, args, context, info) {
     }
 
     for (const card of copiesArray) {
-      const component = card.component === 'mainboard' ? 'mainboard' : 'sideboard';
+      const component =
+        card.component === 'mainboard' ? 'mainboard' : 'sideboard';
       for (let i = 0; i < card.copies; i++) {
         deckInfo[component].push({
           back_image: card.back_image,
@@ -83,10 +103,10 @@ export default async function (parent, args, context, info) {
     }
   }
 
-  if (format)  deckInfo.format = format.toString();
+  if (format) deckInfo.format = format.toString();
 
   const deck = new Deck(deckInfo);
   await deck.save();
-  
+
   return deck;
-};
+}

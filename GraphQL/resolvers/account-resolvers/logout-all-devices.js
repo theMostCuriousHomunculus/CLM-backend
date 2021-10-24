@@ -1,5 +1,4 @@
 export default async function (parent, args, context, info) {
-  
   const { account } = context;
 
   if (!account) {
@@ -7,8 +6,7 @@ export default async function (parent, args, context, info) {
   } else {
     account.tokens = [];
     await account.save();
-    
+
     return true;
   }
-
-};
+}

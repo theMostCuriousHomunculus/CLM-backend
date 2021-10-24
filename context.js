@@ -10,12 +10,11 @@ import { Event } from './models/event-model.js';
 
 export default async function (req, res, next) {
   try {
-
     if (req.header('Authorization')) {
       const token = req.header('Authorization').replace('Bearer ', '');
       const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
       const account = await Account.findById(decodedToken._id);
-  
+
       req.account = account;
       req.token = token;
     }
@@ -36,24 +35,36 @@ export default async function (req, res, next) {
     }
 
     if (req.header('EventID')) {
-      const event = await Event.findOne({ '_id': req.header('EventID'), players: { $elemMatch: { account: req.account._id } } });
+      const event = await Event.findOne({
+        _id: req.header('EventID'),
+        players: { $elemMatch: { account: req.account._id } }
+      });
       req.event = event;
-      req.player = event ? event.players.find(plr => plr.account.toString() === req.account._id.toString()) : null;
+
+      if (event) {
+        req.player = event.players.find(
+          (plr) => plr.account.toString() === req.account._id.toString()
+        );
+      }
     }
 
     if (req.header('MatchID')) {
       const match = await Match.findById(req.header('MatchID'));
-      
+
       for (const plr of match.players) {
-        plr.library.sort((a,b) => a.index - b.index);
+        plr.library.sort((a, b) => a.index - b.index);
       }
 
       req.match = match;
-      req.player = match && req.account ? match.players.find(plr => plr.account.toString() === req.account._id.toString()) : null;
+
+      if (match && req.account) {
+        req.player = match.players.find(
+          (plr) => plr.account.toString() === req.account._id.toString()
+        );
+      }
     }
 
     req.pubsub = pubsub;
-
   } catch (error) {
     req.account = null;
     req.cube = null;
@@ -66,4 +77,4 @@ export default async function (req, res, next) {
   } finally {
     next();
   }
-};
+}

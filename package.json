@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon -L index.js",
-    "pretest": "eslint --ignore-path .gitignore .",
+    "lint": "eslint --ignore-path .gitignore .",
     "start": "node index.js",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config ./jest.config.json --watch --runInBand"
   },

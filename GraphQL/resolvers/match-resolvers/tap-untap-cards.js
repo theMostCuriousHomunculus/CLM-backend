@@ -1,15 +1,18 @@
 import HttpError from '../../../models/http-error.js';
 
 export default async function (parent, args, context, info) {
-
   const { match, player, pubsub } = context;
 
-  if (!player) throw new HttpError("You are only a spectator.", 401);
+  if (!player) throw new HttpError('You are only a spectator.', 401);
 
-  const { input: { cardIDs } } = args;
+  const {
+    input: { cardIDs }
+  } = args;
 
   for (const cardID of cardIDs) {
-    const card = player.battlefield.find(crd => crd._id.toString() === cardID);
+    const card = player.battlefield.find(
+      (crd) => crd._id.toString() === cardID
+    );
 
     card.tapped = !card.tapped;
   }
@@ -18,4 +21,4 @@ export default async function (parent, args, context, info) {
   pubsub.publish(match._id.toString(), { subscribeMatch: match });
 
   return match;
-};
+}

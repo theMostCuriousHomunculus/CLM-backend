@@ -1,18 +1,21 @@
 import mongoose from 'mongoose';
 
-const commentSchema = new mongoose.Schema({
-  author: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Account',
-    required: true
+const commentSchema = new mongoose.Schema(
+  {
+    author: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Account',
+      required: true
+    },
+    body: {
+      required: true,
+      type: String
+    }
   },
-  body: {
-    required: true,
-    type: String
+  {
+    timestamps: true
   }
-}, {
-  timestamps: true
-});
+);
 
 const blogSchema = new mongoose.Schema({
   author: {
@@ -45,7 +48,7 @@ const blogSchema = new mongoose.Schema({
   updatedAt: Date
 });
 
-blogSchema.index({ title: "text", subtitle: "text" });
+blogSchema.index({ title: 'text', subtitle: 'text' });
 
 const Blog = mongoose.model('Blog', blogSchema);
 

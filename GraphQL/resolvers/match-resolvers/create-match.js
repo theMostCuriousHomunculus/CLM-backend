@@ -5,12 +5,14 @@ import Match from '../../../models/match-model.js';
 import { Event } from '../../../models/event-model.js';
 
 export default async function (parent, args, context, info) {
-
   const { account } = context;
 
-  if (!account) throw new HttpError("You must be logged in to create a match.", 401);
-  
-  const { input: { deckIDs, eventID, playerIDs } } = args;
+  if (!account)
+    throw new HttpError('You must be logged in to create a match.', 401);
+
+  const {
+    input: { deckIDs, eventID, playerIDs }
+  } = args;
   const matchInfo = {
     game_winners: [],
     log: [],
@@ -40,7 +42,7 @@ export default async function (parent, args, context, info) {
           temporary: []
         };
 
-        ['mainboard', 'sideboard'].forEach(component => {
+        ['mainboard', 'sideboard'].forEach((component) => {
           for (const card of player[component]) {
             plr[component].push({
               back_image: card.back_image,
@@ -72,7 +74,7 @@ export default async function (parent, args, context, info) {
     }
   } else {
     matchInfo.decks = deckIDs;
-    
+
     for (let i = 0; i < deckIDs.length; i++) {
       const deck = await Deck.findById(deckIDs[i]);
       const player = await Account.findById(playerIDs[i]);
@@ -91,7 +93,7 @@ export default async function (parent, args, context, info) {
         temporary: []
       };
 
-      ['mainboard', 'sideboard'].forEach(component => {
+      ['mainboard', 'sideboard'].forEach((component) => {
         for (const card of deck[component]) {
           plr[component].push({
             back_image: card.back_image,
@@ -126,4 +128,4 @@ export default async function (parent, args, context, info) {
   await match.save();
 
   return match;
-};
+}

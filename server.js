@@ -33,18 +33,20 @@ app.use(function (req, res, next) {
     'Origin, X-Requested-With, Content-Type, Accept, Authorization, BlogPostID, CubeID, DeckID, EventID, MatchID'
   );
   res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, POST');
-  
+
   if (req.method === 'OPTIONS') {
     return res.sendStatus(200);
   }
 
   next();
 });
-app.use(express.urlencoded({
-  extended: true,
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}));
+app.use(
+  express.urlencoded({
+    extended: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+);
 
 app.use(context);
 

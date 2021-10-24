@@ -1,12 +1,13 @@
 import HttpError from '../../../models/http-error.js';
 
 export default async function (parent, args, context, info) {
-
   const { account, match, player, pubsub } = context;
 
-  if (!player) throw new HttpError("You are only a spectator.", 401);
+  if (!player) throw new HttpError('You are only a spectator.', 401);
 
-  const { input: { token, numberOfTokens } } = args;
+  const {
+    input: { token, numberOfTokens }
+  } = args;
 
   for (let i = 0; i < numberOfTokens; i++) {
     player.battlefield.push({
@@ -19,7 +20,7 @@ export default async function (parent, args, context, info) {
       name: token.name,
       owner: account._id,
       scryfall_id: token.scryfall_id,
-      visibility: match.players.map(plr => plr.account),
+      visibility: match.players.map((plr) => plr.account),
       x_coordinate: i,
       y_coordinate: i
     });
@@ -29,4 +30,4 @@ export default async function (parent, args, context, info) {
   pubsub.publish(match._id.toString(), { subscribeMatch: match });
 
   return match;
-};
+}

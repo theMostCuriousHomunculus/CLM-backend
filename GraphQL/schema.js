@@ -554,7 +554,7 @@ const typeDefs = `
 
 export default makeExecutableSchema({
   resolvers: rootResolver,
-  typeDefs: /*mergeTypeDefs(typeDefsArray)*/typeDefs
+  typeDefs: /* mergeTypeDefs(typeDefsArray) */ typeDefs
 });
 
 // const DraftCardInput = new GraphQLInputObjectType({

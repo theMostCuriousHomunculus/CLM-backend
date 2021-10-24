@@ -1,7 +1,9 @@
 import Account from '../../../models/account-model.js';
 
 export default async function (parent, args, context, info) {
-  const { input: { email, password } } = args;
+  const {
+    input: { email, password }
+  } = args;
   const account = await Account.findByCredentials(email, password);
   const token = await account.generateAuthenticationToken();
 
@@ -10,4 +12,4 @@ export default async function (parent, args, context, info) {
     token,
     userId: account._id
   };
-};
+}

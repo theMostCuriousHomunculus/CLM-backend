@@ -157,7 +157,7 @@ export default {
     event
   },
   Mutation: {
-  // account
+    // account
     // deleteAccount,
     editAccount,
     login,
@@ -166,13 +166,13 @@ export default {
     register,
     requestPasswordReset,
     submitPasswordReset,
-  // blog
+    // blog
     createBlogPost,
     createComment,
     deleteBlogPost,
     deleteComment,
     editBlogPost,
-  // cube
+    // cube
     addCardToCube,
     cloneCube,
     createCube,
@@ -186,7 +186,7 @@ export default {
     editCube,
     editModule,
     editRotation,
-  // deck
+    // deck
     addCardsToDeck,
     cloneDeck,
     createDeck,
@@ -194,14 +194,14 @@ export default {
     editDeck,
     removeCardsFromDeck,
     toggleMainboardSideboardDeck,
-  // event
+    // event
     addBasics,
     createEvent,
     removeBasics,
     selectCard,
     sortCard,
     toggleMainboardSideboardEvent,
-  // match
+    // match
     adjustCounters,
     adjustEnergyCounters,
     adjustLifeTotal,
@@ -227,36 +227,36 @@ export default {
     transferCard,
     turnCard,
     viewCard,
-    viewZone,
+    viewZone
   },
   Query: {
-  // account
+    // account
     fetchAccountByID,
     searchAccounts,
-  // blog
+    // blog
     fetchBlogPostByID,
     searchBlogPosts,
-  // cube
+    // cube
     fetchCubeByID,
     searchCubes,
-  // deck
+    // deck
     fetchDeckByID,
-  // event
+    // event
     fetchEventByID,
-  // match
+    // match
     fetchMatchByID
   },
   Subscription: {
-  // account
-  // blog
+    // account
+    // blog
     subscribeBlogPost,
-  // cube
+    // cube
     subscribeCube,
-  // deck
+    // deck
     subscribeDeck,
-  // event
+    // event
     subscribeEvent,
-  // match
+    // match
     subscribeMatch
   }
 };

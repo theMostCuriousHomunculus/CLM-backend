@@ -6,14 +6,18 @@ import HttpError from '../../../models/http-error.js';
 import formatScryfallCardData from '../../../utils/format-scryfall-card-data.js';
 
 export default async function (parent, args, context, info) {
+  if (!context.account)
+    throw new HttpError('You must be logged in to create a cube.', 401);
 
-  if (!context.account) throw new HttpError("You must be logged in to create a cube.", 401);
-
-  const { input: { cobraID, description, name } } = args;
+  const {
+    input: { cobraID, description, name }
+  } = args;
   const cardArray = [];
 
   if (cobraID) {
-    const cubeCobraResponse = await axios.get(`https://cubecobra.com/cube/download/csv/${cobraID}`);
+    const cubeCobraResponse = await axios.get(
+      `https://cubecobra.com/cube/download/csv/${cobraID}`
+    );
 
     CSVString.forEach(cubeCobraResponse.data, ',', function (card, index) {
       if (index > 0 && card[4] && card[5]) {
@@ -28,14 +32,21 @@ export default async function (parent, args, context, info) {
     const numberOfScryfallRequests = Math.ceil(cardArray.length / 75);
     const scryfallRequestArrays = [];
 
-    for (let requestNumber = 0; requestNumber < numberOfScryfallRequests; requestNumber++) {
+    for (
+      let requestNumber = 0;
+      requestNumber < numberOfScryfallRequests;
+      requestNumber++
+    ) {
       scryfallRequestArrays.push(cardArray.splice(0, 75));
     }
 
     for (let request of scryfallRequestArrays) {
-      const scryfallResponse = await axios.post('https://api.scryfall.com/cards/collection', {
-        identifiers: request
-      });
+      const scryfallResponse = await axios.post(
+        'https://api.scryfall.com/cards/collection',
+        {
+          identifiers: request
+        }
+      );
 
       for (let card of scryfallResponse.data.data) {
         cardArray.push(formatScryfallCardData(card));
@@ -50,6 +61,6 @@ export default async function (parent, args, context, info) {
     name
   });
   await cube.save();
-  
+
   return cube;
-};
+}

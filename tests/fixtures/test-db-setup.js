@@ -9,13 +9,16 @@ const existingUser1ID = new mongoose.Types.ObjectId();
 export const existingUser1 = {
   _id: existingUser1ID,
   admin: true,
-  avatar: 'https://c1.scryfall.com/file/scryfall-cards/art_crop/front/3/b/3bd78731-949c-464a-826a-92f86d784911.jpg?1562553791',
+  avatar:
+    'https://c1.scryfall.com/file/scryfall-cards/art_crop/front/3/b/3bd78731-949c-464a-826a-92f86d784911.jpg?1562553791',
   email: 'carnage_tyrant@yahoo.com',
   name: 'Carny-T',
   password: '!Gr0wLR04r',
-  tokens: [{
-    token: jwt.sign({ _id: existingUser1ID }, process.env.JWT_SECRET)
-  }]
+  tokens: [
+    {
+      token: jwt.sign({ _id: existingUser1ID }, process.env.JWT_SECRET)
+    }
+  ]
 };
 
 export const existingCube1 = {
@@ -32,13 +35,16 @@ export const existingCube1 = {
 const existingUser2ID = new mongoose.Types.ObjectId();
 export const existingUser2 = {
   _id: existingUser2ID,
-  avatar: 'https://c1.scryfall.com/file/scryfall-cards/art_crop/front/3/b/3bd78731-949c-464a-826a-92f86d784911.jpg?1562553791',
+  avatar:
+    'https://c1.scryfall.com/file/scryfall-cards/art_crop/front/3/b/3bd78731-949c-464a-826a-92f86d784911.jpg?1562553791',
   email: 'primeval_titan@aol.com',
   name: 'Prime Time',
   password: '123password!@#',
-  tokens: [{
-    token: jwt.sign({ _id: existingUser2ID }, process.env.JWT_SECRET)
-  }]
+  tokens: [
+    {
+      token: jwt.sign({ _id: existingUser2ID }, process.env.JWT_SECRET)
+    }
+  ]
 };
 
 const dateTime = new Date();
@@ -68,7 +74,8 @@ export const existingBlogPost1 = {
       updatedAt: dateTimePlus2.toISOString()
     }
   ],
-  image: 'https://c1.scryfall.com/file/scryfall-cards/art_crop/front/e/6/e6990bf6-3b2a-44c8-b7fb-04d74249abfe.jpg?1562941305',
+  image:
+    'https://c1.scryfall.com/file/scryfall-cards/art_crop/front/e/6/e6990bf6-3b2a-44c8-b7fb-04d74249abfe.jpg?1562941305',
   subtitle: 'Much Wisdom',
   title: 'Cube 101',
   createdAt: dateTime.toISOString(),
@@ -95,7 +102,8 @@ export const existingBlogPost2 = {
       updatedAt: dateTimePlus5.toISOString()
     }
   ],
-  image: 'https://c1.scryfall.com/file/scryfall-cards/art_crop/front/b/a/baeb0421-b7af-44cd-a7f6-7daaa3dcaa38.jpg?1598303782',
+  image:
+    'https://c1.scryfall.com/file/scryfall-cards/art_crop/front/b/a/baeb0421-b7af-44cd-a7f6-7daaa3dcaa38.jpg?1598303782',
   subtitle: 'Wisdom Galore',
   title: 'Cube 102',
   createdAt: dateTimePlus3.toISOString(),
@@ -107,7 +115,7 @@ export const nonExistantUser = {
   password: 'd0ntM4ak3N0M4tt3r'
 };
 
-export async function setupDatabase () {
+export async function setupDatabase() {
   await Account.deleteMany();
   await Blog.deleteMany();
   await Cube.deleteMany();

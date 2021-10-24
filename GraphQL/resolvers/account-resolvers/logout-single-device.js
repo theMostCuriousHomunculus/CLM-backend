@@ -7,10 +7,9 @@ export default async function (parent, args, context, info) {
     account.tokens = account.tokens.filter((token) => {
       return token.token !== context.token;
     });
-  
+
     await account.save();
-    
+
     return true;
   }
-
-};
+}

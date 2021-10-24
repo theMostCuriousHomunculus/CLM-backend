@@ -1,13 +1,14 @@
 import HttpError from '../../../models/http-error.js';
 
 export default async function (parent, args, context, info) {
-
   const { match, player, pubsub } = context;
 
-  if (!player) throw new HttpError("You are only a spectator.", 401);
+  if (!player) throw new HttpError('You are only a spectator.', 401);
 
-  const { input: { cardID, xCoordinate, yCoordinate } } = args;
-  const card = player.battlefield.find(crd => crd._id.toString() === cardID);
+  const {
+    input: { cardID, xCoordinate, yCoordinate }
+  } = args;
+  const card = player.battlefield.find((crd) => crd._id.toString() === cardID);
 
   card.x_coordinate = xCoordinate;
   card.y_coordinate = yCoordinate;
@@ -22,4 +23,4 @@ export default async function (parent, args, context, info) {
   pubsub.publish(match._id.toString(), { subscribeMatch: match });
 
   return match;
-};
+}

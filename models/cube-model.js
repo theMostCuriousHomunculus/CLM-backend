@@ -26,7 +26,7 @@ const cubeCardSchema = new mongoose.Schema({
     default: '',
     maxlength: 1000,
     trim: true,
-    type: String,
+    type: String
   },
   oracle_id: {
     required: true,
@@ -105,7 +105,7 @@ const cubeSchema = new mongoose.Schema({
   sideboard: [cubeCardSchema]
 });
 
-cubeSchema.index({ name: "text", description: "text" });
+cubeSchema.index({ name: 'text', description: 'text' });
 
 const Cube = mongoose.model('Cube', cubeSchema);
 

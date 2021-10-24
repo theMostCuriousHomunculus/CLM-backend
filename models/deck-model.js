@@ -59,7 +59,15 @@ const deckSchema = new mongoose.Schema({
     type: String
   },
   format: {
-    enum: ['Classy', 'Legacy', 'Modern', 'Pauper', 'Pioneer', 'Standard', 'Vintage'],
+    enum: [
+      'Classy',
+      'Legacy',
+      'Modern',
+      'Pauper',
+      'Pioneer',
+      'Standard',
+      'Vintage'
+    ],
     required: false,
     type: String
   },
@@ -76,7 +84,7 @@ const deckSchema = new mongoose.Schema({
   sideboard: [deckCardSchema]
 });
 
-deckSchema.index({ name: "text", description: "text" });
+deckSchema.index({ name: 'text', description: 'text' });
 
 const Deck = mongoose.model('Deck', deckSchema);
 

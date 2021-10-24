@@ -26,5 +26,5 @@ export default graphqlHTTP(async function (req, res, graphQLParams) {
     // graphiql: { subscriptionEndpoint: `ws://localhost:${process.env.PORT}/subscriptions` },
     // graphiql: true,
     schema
-  }
+  };
 });

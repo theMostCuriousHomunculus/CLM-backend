@@ -14,10 +14,12 @@ const accountSchema = new mongoose.Schema({
     required: true,
     type: String
   },
-  buds: [{
-    ref: 'Account',
-    type: mongoose.Schema.Types.ObjectId
-  }],
+  buds: [
+    {
+      ref: 'Account',
+      type: mongoose.Schema.Types.ObjectId
+    }
+  ],
   email: {
     lowercase: true,
     required: true,
@@ -33,7 +35,7 @@ const accountSchema = new mongoose.Schema({
     maxlength: 30,
     required: true,
     trim: true,
-    type: String        
+    type: String
   },
   password: {
     minlength: 7,
@@ -41,22 +43,28 @@ const accountSchema = new mongoose.Schema({
     trim: true,
     type: String
   },
-  received_bud_requests: [{
-    ref: 'Account',
-    type: mongoose.Schema.Types.ObjectId
-  }],
+  received_bud_requests: [
+    {
+      ref: 'Account',
+      type: mongoose.Schema.Types.ObjectId
+    }
+  ],
   reset_token: String,
   reset_token_expiration: Date,
-  sent_bud_requests: [{
-    ref: 'Account',
-    type: mongoose.Schema.Types.ObjectId
-  }],
-  tokens: [{
-    token: {
-      type: String,
-      required: true
+  sent_bud_requests: [
+    {
+      ref: 'Account',
+      type: mongoose.Schema.Types.ObjectId
     }
-  }]
+  ],
+  tokens: [
+    {
+      token: {
+        type: String,
+        required: true
+      }
+    }
+  ]
 });
 
 accountSchema.methods.generateAuthenticationToken = async function () {
@@ -69,23 +77,29 @@ accountSchema.methods.generateAuthenticationToken = async function () {
 };
 
 accountSchema.statics.findByCredentials = async (email, enteredPassword) => {
-  const user = await Account.findOne({ email })
+  const user = await Account.findOne({ email });
 
   if (!user) {
-    throw new HttpError('The provided email address and/or password were incorrect.  Please try again.', 404);
+    throw new HttpError(
+      'The provided email address and/or password were incorrect.  Please try again.',
+      404
+    );
   }
 
   const isMatch = await bcrypt.compare(enteredPassword, user.password);
 
   if (!isMatch) {
-    throw new HttpError('The provided email address and/or password were incorrect.  Please try again.', 404);
+    throw new HttpError(
+      'The provided email address and/or password were incorrect.  Please try again.',
+      404
+    );
   }
 
   return user;
 };
 
 // allows searching for other users by name for bud request purposes
-accountSchema.index({ name: "text" });
+accountSchema.index({ name: 'text' });
 
 // Hash the plain text password before saving
 accountSchema.pre('save', async function (next) {

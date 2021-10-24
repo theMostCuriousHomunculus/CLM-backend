@@ -2,14 +2,13 @@ import HttpError from '../../../models/http-error.js';
 import shuffle from '../../../utils/shuffle.js';
 
 export default async function (parent, args, context, info) {
-
   const { account, match, player, pubsub } = context;
 
-  if (!player) throw new HttpError("You are only a spectator.", 401);
+  if (!player) throw new HttpError('You are only a spectator.', 401);
 
   const allMaindeckedCards = [];
 
-  function resetCard (card) {
+  function resetCard(card) {
     if (!card.isCopyToken) {
       card.controller = card.owner;
       card.counters = [];
@@ -27,7 +26,14 @@ export default async function (parent, args, context, info) {
     allMaindeckedCards.push(card);
   }
 
-  for (const zone of ['battlefield', 'exile', 'graveyard', 'hand', 'library', 'temporary']) {
+  for (const zone of [
+    'battlefield',
+    'exile',
+    'graveyard',
+    'hand',
+    'library',
+    'temporary'
+  ]) {
     for (const card of player[zone]) {
       resetCard(card);
     }
@@ -40,7 +46,9 @@ export default async function (parent, args, context, info) {
     }
   }
 
-  match.stack = match.stack.filter(card => card.owner.toString() !== account._id.toString());
+  match.stack = match.stack.filter(
+    (card) => card.owner.toString() !== account._id.toString()
+  );
   shuffle(allMaindeckedCards);
   player.hand = allMaindeckedCards.splice(0, 7);
 
@@ -61,4 +69,4 @@ export default async function (parent, args, context, info) {
   pubsub.publish(match._id.toString(), { subscribeMatch: match });
 
   return match;
-};
+}

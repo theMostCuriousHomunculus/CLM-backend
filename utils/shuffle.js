@@ -5,4 +5,4 @@ export default function (array) {
     array[i] = array[j];
     array[j] = dummy;
   }
-};
+}

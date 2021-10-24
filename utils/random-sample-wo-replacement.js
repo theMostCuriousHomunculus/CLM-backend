@@ -10,5 +10,5 @@ export default function (array, sampleSize) {
     array.splice(randomNumber, 1);
   }
 
-  return sampleArray
-};
+  return sampleArray;
+}

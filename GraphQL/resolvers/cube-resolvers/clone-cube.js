@@ -3,10 +3,10 @@ import Cube from '../../../models/cube-model.js';
 import HttpError from '../../../models/http-error.js';
 
 export default async function (parent, args, context, info) {
-
   const { account, cube } = context;
 
-  if (!account) throw new HttpError("You must be logged in to clone a cube.", 401);
+  if (!account)
+    throw new HttpError('You must be logged in to clone a cube.', 401);
 
   const copy = JSON.parse(JSON.stringify(cube));
 
@@ -14,9 +14,9 @@ export default async function (parent, args, context, info) {
 
   copy.creator = account._id;
   copy.name = `Copy of ${cube.name}`;
-  
+
   const clonedCube = new Cube(copy);
   await clonedCube.save();
-  
+
   return clonedCube;
-};
+}

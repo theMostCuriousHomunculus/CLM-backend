@@ -1,20 +1,23 @@
 import HttpError from '../../../models/http-error.js';
 
 export default async function (parent, args, context, info) {
-
   const { account, match, player, pubsub } = context;
 
-  if (!player) throw new HttpError("You are only a spectator.", 401);
+  if (!player) throw new HttpError('You are only a spectator.', 401);
 
-  const { input: { cardID, controllerID, numberOfCopies, zone } } = args;
-  const controller = match.players.find(plr => plr.account.toString() === controllerID);
+  const {
+    input: { cardID, controllerID, numberOfCopies, zone }
+  } = args;
+  const controller = match.players.find(
+    (plr) => plr.account.toString() === controllerID
+  );
 
-  if (!controller) throw new HttpError("Invalid controllerID.", 404);
+  if (!controller) throw new HttpError('Invalid controllerID.', 404);
 
   let card;
 
   if (zone === 'stack') {
-    card  = match.stack.find(crd => crd._id.toString() === cardID);
+    card = match.stack.find((crd) => crd._id.toString() === cardID);
     for (let i = 0; i < numberOfCopies; i++) {
       match.stack.push({
         back_image: card.back_image,
@@ -31,7 +34,7 @@ export default async function (parent, args, context, info) {
       });
     }
   } else if (zone === 'battlefield') {
-    card  = controller.battlefield.find(crd => crd._id.toString() === cardID);
+    card = controller.battlefield.find((crd) => crd._id.toString() === cardID);
     for (let i = 0; i < numberOfCopies; i++) {
       player.battlefield.push({
         back_image: card.back_image,
@@ -50,11 +53,14 @@ export default async function (parent, args, context, info) {
       });
     }
   } else {
-    throw new HttpError("Copies can only exist on the stack or on the battlefield.", 400);
+    throw new HttpError(
+      'Copies can only exist on the stack or on the battlefield.',
+      400
+    );
   }
 
   await match.save();
   pubsub.publish(match._id.toString(), { subscribeMatch: match });
 
   return match;
-};
+}
