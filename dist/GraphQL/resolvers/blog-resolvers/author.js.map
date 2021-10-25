@@ -1,0 +1,1 @@
+{"version":3,"file":"author.js","sourceRoot":"","sources":["../../../../src/GraphQL/resolvers/blog-resolvers/author.js"],"names":[],"mappings":"AAAA,OAAO,OAAO,MAAM,kCAAkC,CAAC;AAEvD,MAAM,CAAC,OAAO,CAAC,KAAK,WAAW,MAAM;IACnC,MAAM,OAAO,GAAG,MAAM,OAAO,CAAC,QAAQ,CAAC,MAAM,CAAC,MAAM,CAAC,CAAC;IAEtD,OAAO,OAAO,CAAC;AACjB,CAAC"}

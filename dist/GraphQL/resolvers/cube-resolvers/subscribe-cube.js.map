@@ -1,0 +1,1 @@
+{"version":3,"file":"subscribe-cube.js","sourceRoot":"","sources":["../../../../src/GraphQL/resolvers/cube-resolvers/subscribe-cube.js"],"names":[],"mappings":"AAAA,eAAe;IACb,SAAS,EAAE,UAAU,MAAM,EAAE,IAAI,EAAE,OAAO;QACxC,OAAO,OAAO,CAAC,MAAM,CAAC,aAAa,CAAC,OAAO,CAAC,IAAI,CAAC,GAAG,CAAC,QAAQ,EAAE,CAAC,CAAC;IACnE,CAAC;CACF,CAAC"}

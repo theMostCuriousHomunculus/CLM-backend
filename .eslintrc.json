@@ -1,21 +1,24 @@
 {
   "env": {
-    "es2021": true
+    "es2021": true,
+    "node": true
   },
-  "extends": "strongloop",
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 2021,
     "sourceType": "module"
   },
+  "plugins": ["@typescript-eslint"],
   "rules": {
     "comma-dangle": "off",
     "max-len": [
       "error",
       {
         "ignoreComments": true,
-        "ignoreUrls": true,
         "ignoreStrings": true,
-        "ignoreTemplateLiterals": true
+        "ignoreTemplateLiterals": true,
+        "ignoreUrls": true
       }
     ],
     "radix": ["error", "as-needed"],
