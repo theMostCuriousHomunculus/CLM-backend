@@ -1,0 +1,4 @@
+input CardIDZoneInput {
+  cardID: ID!
+  zone: PlayZoneEnum!
+}

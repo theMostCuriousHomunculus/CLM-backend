@@ -55,7 +55,6 @@ import createEvent from './event-resolvers/create-event.js';
 import fetchEventByID from './event-resolvers/fetch-event-by-id.js';
 import removeBasics from './event-resolvers/remove-basics.js';
 import selectCard from './event-resolvers/select-card.js';
-import sortCard from './event-resolvers/sort-card.js';
 import subscribeEvent from './event-resolvers/subscribe-event.js';
 import toggleMainboardSideboardEvent from './event-resolvers/toggle-mainboard-sideboard-event.js';
 
@@ -199,7 +198,6 @@ export default {
     createEvent,
     removeBasics,
     selectCard,
-    sortCard,
     toggleMainboardSideboardEvent,
     // match
     adjustCounters,

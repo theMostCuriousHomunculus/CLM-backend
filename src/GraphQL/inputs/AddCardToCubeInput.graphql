@@ -1,0 +1,4 @@
+input AddCardToCubeInput {
+  card: CollectionCardInput!
+  componentID: String!
+}

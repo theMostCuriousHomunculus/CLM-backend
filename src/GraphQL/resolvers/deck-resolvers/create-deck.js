@@ -4,15 +4,13 @@ import CSVString from 'csv-string';
 import Deck from '../../../models/deck-model.js';
 import HttpError from '../../../models/http-error.js';
 import formatScryfallCardData from '../../../utils/format-scryfall-card-data.js';
-// TODO: import deck list from scryfall, tappedout or mtggoldfish
+// TODO: import deck list from tappedout or mtggoldfish
 
 export default async function (parent, args, context) {
   if (!context.account)
     throw new HttpError('You must be logged in to create a deck.', 401);
 
-  const {
-    input: { description, existingListID, format, name }
-  } = args;
+  const { description, existingListID, format, name } = args;
   const deckInfo = {
     creator: context.account._id,
     description,

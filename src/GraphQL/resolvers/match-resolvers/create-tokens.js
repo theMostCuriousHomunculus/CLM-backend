@@ -5,9 +5,7 @@ export default async function (parent, args, context) {
 
   if (!player) throw new HttpError('You are only a spectator.', 401);
 
-  const {
-    input: { token, numberOfTokens }
-  } = args;
+  const { token, numberOfTokens } = args;
 
   for (let i = 0; i < numberOfTokens; i++) {
     player.battlefield.push({

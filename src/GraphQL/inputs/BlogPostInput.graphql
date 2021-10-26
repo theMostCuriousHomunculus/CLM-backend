@@ -1,0 +1,6 @@
+input BlogPostInput {
+  body: String!
+  image: String!
+  subtitle: String
+  title: String!
+}

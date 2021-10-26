@@ -1,0 +1,67 @@
+type Mutation {
+  editAccount(input: EditAccountInput): AccountType!
+  login(input: LoginInput!): Credentials!
+  logoutAllDevices: Boolean
+  logoutSingleDevice: Boolean
+  register(input: RegisterInput!): Credentials!
+  requestPasswordReset(email: String!): Boolean
+  submitPasswordReset(input: SubmitPasswordResetInput!): Credentials!
+  createBlogPost(input: BlogPostInput!): BlogPostType
+  createComment(body: String!): BlogPostType
+  deleteBlogPost(_id: ID!): Boolean
+  deleteComment(input: DeleteCommentInput!): Boolean
+  editBlogPost(input: BlogPostInput!): BlogPostType
+  addCardToCube(input: AddCardToCubeInput!): CubeType
+  cloneCube: CubeType!
+  createCube(input: CreateCubeInput!): CubeType!
+  createModule(name: String!): CubeType
+  createRotation(name: String!): CubeType
+  deleteCard(input: DeleteCardInput!): Boolean
+  deleteCube: Boolean
+  deleteModule(_id: ID!): Boolean
+  deleteRotation(_id: ID!): Boolean
+  editCard(input: EditCardInput!): CubeType
+  editCube(input: EditCubeInput!): CubeType
+  editModule(input: EditModuleInput!): CubeType
+  editRotation(input: EditRotationInput!): CubeType
+  addCardsToDeck(input: AddCardsToDeckInput!): DeckType
+  changeCardPrinting(input: String!): DeckType
+  cloneDeck: DeckType!
+  createDeck(input: DeckInput!): DeckType
+  deleteDeck: Boolean
+  editDeck(input: DeckInput!): DeckType
+  removeCardsFromDeck(input: RemoveCardsFromDeckInput!): DeckType
+  toggleMainboardSideboardDeck(cardID: ID!): DeckType
+  addBasics(input: AddCardsToDeckInput!): EventType
+  createEvent(input: CreateEventInput!): EventType!
+  toggleMainboardSideboardEvent(cardID: ID!): EventType
+  removeBasics(input: RemoveCardsFromDeckInput!): EventType
+  selectCard(_id: ID!): EventType
+  sortCard(input: SortCardInput!): EventType
+  adjustCounters(input: AdjustCountersInput!): MatchType
+  adjustEnergyCounters(energy: Int!): MatchType
+  adjustLifeTotal(life: Int!): MatchType
+  adjustPoisonCounters(poison: Int!): MatchType
+  changeFaceDownImage(input: ChangeFaceDownImageInput!): MatchType
+  concedeGame: MatchType
+  createCopies(input: CreateCopiesInput!): MatchType
+  createMatch(input: CreateMatchInput!): MatchType!
+  createTokens(input: CreateTokensInput!): MatchType
+  destroyCopyToken(input: CardIDZoneInput!): MatchType
+  dragCard(input: DragCardInput!): MatchType
+  drawCard: MatchType
+  flipCard(input: CardIDZoneInput!): MatchType
+  flipCoin: MatchType
+  gainControlOfCard(input: GainControlOfCardInput): MatchType
+  mulligan: MatchType
+  ready: MatchType
+  revealCard(input: CardIDZoneInput!): MatchType
+  rollDice(sides: Int!): MatchType
+  shuffleLibrary: MatchType
+  tapUntapCards(input: TapUntapCardsInput!): MatchType
+  toggleMainboardSideboardMatch(cardID: ID!): MatchType
+  transferCard(input: TransferCardInput!): MatchType
+  turnCard(input: CardIDZoneInput!): MatchType
+  viewCard(input: ViewCardInput!): MatchType
+  viewZone(input: ViewZoneInput!): MatchType
+}

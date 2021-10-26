@@ -19,12 +19,6 @@ import rootResolver from './resolvers/root-resolver.js';
 // const typeDefsArray = loadFilesSync(new URL('./typeDefs', import.meta.url).toString(), { extensions: ['graphql'] });
 
 const typeDefs = `
-  enum CollectionEnum {
-    current_pack
-    mainboard
-    sideboard
-  }
-
   enum DeckComponentEnum {
     mainboard
     sideboard
@@ -70,18 +64,6 @@ const typeDefs = `
     numberOfCopies: Int!
   }
 
-  input AddCardToCubeInput {
-    card: CollectionCardInput!
-    componentID: String!
-  }
-
-  input AdjustCountersInput {
-    cardID: String!
-    counterAmount: Int!
-    counterType: String!
-    zone: PlayZoneEnum!
-  }
-
   input BlogPostInput {
     body: String!
     image: String!
@@ -91,12 +73,6 @@ const typeDefs = `
 
   input CardIDZoneInput {
     cardID: ID!
-    zone: PlayZoneEnum!
-  }
-
-  input ChangeFaceDownImageInput {
-    cardID: String!
-    faceDownImage: FaceDownImageEnum!
     zone: PlayZoneEnum!
   }
 
@@ -116,73 +92,6 @@ const typeDefs = `
     set_name: String!
     tcgplayer_id: Int
     type_line: String!
-  }
-
-  input CreateCopiesInput {
-    cardID: String!
-    controllerID: String!
-    numberOfCopies: Int!
-    zone: PlayZoneEnum!
-  }
-
-  input CreateCubeInput {
-    cobraID: String
-    description: String
-    name: String!
-  }
-
-  input CreateEventInput {
-    cards_per_pack: Int!
-    event_type: EventEnum!
-    modules: [String]
-    name: String!
-    other_players: [String]
-    packs_per_player: Int!
-  }
-
-  input CreateMatchInput {
-    deckIDs: [ID]
-    eventID: ID
-    playerIDs: [ID]!
-  }
-
-  input CreateTokensInput {
-    token: TokenInput!
-    numberOfTokens: Int!
-  }
-
-  input DeckInput {
-    description: String
-    existingListID: String
-    format: FormatEnum
-    name: String
-  }
-
-  input DeleteCardInput {
-    cardID: String!
-    originID: String!
-    destinationID: String
-  }
-
-  input DeleteCommentInput {
-    blogPostID: String!
-    commentID: String!
-  }
-
-  input DragCardInput {
-    cardID: String!
-    xCoordinate: Float!
-    yCoordinate: Float!
-  }
-
-  input EditAccountInput {
-    action: String
-    avatar: String
-    email: String
-    name: String
-    other_user_id: String
-    password: String
-    return_other: Boolean
   }
 
   input EditCardInput {
@@ -230,12 +139,6 @@ const typeDefs = `
     password: String!
   }
 
-  input MoveCardInput {
-    cardID: String!
-    destination: CollectionEnum!
-    origin: CollectionEnum!
-  }
-
   input RegisterInput {
     avatar: String!
     email: String!
@@ -246,12 +149,6 @@ const typeDefs = `
   input RemoveCardsFromDeckInput {
     cardIDs: [ID]!
     component: DeckComponentEnum!
-  }
-
-  input SortCardInput {
-    collection: CollectionEnum!
-    newIndex: Int!
-    oldIndex: Int!
   }
 
   input SubmitPasswordResetInput {
@@ -457,7 +354,7 @@ const typeDefs = `
   }
 
   type Mutation {
-    editAccount(input: EditAccountInput): AccountType!
+    editAccount(action: String, avatar: String, email: String, name: String, other_user_id: String, password: String, return_other: Boolean): AccountType!
     login(input: LoginInput!): Credentials!
     logoutAllDevices: Boolean
     logoutSingleDevice: Boolean
@@ -467,14 +364,14 @@ const typeDefs = `
     createBlogPost(input: BlogPostInput!): BlogPostType
     createComment(body: String!): BlogPostType
     deleteBlogPost(_id: ID!): Boolean
-    deleteComment(input: DeleteCommentInput!): Boolean
+    deleteComment(blogPostID: String!, commentID: String!): Boolean
     editBlogPost(input: BlogPostInput!): BlogPostType
-    addCardToCube(input: AddCardToCubeInput!): CubeType
+    addCardToCube(card: CollectionCardInput!, componentID: String!): CubeType
     cloneCube: CubeType!
-    createCube(input: CreateCubeInput!): CubeType!
+    createCube(cobraID: String, description: String, name: String!): CubeType!
     createModule(name: String!): CubeType
     createRotation(name: String!): CubeType
-    deleteCard(input: DeleteCardInput!): Boolean
+    deleteCard(cardID: ID!, originID: ID!, destinationID: ID): Boolean
     deleteCube: Boolean
     deleteModule(_id: ID!): Boolean
     deleteRotation(_id: ID!): Boolean
@@ -485,28 +382,27 @@ const typeDefs = `
     addCardsToDeck(input: AddCardsToDeckInput!): DeckType
     changeCardPrinting(input: String!): DeckType
     cloneDeck: DeckType!
-    createDeck(input: DeckInput!): DeckType
+    createDeck(description: String, existingListID: String, format: FormatEnum, name: String): DeckType
     deleteDeck: Boolean
-    editDeck(input: DeckInput!): DeckType
+    editDeck(description: String, format: FormatEnum, name: String): DeckType
     removeCardsFromDeck(input: RemoveCardsFromDeckInput!): DeckType
     toggleMainboardSideboardDeck(cardID: ID!): DeckType
     addBasics(input: AddCardsToDeckInput!): EventType
-    createEvent(input: CreateEventInput!): EventType!
+    createEvent(cards_per_pack: Int!, event_type: EventEnum!, modules: [String], name: String!, other_players: [String], packs_per_player: Int!): EventType!
     toggleMainboardSideboardEvent(cardID: ID!): EventType
     removeBasics(input: RemoveCardsFromDeckInput!): EventType
     selectCard(_id: ID!): EventType
-    sortCard(input: SortCardInput!): EventType
-    adjustCounters(input: AdjustCountersInput!): MatchType
+    adjustCounters(cardID: String!, counterAmount: Int!, counterType: String!, zone: PlayZoneEnum!): MatchType
     adjustEnergyCounters(energy: Int!): MatchType
     adjustLifeTotal(life: Int!): MatchType
     adjustPoisonCounters(poison: Int!): MatchType
-    changeFaceDownImage(input: ChangeFaceDownImageInput!): MatchType
+    changeFaceDownImage(cardID: String!, faceDownImage: FaceDownImageEnum!, zone: PlayZoneEnum!): MatchType
     concedeGame: MatchType
-    createCopies(input: CreateCopiesInput!): MatchType
-    createMatch(input: CreateMatchInput!): MatchType!
-    createTokens(input: CreateTokensInput!): MatchType
+    createCopies(cardID: String!, controllerID: String!, numberOfCopies: Int!, zone: PlayZoneEnum!): MatchType
+    createMatch(deckIDs: [ID], eventID: ID, playerIDs: [ID]!): MatchType!
+    createTokens(token: TokenInput!, numberOfTokens: Int!): MatchType
     destroyCopyToken(input: CardIDZoneInput!): MatchType
-    dragCard(input: DragCardInput!): MatchType
+    dragCard(cardID: String!, xCoordinate: Float!, yCoordinate: Float!): MatchType
     drawCard: MatchType
     flipCard(input: CardIDZoneInput!): MatchType
     flipCoin: MatchType
