@@ -5,6 +5,7 @@
   "description": "The new and improved backend for Cube Level Midnight",
   "main": "./dis/index.js",
   "scripts": {
+    "build": "rm -rf dist && tsc && copyfiles *.graphql dist/",
     "dev": "nodemon -L ./dist/index.js",
     "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
     "lint": "eslint --ignore-path .gitignore .",

@@ -9,9 +9,7 @@ export default async function (parent, args, context) {
       404
     );
 
-  const {
-    input: { card, component, numberOfCopies }
-  } = args;
+  const { card, component, numberOfCopies } = args;
 
   for (let i = 0; i < numberOfCopies; i++) {
     player[component.toString()].push(card);

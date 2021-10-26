@@ -9,9 +9,7 @@ export default async function (parent, args, context) {
       404
     );
 
-  const {
-    input: { cardIDs, component }
-  } = args;
+  const { cardIDs, component } = args;
 
   for (const cardID of cardIDs) {
     player[component].pull(cardID);

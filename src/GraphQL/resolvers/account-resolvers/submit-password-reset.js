@@ -2,9 +2,7 @@ import Account from '../../../models/account-model.js';
 import HttpError from '../../../models/http-error.js';
 
 export default async function (parent, args) {
-  const {
-    input: { email, password, reset_token }
-  } = args;
+  const { email, password, reset_token } = args;
   const account = await Account.findOne({
     email,
     reset_token,

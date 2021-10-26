@@ -1,5 +1,0 @@
-input AddCardsToDeckInput {
-  card: CollectionCardInput!
-  component: DeckComponentEnum!
-  numberOfCopies: Int!
-}
