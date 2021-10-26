@@ -1,0 +1,11 @@
+enum PlayZoneEnum {
+  battlefield
+  exile
+  graveyard
+  hand
+  library
+  mainboard
+  sideboard
+  stack
+  temporary
+}
