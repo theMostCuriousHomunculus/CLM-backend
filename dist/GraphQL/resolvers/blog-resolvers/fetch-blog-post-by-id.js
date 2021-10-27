@@ -1,4 +1,4 @@
 export default async function (parent, args, context) {
-    return context.blogPost;
+  return context.blogPost;
 }
 //# sourceMappingURL=fetch-blog-post-by-id.js.map

@@ -103,152 +103,152 @@ import sent_bud_requests from './account-resolvers/sent-bud-requests.js';
 import unknownArray from './event-resolvers/unknown-array.js';
 import unknownCard from './match-resolvers/unknown-card.js';
 export default {
-    AccountType: {
-        buds,
-        cubes,
-        decks: account_decks,
-        email,
-        events,
-        matches,
-        received_bud_requests,
-        sent_bud_requests
-    },
-    BlogPostType: {
-        author
-    },
-    CommentType: {
-        author
-    },
-    CubeType: {
-        creator
-    },
-    DeckType: {
-        creator
-    },
-    EventPlayerType: {
-        account: event_account,
-        current_pack,
-        mainboard: unknownArray,
-        sideboard: unknownArray
-    },
-    EventType: {
-        cube,
-        host
-    },
-    MatchCardType: {
-        back_image: unknownCard,
-        image: unknownCard,
-        name: unknownCard
-    },
-    MatchPlayerType: {
-        account: match_account
-    },
-    MatchType: {
-        cube,
-        decks: match_decks,
-        event
-    },
-    Mutation: {
-        // account
-        // deleteAccount,
-        editAccount,
-        login,
-        logoutAllDevices,
-        logoutSingleDevice,
-        register,
-        requestPasswordReset,
-        submitPasswordReset,
-        // blog
-        createBlogPost,
-        createComment,
-        deleteBlogPost,
-        deleteComment,
-        editBlogPost,
-        // cube
-        addCardToCube,
-        cloneCube,
-        createCube,
-        createModule,
-        createRotation,
-        deleteCard,
-        deleteCube,
-        deleteModule,
-        deleteRotation,
-        editCard,
-        editCube,
-        editModule,
-        editRotation,
-        // deck
-        addCardsToDeck,
-        cloneDeck,
-        createDeck,
-        deleteDeck,
-        editDeck,
-        removeCardsFromDeck,
-        toggleMainboardSideboardDeck,
-        // event
-        addBasics,
-        createEvent,
-        removeBasics,
-        selectCard,
-        toggleMainboardSideboardEvent,
-        // match
-        adjustCounters,
-        adjustEnergyCounters,
-        adjustLifeTotal,
-        adjustPoisonCounters,
-        changeFaceDownImage,
-        concedeGame,
-        createCopies,
-        createMatch,
-        createTokens,
-        destroyCopyToken,
-        dragCard,
-        drawCard,
-        flipCard,
-        flipCoin,
-        gainControlOfCard,
-        mulligan,
-        ready,
-        revealCard,
-        rollDice,
-        shuffleLibrary,
-        tapUntapCards,
-        toggleMainboardSideboardMatch,
-        transferCard,
-        turnCard,
-        viewCard,
-        viewZone
-    },
-    Query: {
-        // account
-        fetchAccountByID,
-        searchAccounts,
-        // blog
-        fetchBlogPostByID,
-        searchBlogPosts,
-        // cube
-        fetchCubeByID,
-        searchCubes,
-        // deck
-        fetchDeckByID,
-        // event
-        fetchEventByID,
-        // match
-        fetchMatchByID
-    },
-    Subscription: {
-        // account
-        // blog
-        subscribeBlogPost,
-        // cube
-        subscribeCube,
-        // deck
-        subscribeDeck,
-        // event
-        subscribeEvent,
-        // match
-        subscribeMatch
-    }
+  AccountType: {
+    buds,
+    cubes,
+    decks: account_decks,
+    email,
+    events,
+    matches,
+    received_bud_requests,
+    sent_bud_requests
+  },
+  BlogPostType: {
+    author
+  },
+  CommentType: {
+    author
+  },
+  CubeType: {
+    creator
+  },
+  DeckType: {
+    creator
+  },
+  EventPlayerType: {
+    account: event_account,
+    current_pack,
+    mainboard: unknownArray,
+    sideboard: unknownArray
+  },
+  EventType: {
+    cube,
+    host
+  },
+  MatchCardType: {
+    back_image: unknownCard,
+    image: unknownCard,
+    name: unknownCard
+  },
+  MatchPlayerType: {
+    account: match_account
+  },
+  MatchType: {
+    cube,
+    decks: match_decks,
+    event
+  },
+  Mutation: {
+    // account
+    // deleteAccount,
+    editAccount,
+    login,
+    logoutAllDevices,
+    logoutSingleDevice,
+    register,
+    requestPasswordReset,
+    submitPasswordReset,
+    // blog
+    createBlogPost,
+    createComment,
+    deleteBlogPost,
+    deleteComment,
+    editBlogPost,
+    // cube
+    addCardToCube,
+    cloneCube,
+    createCube,
+    createModule,
+    createRotation,
+    deleteCard,
+    deleteCube,
+    deleteModule,
+    deleteRotation,
+    editCard,
+    editCube,
+    editModule,
+    editRotation,
+    // deck
+    addCardsToDeck,
+    cloneDeck,
+    createDeck,
+    deleteDeck,
+    editDeck,
+    removeCardsFromDeck,
+    toggleMainboardSideboardDeck,
+    // event
+    addBasics,
+    createEvent,
+    removeBasics,
+    selectCard,
+    toggleMainboardSideboardEvent,
+    // match
+    adjustCounters,
+    adjustEnergyCounters,
+    adjustLifeTotal,
+    adjustPoisonCounters,
+    changeFaceDownImage,
+    concedeGame,
+    createCopies,
+    createMatch,
+    createTokens,
+    destroyCopyToken,
+    dragCard,
+    drawCard,
+    flipCard,
+    flipCoin,
+    gainControlOfCard,
+    mulligan,
+    ready,
+    revealCard,
+    rollDice,
+    shuffleLibrary,
+    tapUntapCards,
+    toggleMainboardSideboardMatch,
+    transferCard,
+    turnCard,
+    viewCard,
+    viewZone
+  },
+  Query: {
+    // account
+    fetchAccountByID,
+    searchAccounts,
+    // blog
+    fetchBlogPostByID,
+    searchBlogPosts,
+    // cube
+    fetchCubeByID,
+    searchCubes,
+    // deck
+    fetchDeckByID,
+    // event
+    fetchEventByID,
+    // match
+    fetchMatchByID
+  },
+  Subscription: {
+    // account
+    // blog
+    subscribeBlogPost,
+    // cube
+    subscribeCube,
+    // deck
+    subscribeDeck,
+    // event
+    subscribeEvent,
+    // match
+    subscribeMatch
+  }
 };
 //# sourceMappingURL=root-resolver.js.map
