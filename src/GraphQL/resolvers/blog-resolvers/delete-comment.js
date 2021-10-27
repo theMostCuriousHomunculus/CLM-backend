@@ -2,9 +2,7 @@ import Blog, { Comment } from '../../../models/blog-model.js';
 import HttpError from '../../../models/http-error.js';
 
 export default async function (parent, args, context) {
-  const {
-    input: { blogPostID, commentID }
-  } = args;
+  const { blogPostID, commentID } = args;
   const article = await Blog.findById(blogPostID);
   const comment = await Comment.findById(commentID);
 

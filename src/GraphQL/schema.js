@@ -1,16 +1,12 @@
-import path from 'path';
-import { loadFilesSync } from '@graphql-tools/load-files';
-import { makeExecutableSchema } from '@graphql-tools/schema';
-import { mergeTypeDefs } from '@graphql-tools/merge';
+import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
+import { addResolversToSchema } from '@graphql-tools/schema';
+import { loadSchema } from '@graphql-tools/load';
 
 import rootResolver from './resolvers/root-resolver.js';
 
-export default makeExecutableSchema({
+export default addResolversToSchema({
   resolvers: rootResolver,
-  typeDefs: mergeTypeDefs(
-    loadFilesSync(path.join(__dirname, '.'), {
-      extensions: ['graphql'],
-      recursive: true
-    })
-  )
+  schema: await loadSchema('./**/*.graphql', {
+    loaders: [new GraphQLFileLoader()]
+  })
 });

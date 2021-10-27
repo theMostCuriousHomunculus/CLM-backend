@@ -2,7 +2,7 @@ import HttpError from '../../../models/http-error.js';
 import transporter from '../../../utils/sendgrid-transporter.js';
 import Account from '../../../models/account-model.js';
 export default async function (parent, args) {
-    const { input: { avatar, email, name, password } } = args;
+    const { avatar, email, name, password } = args;
     const existingUsersWithEmail = await Account.find({ email });
     if (existingUsersWithEmail.length > 0)
         throw new HttpError('An account with that email address already exists.  Use a different email address to register or try logging in instead.', 409);
