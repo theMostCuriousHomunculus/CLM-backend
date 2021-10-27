@@ -2,9 +2,7 @@ import HttpError from '../../../models/http-error.js';
 export default async function (parent, args, context) {
   const { match, player, pubsub } = context;
   if (!player) throw new HttpError('You are only a spectator.', 401);
-  const {
-    input: { cardID, faceDownImage, zone }
-  } = args;
+  const { cardID, faceDownImage, zone } = args;
   let card;
   if (zone.toString() === 'stack') {
     card = match.stack.find((crd) => crd._id.toString() === cardID);

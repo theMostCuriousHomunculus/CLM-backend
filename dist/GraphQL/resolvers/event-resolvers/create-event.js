@@ -7,14 +7,12 @@ export default async function (parent, args, context) {
   if (!account)
     throw new HttpError('You must be logged in to create an event.', 401);
   const {
-    input: {
-      cards_per_pack,
-      event_type,
-      modules,
-      name,
-      other_players,
-      packs_per_player
-    }
+    cards_per_pack,
+    event_type,
+    modules,
+    name,
+    other_players,
+    packs_per_player
   } = args;
   let eventCardPool = cube.mainboard;
   cube.modules.forEach(function (module) {

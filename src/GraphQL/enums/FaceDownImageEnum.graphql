@@ -1,0 +1,6 @@
+enum FaceDownImageEnum {
+  foretell
+  manifest
+  morph
+  standard
+}

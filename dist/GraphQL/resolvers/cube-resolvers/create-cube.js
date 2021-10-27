@@ -6,9 +6,7 @@ import formatScryfallCardData from '../../../utils/format-scryfall-card-data.js'
 export default async function (parent, args, context) {
   if (!context.account)
     throw new HttpError('You must be logged in to create a cube.', 401);
-  const {
-    input: { cobraID, description, name }
-  } = args;
+  const { cobraID, description, name } = args;
   const cardArray = [];
   if (cobraID) {
     const cubeCobraResponse = await axios.get(

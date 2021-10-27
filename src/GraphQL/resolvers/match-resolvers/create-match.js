@@ -10,9 +10,7 @@ export default async function (parent, args, context) {
   if (!account)
     throw new HttpError('You must be logged in to create a match.', 401);
 
-  const {
-    input: { deckIDs, eventID, playerIDs }
-  } = args;
+  const { deckIDs, eventID, playerIDs } = args;
   const matchInfo = {
     game_winners: [],
     log: [],

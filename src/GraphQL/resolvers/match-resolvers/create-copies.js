@@ -5,9 +5,7 @@ export default async function (parent, args, context) {
 
   if (!player) throw new HttpError('You are only a spectator.', 401);
 
-  const {
-    input: { cardID, controllerID, numberOfCopies, zone }
-  } = args;
+  const { cardID, controllerID, numberOfCopies, zone } = args;
   const controller = match.players.find(
     (plr) => plr.account.toString() === controllerID
   );

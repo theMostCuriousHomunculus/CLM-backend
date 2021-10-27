@@ -4,9 +4,7 @@ export default async function (parent, args, context) {
   const { account, cube, pubsub } = context;
   if (!account || !cube || account._id.toString() !== cube.creator.toString())
     throw new HttpError('You are not authorized to edit this cube.', 401);
-  const {
-    input: { cardID, destinationID, originID }
-  } = args;
+  const { cardID, destinationID, originID } = args;
   const originComponent = await returnComponent(cube, originID);
   const card = originComponent.id(cardID);
   if (!card) {

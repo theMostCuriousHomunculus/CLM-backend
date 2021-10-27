@@ -1,0 +1,19 @@
+type CollectionCardType {
+  _id: ID
+  back_image: String
+  cmc: Int
+  collector_number: Int
+  color_identity: [String]
+  image: String
+  keywords: [String]
+  mana_cost: String
+  mtgo_id: Int
+  name: String
+  notes: String
+  oracle_id: String
+  scryfall_id: String
+  set: String
+  set_name: String
+  tcgplayer_id: String
+  type_line: String
+}

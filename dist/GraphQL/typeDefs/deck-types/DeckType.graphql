@@ -1,0 +1,9 @@
+type DeckType {
+  _id: ID
+  creator: AccountType
+  description: String
+  format: FormatEnum
+  mainboard: [CollectionCardType]
+  name: String
+  sideboard: [CollectionCardType]
+}

@@ -5,21 +5,19 @@ export default async function (parent, args, context) {
 
   if (!player) throw new HttpError('You are only a spectator.', 401);
 
-  const {
-    input: { token, numberOfTokens }
-  } = args;
+  const { back_image, image, name, scryfall_id, numberOfTokens } = args;
 
   for (let i = 0; i < numberOfTokens; i++) {
     player.battlefield.push({
-      back_image: token.back_image,
+      back_image: back_image,
       controller: account._id,
       counters: [],
-      image: token.image,
+      image: image,
       index: player.battlefield.length - 1,
       isCopyToken: true,
-      name: token.name,
+      name: name,
       owner: account._id,
-      scryfall_id: token.scryfall_id,
+      scryfall_id: scryfall_id,
       visibility: match.players.map((plr) => plr.account),
       x_coordinate: i,
       y_coordinate: i

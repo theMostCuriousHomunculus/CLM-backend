@@ -1,6 +1,5 @@
 import HttpError from '../../../models/http-error.js';
 import returnComponent from '../../../utils/return-component.js';
-import validCardProperties from '../../../constants/valid-card-properties.js';
 
 export default async function (parent, args, context) {
   const { account, cube, pubsub } = context;
@@ -8,10 +7,10 @@ export default async function (parent, args, context) {
   if (!account || !cube || account._id.toString() !== cube.creator.toString())
     throw new HttpError('You are not authorized to edit this cube.', 401);
 
-  const { input } = args;
+  const { cardID, componentID } = args;
 
-  const component = await returnComponent(cube, input.componentID);
-  const card = component.id(input.cardID);
+  const component = await returnComponent(cube, componentID);
+  const card = component.id(cardID);
 
   if (!card) {
     throw new HttpError(
@@ -20,8 +19,23 @@ export default async function (parent, args, context) {
     );
   }
 
+  const validCardProperties = [
+    'back_image',
+    'cmc',
+    'collector_number',
+    'color_identity',
+    'image',
+    'mtgo_id',
+    'notes',
+    'scryfall_id',
+    'set',
+    'set_name',
+    'tcgplayer_id',
+    'type_line'
+  ];
+
   for (let property of validCardProperties) {
-    card[property] = input[property];
+    card[property] = args[property];
   }
 
   await cube.save();

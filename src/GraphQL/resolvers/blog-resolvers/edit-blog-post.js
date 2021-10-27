@@ -12,11 +12,9 @@ export default async function (parent, args, context) {
   if (account._id.toString() !== blogPost.author.toString())
     throw new HttpError('You are not authorized to edit this blog post.', 401);
 
-  const { input } = args;
-
   try {
     for (const field of ['body', 'image', 'subtitle', 'title']) {
-      if (input[field]) blogPost[field] = input[field];
+      if (args[field]) blogPost[field] = args[field];
     }
 
     blogPost.updatedAt = new Date();

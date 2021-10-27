@@ -5,9 +5,7 @@ export default async function (parent, args, context) {
 
   if (!player) throw new HttpError('You are only a spectator.', 401);
 
-  const {
-    input: { cardID, destinationZone, index, originZone, reveal, shuffle }
-  } = args;
+  const { cardID, destinationZone, index, originZone, reveal, shuffle } = args;
   let card;
 
   if (originZone.toString() === 'stack') {

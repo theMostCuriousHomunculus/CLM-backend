@@ -5,9 +5,7 @@ export default async function (parent, args, context) {
 
   if (!player) throw new HttpError('You are only a spectator.', 401);
 
-  const {
-    input: { cardID, counterAmount, counterType, zone }
-  } = args;
+  const { cardID, counterAmount, counterType, zone } = args;
 
   let card;
 

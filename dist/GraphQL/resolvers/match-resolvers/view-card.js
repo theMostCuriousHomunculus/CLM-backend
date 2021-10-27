@@ -3,9 +3,7 @@ import Account from '../../../models/account-model.js';
 export default async function (parent, args, context) {
   const { account, match, player, pubsub } = context;
   if (!player) throw new HttpError('You are only a spectator.', 401);
-  const {
-    input: { cardID, controllerID, zone }
-  } = args;
+  const { cardID, controllerID, zone } = args;
   const controller = match.players.find(
     (plr) => plr.account.toString() === controllerID
   );

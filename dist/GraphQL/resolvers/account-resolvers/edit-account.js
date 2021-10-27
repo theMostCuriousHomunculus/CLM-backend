@@ -4,9 +4,7 @@ export default async function (parent, args, context) {
   const { account } = context;
   if (!account)
     throw new HttpError('You must be logged in to perform this action.', 401);
-  const {
-    input: { action, other_user_id, return_other }
-  } = args;
+  const { action, other_user_id, return_other } = args;
   try {
     const mutableFields = ['avatar', 'email', 'name', 'password'];
     for (let field of mutableFields) {
