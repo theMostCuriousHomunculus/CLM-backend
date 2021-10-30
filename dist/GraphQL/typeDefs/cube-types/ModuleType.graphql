@@ -1,0 +1,5 @@
+type ModuleType {
+  _id: ID
+  cards: [CollectionCardType]
+  name: String
+}
