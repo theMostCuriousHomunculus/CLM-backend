@@ -1,23 +1,8 @@
 import mongoose from 'mongoose';
 
 const cubeCardSchema = new mongoose.Schema({
-  // back_image: String,
-  cmc: {
-    required: true,
-    type: Number
-  },
-  // collector_number: {
-  //   required: true,
-  //   type: Number
-  // },
+  cmc: Number,
   color_identity: [String],
-  // image: {
-  //   required: true,
-  //   type: String
-  // },
-  // keywords: [String],
-  // mana_cost: String,
-  // mtgo_id: Number,
   name: {
     required: true,
     type: String
@@ -36,19 +21,7 @@ const cubeCardSchema = new mongoose.Schema({
     required: true,
     type: String
   },
-  // set: {
-  //   required: true,
-  //   type: String
-  // },
-  // set_name: {
-  //   require: true,
-  //   type: String
-  // },
-  // tcgplayer_id: Number,
-  type_line: {
-    required: true,
-    type: String
-  }
+  type_line: String
 });
 
 const moduleSchema = new mongoose.Schema({

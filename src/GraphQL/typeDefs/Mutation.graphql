@@ -50,17 +50,10 @@ type Mutation {
   editCard(
     cardID: ID!
     componentID: ID!
-    back_image: String
     cmc: Int!
-    collector_number: Int!
     color_identity: [String!]
-    image: String!
-    mtgo_id: Int
     notes: String!
     scryfall_id: String!
-    set: String!
-    set_name: String!
-    tcgplayer_id: Int
     type_line: String!
   ): CubeType
   editCube(description: String, name: String, published: Boolean): CubeType
