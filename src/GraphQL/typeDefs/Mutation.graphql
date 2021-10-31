@@ -124,8 +124,6 @@ type Mutation {
   ): MatchType
   createMatch(deckIDs: [ID], eventID: ID, playerIDs: [ID]!): MatchType!
   createTokens(
-    back_image: String
-    image: String!
     name: String!
     scryfall_id: String!
     numberOfTokens: Int!

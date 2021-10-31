@@ -18,11 +18,8 @@ export default async function (parent, args, context) {
     card = match.stack.find((crd) => crd._id.toString() === cardID);
     for (let i = 0; i < numberOfCopies; i++) {
       match.stack.push({
-        back_image: card.back_image,
-        cmc: card.cmc,
         controller: account._id,
         counters: [],
-        image: card.image,
         index: match.stack.length - 1,
         isCopyToken: true,
         name: card.name,
@@ -35,11 +32,8 @@ export default async function (parent, args, context) {
     card = controller.battlefield.find((crd) => crd._id.toString() === cardID);
     for (let i = 0; i < numberOfCopies; i++) {
       player.battlefield.push({
-        back_image: card.back_image,
-        cmc: card.cmc,
         controller: account._id,
         counters: [],
-        image: card.image,
         index: player.battlefield.length - 1,
         isCopyToken: true,
         name: card.name,

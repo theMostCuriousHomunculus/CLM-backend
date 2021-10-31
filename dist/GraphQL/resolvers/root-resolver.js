@@ -136,8 +136,6 @@ export default {
         host
     },
     MatchCardType: {
-        back_image: unknownCard,
-        image: unknownCard,
         name: unknownCard
     },
     MatchPlayerType: {

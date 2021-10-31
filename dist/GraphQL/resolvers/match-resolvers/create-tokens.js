@@ -3,13 +3,11 @@ export default async function (parent, args, context) {
     const { account, match, player, pubsub } = context;
     if (!player)
         throw new HttpError('You are only a spectator.', 401);
-    const { back_image, image, name, scryfall_id, numberOfTokens } = args;
+    const { name, scryfall_id, numberOfTokens } = args;
     for (let i = 0; i < numberOfTokens; i++) {
         player.battlefield.push({
-            back_image: back_image,
             controller: account._id,
             counters: [],
-            image: image,
             index: player.battlefield.length - 1,
             isCopyToken: true,
             name: name,
