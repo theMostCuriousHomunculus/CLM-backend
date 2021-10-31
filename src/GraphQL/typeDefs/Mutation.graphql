@@ -41,7 +41,6 @@ type Mutation {
   addCardToCube(
     componentID: String!
     name: String!
-    oracle_id: String!
     scryfall_id: String!
   ): CubeType
   cloneCube: CubeType!
@@ -68,7 +67,6 @@ type Mutation {
     component: DeckComponentEnum!
     name: String
     numberOfCopies: Int!
-    oracle_id: String
     scryfall_id: String
   ): DeckType
   changeCardPrinting(input: String!): DeckType
@@ -87,7 +85,6 @@ type Mutation {
     component: DeckComponentEnum!
     name: String!
     numberOfCopies: Int!
-    oracle_id: String!
     scryfall_id: String!
   ): EventType
   createEvent(

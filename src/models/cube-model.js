@@ -2,7 +2,10 @@ import mongoose from 'mongoose';
 
 const cubeCardSchema = new mongoose.Schema({
   cmc: Number,
-  color_identity: [String],
+  color_identity: {
+    default: undefined,
+    type: [String]
+  },
   name: {
     required: true,
     type: String

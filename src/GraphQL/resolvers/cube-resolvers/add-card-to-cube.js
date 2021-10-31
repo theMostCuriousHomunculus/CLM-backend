@@ -16,7 +16,14 @@ export default async function (parent, args, context) {
   });
 
   await cube.save();
-  pubsub.publish(cube._id.toString(), { subscribeCube: cube });
+  console.log(component[component.length - 1]);
+  pubsub.publish(cube._id.toString(), {
+    subscribeCube: {
+      change: 'addCardToCube',
+      componentID,
+      card: component[component.length - 1]
+    }
+  });
 
   return cube;
 }
