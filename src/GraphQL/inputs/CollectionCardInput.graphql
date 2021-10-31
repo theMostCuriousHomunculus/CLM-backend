@@ -1,5 +1,0 @@
-input CollectionCardInput {
-  name: String
-  oracle_id: String
-  scryfall_id: String
-}
