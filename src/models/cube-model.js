@@ -13,10 +13,6 @@ const cubeCardSchema = new mongoose.Schema({
     trim: true,
     type: String
   },
-  oracle_id: {
-    required: true,
-    type: String
-  },
   scryfall_id: {
     required: true,
     type: String

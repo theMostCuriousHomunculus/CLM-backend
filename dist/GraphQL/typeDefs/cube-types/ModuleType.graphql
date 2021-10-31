@@ -1,5 +1,5 @@
 type ModuleType {
   _id: ID
-  cards: [CollectionCardType]
+  cards: [CubeCardType]
   name: String
 }

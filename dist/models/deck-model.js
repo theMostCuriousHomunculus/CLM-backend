@@ -4,10 +4,6 @@ const deckCardSchema = new mongoose.Schema({
         required: true,
         type: String
     },
-    oracle_id: {
-        required: true,
-        type: String
-    },
     scryfall_id: {
         required: true,
         type: String

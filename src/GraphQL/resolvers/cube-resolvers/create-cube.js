@@ -3,7 +3,6 @@ import CSVString from 'csv-string';
 
 import Cube from '../../../models/cube-model.js';
 import HttpError from '../../../models/http-error.js';
-import formatScryfallCardData from '../../../utils/format-scryfall-card-data.js';
 
 export default async function (parent, args, context) {
   if (!context.account)
@@ -47,7 +46,7 @@ export default async function (parent, args, context) {
       );
 
       for (let card of scryfallResponse.data.data) {
-        cardArray.push(formatScryfallCardData(card));
+        cardArray.push({ name: card.name, scryfall_id: card.id });
       }
     }
   }
