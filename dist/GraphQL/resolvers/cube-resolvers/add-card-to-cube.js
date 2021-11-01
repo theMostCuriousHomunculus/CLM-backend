@@ -11,14 +11,7 @@ export default async function (parent, args, context) {
         scryfall_id
     });
     await cube.save();
-    console.log(component[component.length - 1]);
-    pubsub.publish(cube._id.toString(), {
-        subscribeCube: {
-            change: 'addCardToCube',
-            componentID,
-            card: component[component.length - 1]
-        }
-    });
+    pubsub.publish(cube._id.toString(), { subscribeCube: cube });
     return cube;
 }
 //# sourceMappingURL=add-card-to-cube.js.map
