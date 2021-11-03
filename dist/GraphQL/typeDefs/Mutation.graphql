@@ -8,7 +8,7 @@ type Mutation {
     password: String
     return_other: Boolean
   ): AccountType!
-  login(email: String!, password: String!): Credentials!
+  login(email: String!, password: String!): AccountType!
   logoutAllDevices: Boolean
   logoutSingleDevice: Boolean
   register(
@@ -16,13 +16,13 @@ type Mutation {
     email: String!
     name: String!
     password: String!
-  ): Credentials!
+  ): AccountType!
   requestPasswordReset(email: String!): Boolean
   submitPasswordReset(
     email: String!
     password: String!
     reset_token: String!
-  ): Credentials!
+  ): AccountType!
   createBlogPost(
     body: String!
     image: String!

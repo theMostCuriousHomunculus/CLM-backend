@@ -10,17 +10,13 @@ export default async function (parent, args) {
     if (existingUsersWithName.length > 0)
         throw new HttpError('An account with that name already exists.  Please choose a different name so that other users can uniquely identify you.', 409);
     const account = new Account({ avatar, email, name, password });
-    const token = await account.generateAuthenticationToken();
+    await account.generateAuthenticationToken();
     transporter.sendMail({
         to: email,
         from: 'CubeLevelMidnight@gmail.com',
         subject: 'Welcome to Cube Level Midnight',
         html: '<h1>Hells Yeah!</h1>\n<p>Cube Level Midnight is the dopest.</p>'
     });
-    await account.save();
-    return {
-        token,
-        userID: account._id
-    };
+    return account;
 }
 //# sourceMappingURL=register.js.map

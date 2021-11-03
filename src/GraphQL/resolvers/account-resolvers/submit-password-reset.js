@@ -15,11 +15,7 @@ export default async function (parent, args) {
   account.reset_token = null;
   account.reset_token_expiration = null;
 
-  const token = await account.generateAuthenticationToken();
+  await account.generateAuthenticationToken();
 
-  return {
-    isAdmin: account.admin,
-    token,
-    userID: account._id
-  };
+  return account;
 }

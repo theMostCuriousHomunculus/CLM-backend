@@ -24,7 +24,7 @@ export default async function (parent, args) {
 
   const account = new Account({ avatar, email, name, password });
 
-  const token = await account.generateAuthenticationToken();
+  await account.generateAuthenticationToken();
 
   transporter.sendMail({
     to: email,
@@ -33,10 +33,5 @@ export default async function (parent, args) {
     html: '<h1>Hells Yeah!</h1>\n<p>Cube Level Midnight is the dopest.</p>'
   });
 
-  await account.save();
-
-  return {
-    token,
-    userID: account._id
-  };
+  return account;
 }

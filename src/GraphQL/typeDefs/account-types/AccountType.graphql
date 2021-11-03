@@ -11,4 +11,5 @@ type AccountType {
   name: String
   received_bud_requests: [AccountType]
   sent_bud_requests: [AccountType]
+  token: String
 }

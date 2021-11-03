@@ -106,6 +106,7 @@ import match_decks from './match-resolvers/decks.js';
 import matches from './account-resolvers/matches.js';
 import received_bud_requests from './account-resolvers/received-bud-requests.js';
 import sent_bud_requests from './account-resolvers/sent-bud-requests.js';
+import token from './account-resolvers/token.js';
 import unknownArray from './event-resolvers/unknown-array.js';
 import unknownCard from './match-resolvers/unknown-card.js';
 
@@ -118,7 +119,8 @@ export default {
     events,
     matches,
     received_bud_requests,
-    sent_bud_requests
+    sent_bud_requests,
+    token
   },
   BlogPostType: {
     author
