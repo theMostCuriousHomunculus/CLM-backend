@@ -16,7 +16,7 @@ export default async function (parent, args) {
     return {
         isAdmin: account.admin,
         token,
-        userId: account._id
+        userID: account._id
     };
 }
 //# sourceMappingURL=submit-password-reset.js.map

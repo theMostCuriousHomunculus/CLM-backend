@@ -20,7 +20,7 @@ export default async function (parent, args) {
     await account.save();
     return {
         token,
-        userId: account._id
+        userID: account._id
     };
 }
 //# sourceMappingURL=register.js.map

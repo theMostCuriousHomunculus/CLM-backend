@@ -37,6 +37,6 @@ export default async function (parent, args) {
 
   return {
     token,
-    userId: account._id
+    userID: account._id
   };
 }
