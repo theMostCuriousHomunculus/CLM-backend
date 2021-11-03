@@ -15,11 +15,6 @@ const counterSchema = new mongoose.Schema(
   }
 );
 const matchCardSchema = new mongoose.Schema({
-  back_image: {
-    required: false,
-    type: String
-  },
-  cmc: Number,
   controller: {
     ref: 'Account',
     required: true,
@@ -40,10 +35,6 @@ const matchCardSchema = new mongoose.Schema({
     default: false,
     type: Boolean
   },
-  image: {
-    required: true,
-    type: String
-  },
   isCopyToken: {
     required: true,
     type: Boolean
@@ -51,11 +42,6 @@ const matchCardSchema = new mongoose.Schema({
   index: {
     required: true,
     type: Number
-  },
-  mana_cost: String,
-  name: {
-    required: true,
-    type: String
   },
   owner: {
     ref: 'Account',
@@ -66,7 +52,6 @@ const matchCardSchema = new mongoose.Schema({
     required: true,
     type: String
   },
-  set: String,
   sideboarded: {
     default: false,
     required: true,
@@ -83,7 +68,6 @@ const matchCardSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId
     }
   ],
-  type_line: String,
   visibility: [
     {
       ref: 'Account',

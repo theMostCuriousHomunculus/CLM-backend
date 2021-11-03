@@ -9,10 +9,14 @@ export default async function (parent, args, context) {
       404
     );
 
-  const { card, component, numberOfCopies } = args;
+  const { component, name, numberOfCopies, oracle_id, scryfall_id } = args;
 
   for (let i = 0; i < numberOfCopies; i++) {
-    player[component.toString()].push(card);
+    player[component.toString()].push({
+      name,
+      oracle_id,
+      scryfall_id
+    });
   }
 
   await event.save();

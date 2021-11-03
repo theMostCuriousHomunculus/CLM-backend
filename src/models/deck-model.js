@@ -1,45 +1,11 @@
 import mongoose from 'mongoose';
 
 const deckCardSchema = new mongoose.Schema({
-  back_image: String,
-  cmc: {
-    required: true,
-    type: Number
-  },
-  collector_number: {
-    required: true,
-    type: Number
-  },
-  color_identity: [String],
-  image: {
-    required: true,
-    type: String
-  },
-  keywords: [String],
-  mana_cost: String,
-  mtgo_id: Number,
   name: {
     required: true,
     type: String
   },
-  oracle_id: {
-    required: true,
-    type: String
-  },
   scryfall_id: {
-    required: true,
-    type: String
-  },
-  set: {
-    required: true,
-    type: String
-  },
-  set_name: {
-    require: true,
-    type: String
-  },
-  tcgplayer_id: Number,
-  type_line: {
     required: true,
     type: String
   }
@@ -61,6 +27,7 @@ const deckSchema = new mongoose.Schema({
   format: {
     enum: [
       'Classy',
+      'Freeform',
       'Legacy',
       'Modern',
       'Pauper',
@@ -88,4 +55,4 @@ deckSchema.index({ name: 'text', description: 'text' });
 
 const Deck = mongoose.model('Deck', deckSchema);
 
-export { Deck as default, deckCardSchema };
+export { Deck as default };

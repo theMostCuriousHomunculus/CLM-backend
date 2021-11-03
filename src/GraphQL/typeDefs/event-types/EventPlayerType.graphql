@@ -1,6 +1,6 @@
 type EventPlayerType {
   account: AccountType
-  current_pack: [CollectionCardType]
-  mainboard: [CollectionCardType]
-  sideboard: [CollectionCardType]
+  current_pack: [CubeCardType]
+  mainboard: [CubeCardType]
+  sideboard: [CubeCardType]
 }

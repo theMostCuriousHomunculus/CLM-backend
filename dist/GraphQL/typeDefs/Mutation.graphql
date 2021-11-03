@@ -8,7 +8,7 @@ type Mutation {
     password: String
     return_other: Boolean
   ): AccountType!
-  login(email: String!, password: String!): Credentials!
+  login(email: String!, password: String!): AccountType!
   logoutAllDevices: Boolean
   logoutSingleDevice: Boolean
   register(
@@ -16,13 +16,13 @@ type Mutation {
     email: String!
     name: String!
     password: String!
-  ): Credentials!
+  ): AccountType!
   requestPasswordReset(email: String!): Boolean
   submitPasswordReset(
     email: String!
     password: String!
     reset_token: String!
-  ): Credentials!
+  ): AccountType!
   createBlogPost(
     body: String!
     image: String!
@@ -38,7 +38,11 @@ type Mutation {
     subtitle: String
     title: String!
   ): BlogPostType
-  addCardToCube(card: CollectionCardInput!, componentID: String!): CubeType
+  addCardToCube(
+    componentID: String!
+    name: String!
+    scryfall_id: String!
+  ): CubeType
   cloneCube: CubeType!
   createCube(cobraID: String, description: String, name: String!): CubeType!
   createModule(name: String!): CubeType
@@ -50,26 +54,20 @@ type Mutation {
   editCard(
     cardID: ID!
     componentID: ID!
-    back_image: String
     cmc: Int!
-    collector_number: Int!
     color_identity: [String!]
-    image: String!
-    mtgo_id: Int
     notes: String!
     scryfall_id: String!
-    set: String!
-    set_name: String!
-    tcgplayer_id: Int
     type_line: String!
   ): CubeType
   editCube(description: String, name: String, published: Boolean): CubeType
   editModule(moduleID: ID!, name: String): CubeType
   editRotation(rotationID: ID!, name: String, size: Int): CubeType
   addCardsToDeck(
-    card: CollectionCardInput!
     component: DeckComponentEnum!
+    name: String
     numberOfCopies: Int!
+    scryfall_id: String
   ): DeckType
   changeCardPrinting(input: String!): DeckType
   cloneDeck: DeckType!
@@ -84,9 +82,10 @@ type Mutation {
   removeCardsFromDeck(cardIDs: [ID]!, component: DeckComponentEnum!): DeckType
   toggleMainboardSideboardDeck(cardID: ID!): DeckType
   addBasics(
-    card: CollectionCardInput!
     component: DeckComponentEnum!
+    name: String!
     numberOfCopies: Int!
+    scryfall_id: String!
   ): EventType
   createEvent(
     cards_per_pack: Int!
@@ -122,8 +121,6 @@ type Mutation {
   ): MatchType
   createMatch(deckIDs: [ID], eventID: ID, playerIDs: [ID]!): MatchType!
   createTokens(
-    back_image: String
-    image: String!
     name: String!
     scryfall_id: String!
     numberOfTokens: Int!

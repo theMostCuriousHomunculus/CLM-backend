@@ -2,10 +2,10 @@ type CubeType {
   _id: ID
   creator: AccountType
   description: String
-  mainboard: [CollectionCardType]
+  mainboard: [CubeCardType]
   modules: [ModuleType]
   name: String
   published: Boolean
   rotations: [RotationType]
-  sideboard: [CollectionCardType]
+  sideboard: [CubeCardType]
 }

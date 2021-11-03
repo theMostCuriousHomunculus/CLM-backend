@@ -1,6 +1,6 @@
 type RotationType {
   _id: ID
-  cards: [CollectionCardType]
+  cards: [CubeCardType]
   name: String
   size: Int
 }

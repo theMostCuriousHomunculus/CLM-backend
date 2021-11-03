@@ -65,7 +65,6 @@ import adjustLifeTotal from './match-resolvers/adjust-life-total.js';
 import adjustPoisonCounters from './match-resolvers/adjust-poison-counters.js';
 import changeFaceDownImage from './match-resolvers/change-face-down-image.js';
 import concedeGame from './match-resolvers/concede-game.js';
-import current_pack from './event-resolvers/current-pack.js';
 import createCopies from './match-resolvers/create-copies.js';
 import createMatch from './match-resolvers/create-match.js';
 import createTokens from './match-resolvers/create-tokens.js';
@@ -96,6 +95,7 @@ import buds from './account-resolvers/buds.js';
 import creator from './cube-resolvers/creator.js';
 import cube from './match-resolvers/cube.js';
 import cubes from './account-resolvers/cubes.js';
+import current_pack from './event-resolvers/current-pack.js';
 import email from './account-resolvers/email.js';
 import event from './match-resolvers/event.js';
 import event_account from './event-resolvers/event-account.js';
@@ -106,6 +106,7 @@ import match_decks from './match-resolvers/decks.js';
 import matches from './account-resolvers/matches.js';
 import received_bud_requests from './account-resolvers/received-bud-requests.js';
 import sent_bud_requests from './account-resolvers/sent-bud-requests.js';
+import token from './account-resolvers/token.js';
 import unknownArray from './event-resolvers/unknown-array.js';
 import unknownCard from './match-resolvers/unknown-card.js';
 
@@ -118,7 +119,8 @@ export default {
     events,
     matches,
     received_bud_requests,
-    sent_bud_requests
+    sent_bud_requests,
+    token
   },
   BlogPostType: {
     author
@@ -143,8 +145,6 @@ export default {
     host
   },
   MatchCardType: {
-    back_image: unknownCard,
-    image: unknownCard,
     name: unknownCard
   },
   MatchPlayerType: {

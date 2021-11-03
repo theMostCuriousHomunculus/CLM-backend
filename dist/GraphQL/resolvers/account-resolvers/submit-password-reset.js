@@ -11,11 +11,7 @@ export default async function (parent, args) {
   account.password = password;
   account.reset_token = null;
   account.reset_token_expiration = null;
-  const token = await account.generateAuthenticationToken();
-  return {
-    isAdmin: account.admin,
-    token,
-    userId: account._id
-  };
+  await account.generateAuthenticationToken();
+  return account;
 }
 //# sourceMappingURL=submit-password-reset.js.map

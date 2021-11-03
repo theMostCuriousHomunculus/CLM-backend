@@ -3,7 +3,7 @@ type DeckType {
   creator: AccountType
   description: String
   format: FormatEnum
-  mainboard: [CollectionCardType]
+  mainboard: [DeckCardType]
   name: String
-  sideboard: [CollectionCardType]
+  sideboard: [DeckCardType]
 }

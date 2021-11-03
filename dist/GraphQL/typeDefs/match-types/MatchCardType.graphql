@@ -1,23 +1,17 @@
 type MatchCardType {
   _id: ID
-  back_image: String
-  cmc: Int
   controller: AccountType
   counters: [CounterObjectType]
   face_down: Boolean
   face_down_image: String
   flipped: Boolean
-  image: String
   isCopyToken: Boolean
   index: Int
-  mana_cost: String
   name: String
   owner: AccountType
   scryfall_id: String
-  set: String
   tapped: Boolean
   targets: [MatchCardType]
-  type_line: String
   visibility: [AccountType]
   x_coordinate: Float
   y_coordinate: Float

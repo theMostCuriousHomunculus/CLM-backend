@@ -8,12 +8,10 @@ export default async function (parent, args, context) {
   const { cardID, zone } = args;
   const card = player[zone].find((crd) => crd._id.toString() === cardID);
 
-  if (card.back_image) {
-    card.flipped = !card.flipped;
+  card.flipped = !card.flipped;
 
-    await match.save();
-    pubsub.publish(match._id.toString(), { subscribeMatch: match });
-  }
+  await match.save();
+  pubsub.publish(match._id.toString(), { subscribeMatch: match });
 
   return match;
 }

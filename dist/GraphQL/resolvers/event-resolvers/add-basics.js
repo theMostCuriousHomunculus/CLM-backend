@@ -6,9 +6,13 @@ export default async function (parent, args, context) {
       'An event with the provided ID does not exist or you were not invited to it.',
       404
     );
-  const { card, component, numberOfCopies } = args;
+  const { component, name, numberOfCopies, oracle_id, scryfall_id } = args;
   for (let i = 0; i < numberOfCopies; i++) {
-    player[component.toString()].push(card);
+    player[component.toString()].push({
+      name,
+      oracle_id,
+      scryfall_id
+    });
   }
   await event.save();
   pubsub.publish(event._id.toString(), { subscribeEvent: event });

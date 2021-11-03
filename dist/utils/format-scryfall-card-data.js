@@ -10,41 +10,28 @@ export default async function (card) {
     type_line;
   switch (layout) {
     case 'adventure':
-      /* this mechanic debuted in Throne of Eldrain.
-            all adventure cards are either (instants or sorceries) and creatures.
-            it seems to have been popular, so it may appear again. */
+      // this mechanic debuted in Throne of Eldrain.  all adventure cards are either (instants or sorceries) and creatures.  it seems to have been popular, so it may appear again.
       art_crop = image_uris.art_crop;
       image = image_uris.large;
       mana_cost = `${card_faces[0].mana_cost}${card_faces[1].mana_cost}`;
       type_line = `${card_faces[0].type_line} / ${card_faces[1].type_line}`;
       break;
     case 'flip':
-      /* flip was only in Kamigawa block
-            (plus an "Un" card and a couple of reprints),
-            which was before planeswalkers existed.
-            unlikely they ever bring this layout back.
-            if they do, no idea how they would fit a planeswalker onto one side.
-            all flip cards are creatures on one end
-            and either a creature or an enchantment on the other. */
+      // flip was only in Kamigawa block (plus an "Un" card and a couple of reprints), which was before planeswalkers existed.  unlikely they ever bring this layout back.  if they do, no idea how they would fit a planeswalker onto one side.  all flip cards are creatures on one end and either a creature or an enchantment on the other.
       art_crop = image_uris.art_crop;
       image = image_uris.large;
       mana_cost = card_faces[0].mana_cost;
       type_line = `${card_faces[0].type_line} / ${card_faces[1].type_line}`;
       break;
     case 'leveler':
-      /* all level up cards have been creatures.
-            this is a mechanic that has so far only appeared in
-            Rise of the Eldrazi and a single card in Modern Horizons.
-            i don't expect the mechanic to return,
-            but the printing of Hexdrinker in MH1 suggests it may. */
+      // all level up cards have been creatures.  this is a mechanic that has so far only appeared in Rise of the Eldrazi and a single card in Modern Horizons.  i don't expect the mechanic to return, but the printing of Hexdrinker in MH1 suggests it may.
       art_crop = image_uris.art_crop;
       image = image_uris.large;
       mana_cost = card.mana_cost;
       type_line = card.type_line;
       break;
     case 'meld':
-      /* meld only appeared in Eldritch Moon and probably won't ever come back.
-            no planeswalkers; only creatures and a single land. */
+      // meld only appeared in Eldritch Moon and probably won't ever come back.  no planeswalkers; only creatures and a single land.
       art_crop = image_uris.art_crop;
       mana_cost = card.mana_cost;
       type_line = card.type_line;
@@ -63,10 +50,7 @@ export default async function (card) {
       type_line = `${card_faces[0].type_line} / ${card_faces[1].type_line}`;
       break;
     case 'saga':
-      /* sagas have no other faces;
-            they simply have their own layout type becuase of the fact that
-            the art is on the right side of the card rather than the top of the card.
-            all sagas printed so far (through Kaldheim) have only 3 or 4 chapters. */
+      // sagas have no other faces; they simply have their own layout type becuase of the fact that the art is on the right side of the card rather than the top of the card.  all sagas printed so far (through Kaldheim) have only 3 or 4 chapters.
       art_crop = image_uris.art_crop;
       image = image_uris.large;
       mana_cost = card.mana_cost;
@@ -96,7 +80,7 @@ export default async function (card) {
     art_crop,
     back_image,
     cmc: card.cmc,
-    collector_number: parseInt(card.collector_number),
+    collector_number: card.collector_number,
     color_identity: card.color_identity,
     image,
     keywords: card.keywords,
