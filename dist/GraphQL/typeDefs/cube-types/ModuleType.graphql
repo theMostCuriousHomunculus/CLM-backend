@@ -1,5 +1,0 @@
-type ModuleType {
-  _id: ID
-  cards: [CubeCardType]
-  name: String
-}

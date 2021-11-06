@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "description": "The new and improved backend for Cube Level Midnight",
-  "main": "./dis/index.js",
+  "main": "./dist/index.js",
   "scripts": {
     "build": "rimraf ./dist && tsc && copyfiles -u 1 \"src/GraphQL/**/*.graphql\" dist",
     "dev": "nodemon -L ./dist/index.js",

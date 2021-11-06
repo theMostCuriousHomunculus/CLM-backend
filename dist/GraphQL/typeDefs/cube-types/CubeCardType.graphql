@@ -1,9 +1,0 @@
-type CubeCardType {
-  _id: ID
-  cmc: Int
-  color_identity: [String]
-  name: String
-  notes: String
-  scryfall_id: String
-  type_line: String
-}

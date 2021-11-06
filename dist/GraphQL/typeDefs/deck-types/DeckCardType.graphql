@@ -1,5 +1,0 @@
-type DeckCardType {
-  _id: ID
-  name: String
-  scryfall_id: String
-}

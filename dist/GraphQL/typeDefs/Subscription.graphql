@@ -1,7 +1,0 @@
-type Subscription {
-  subscribeBlogPost: BlogPostType!
-  subscribeCube: CubeType!
-  subscribeDeck: DeckType!
-  subscribeEvent: EventType!
-  subscribeMatch: MatchType!
-}

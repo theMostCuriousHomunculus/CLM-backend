@@ -1,1 +1,0 @@
-{"version":3,"file":"sendgrid-transporter.js","sourceRoot":"","sources":["../../src/utils/sendgrid-transporter.js"],"names":[],"mappings":"AAAA,OAAO,UAAU,MAAM,YAAY,CAAC;AACpC,OAAO,iBAAiB,MAAM,+BAA+B,CAAC;AAE9D,MAAM,WAAW,GAAG,UAAU,CAAC,eAAe,CAC5C,iBAAiB,CAAC;IAChB,IAAI,EAAE;QACJ,OAAO,EAAE,OAAO,CAAC,GAAG,CAAC,gBAAgB;KACtC;CACF,CAAC,CACH,CAAC;AAEF,eAAe,WAAW,CAAC"}

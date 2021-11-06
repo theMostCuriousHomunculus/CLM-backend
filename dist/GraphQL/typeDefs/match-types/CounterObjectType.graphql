@@ -1,4 +1,0 @@
-type CounterObjectType {
-  counterAmount: Int
-  counterType: String
-}

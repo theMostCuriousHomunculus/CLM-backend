@@ -1,7 +1,0 @@
-type CommentType {
-  _id: ID
-  author: AccountType
-  body: String
-  createdAt: String
-  updatedAt: String
-}

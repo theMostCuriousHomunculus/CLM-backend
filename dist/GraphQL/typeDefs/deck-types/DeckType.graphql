@@ -1,9 +1,0 @@
-type DeckType {
-  _id: ID
-  creator: AccountType
-  description: String
-  format: FormatEnum
-  mainboard: [DeckCardType]
-  name: String
-  sideboard: [DeckCardType]
-}

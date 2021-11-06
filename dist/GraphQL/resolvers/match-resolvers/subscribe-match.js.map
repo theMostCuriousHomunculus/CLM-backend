@@ -1,1 +1,0 @@
-{"version":3,"file":"subscribe-match.js","sourceRoot":"","sources":["../../../../src/GraphQL/resolvers/match-resolvers/subscribe-match.js"],"names":[],"mappings":"AAAA,eAAe;IACb,SAAS,EAAE,UAAU,MAAM,EAAE,IAAI,EAAE,OAAO;QACxC,OAAO,OAAO,CAAC,MAAM,CAAC,aAAa,CAAC,OAAO,CAAC,KAAK,CAAC,GAAG,CAAC,QAAQ,EAAE,CAAC,CAAC;IACpE,CAAC;CACF,CAAC"}
