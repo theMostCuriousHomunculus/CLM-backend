@@ -6,7 +6,7 @@ import context from './context.js';
 import graphqlHandler from './GraphQL/GRAPHQL-handler.js';
 
 mongoose.connect(
-  process.env.DB_CONNECTION,
+  process.env.DB_CONNECTION!,
   {
     useCreateIndex: true,
     useNewUrlParser: true,
@@ -40,13 +40,7 @@ app.use(function (req, res, next) {
 
   next();
 });
-app.use(
-  express.urlencoded({
-    extended: true,
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
-);
+app.use(express.urlencoded());
 
 app.use(context);
 
