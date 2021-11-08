@@ -1,4 +1,4 @@
-import { Comment } from '../../../models/blog-model.js';
+import { CommentModel } from '../../../models/blog-post-model.js';
 import HttpError from '../../../models/http-error.js';
 
 export default async function (parent, args, context) {
@@ -9,7 +9,7 @@ export default async function (parent, args, context) {
 
   const { body } = args;
 
-  const comment = new Comment({
+  const comment = new CommentModel({
     author: account._id,
     body
   });

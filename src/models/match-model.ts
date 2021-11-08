@@ -1,6 +1,61 @@
-import mongoose from 'mongoose';
+import { model, Schema, Types } from 'mongoose';
 
-const counterSchema = new mongoose.Schema(
+enum FaceDown {
+  FORETELL = 'foretell',
+  MANIFEST = 'manifest',
+  MORPH = 'morph',
+  STANDARD = 'standard'
+}
+
+interface Counter {
+  counterAmount: number;
+  counterType: string;
+}
+
+interface MatchCard {
+  controller: Types.ObjectId;
+  counters: Counter[];
+  face_down: boolean;
+  face_down_image: FaceDown;
+  flipped: boolean;
+  isCopyToken: boolean;
+  index: number;
+  owner: Types.ObjectId;
+  scryfall_id: string;
+  sideboarded: boolean;
+  tapped: boolean;
+  targets: Types.ObjectId[];
+  visibility: Types.ObjectId[];
+  x_coordinate: number;
+  y_coordinate: number;
+}
+
+interface Player {
+  account: Types.ObjectId;
+  battlefield: MatchCard[];
+  energy: number;
+  exile: MatchCard[];
+  graveyard: MatchCard[];
+  hand: MatchCard[];
+  library: MatchCard[];
+  life: number;
+  mainboard: MatchCard[];
+  poison: number;
+  sideboard: MatchCard[];
+  temporary: MatchCard[];
+}
+
+interface Match {
+  cube?: Types.ObjectId;
+  decks?: Types.ObjectId[];
+  event?: Types.ObjectId;
+  game_winners: Types.ObjectId[];
+  log: string[];
+  players: Player[];
+  stack: MatchCard[];
+}
+
+const counterSchema = new Schema<Counter>(
   {
     counterAmount: {
       required: true,
@@ -16,11 +71,11 @@ const counterSchema = new mongoose.Schema(
   }
 );
 
-const matchCardSchema = new mongoose.Schema({
+const matchCardSchema = new Schema<MatchCard>({
   controller: {
-    ref: 'Account',
+    ref: 'AccountModel',
     required: true,
-    type: mongoose.Schema.Types.ObjectId
+    type: Types.ObjectId
   },
   counters: [counterSchema],
   face_down: {
@@ -46,9 +101,9 @@ const matchCardSchema = new mongoose.Schema({
     type: Number
   },
   owner: {
-    ref: 'Account',
+    ref: 'AccountModel',
     required: true,
-    type: mongoose.Schema.Types.ObjectId
+    type: Types.ObjectId
   },
   scryfall_id: {
     required: true,
@@ -66,15 +121,15 @@ const matchCardSchema = new mongoose.Schema({
   },
   targets: [
     {
-      ref: 'Card',
-      type: mongoose.Schema.Types.ObjectId
+      ref: 'CardModel',
+      type: Types.ObjectId
     }
   ],
   visibility: [
     {
-      ref: 'Account',
+      ref: 'AccountModel',
       required: true,
-      type: mongoose.Schema.Types.ObjectId
+      type: Types.ObjectId
     }
   ],
   x_coordinate: {
@@ -91,21 +146,20 @@ const matchCardSchema = new mongoose.Schema({
   }
 });
 
-function coordinateBoundaries(value) {
+function coordinateBoundaries(value: number) {
   return value >= 0 && value < 100;
 }
 
-const playerSchema = new mongoose.Schema(
+const playerSchema = new Schema<Player>(
   {
     account: {
-      ref: 'Account',
+      ref: 'AccountModel',
       required: true,
-      type: mongoose.Schema.Types.ObjectId
+      type: Types.ObjectId
     },
     battlefield: [matchCardSchema],
     energy: {
       default: 0,
-      required: false,
       type: Number
     },
     exile: [matchCardSchema],
@@ -120,7 +174,6 @@ const playerSchema = new mongoose.Schema(
     mainboard: [matchCardSchema],
     poison: {
       default: 0,
-      required: false,
       type: Number
     },
     sideboard: [matchCardSchema],
@@ -131,30 +184,30 @@ const playerSchema = new mongoose.Schema(
   }
 );
 
-const matchSchema = new mongoose.Schema(
+const matchSchema = new Schema<Match>(
   {
     cube: {
-      ref: 'Cube',
+      ref: 'CubeModel',
       required: false,
-      type: mongoose.Schema.Types.ObjectId
+      type: Types.ObjectId
     },
     decks: [
       {
-        ref: 'Deck',
+        ref: 'DeckModel',
         required: false,
-        type: mongoose.Schema.Types.ObjectId
+        type: Types.ObjectId
       }
     ],
     event: {
-      ref: 'Event',
+      ref: 'EventModel',
       required: false,
-      type: mongoose.Schema.Types.ObjectId
+      type: Types.ObjectId
     },
     game_winners: [
       {
-        ref: 'Account',
+        ref: 'AccountModel',
         required: true,
-        type: mongoose.Schema.Types.ObjectId
+        type: Types.ObjectId
       }
     ],
     log: [String],
@@ -166,6 +219,6 @@ const matchSchema = new mongoose.Schema(
   }
 );
 
-const Match = mongoose.model('Match', matchSchema);
+const MatchModel = model('Match', matchSchema);
 
-export { Match as default, matchCardSchema };
+export { MatchModel as default, Match, MatchCard, Player };

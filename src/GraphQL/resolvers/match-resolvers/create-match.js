@@ -2,7 +2,7 @@ import Account from '../../../models/account-model.js';
 import Deck from '../../../models/deck-model.js';
 import HttpError from '../../../models/http-error.js';
 import Match from '../../../models/match-model.js';
-import { Event } from '../../../models/event-model.js';
+import Event from '../../../models/event-model.js';
 
 export default async function (parent, args, context) {
   const { account } = context;

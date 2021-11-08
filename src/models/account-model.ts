@@ -1,10 +1,24 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import mongoose from 'mongoose';
+import { model, Schema, Types } from 'mongoose';
 
 import HttpError from './http-error.js';
 
-const accountSchema = new mongoose.Schema({
+interface Account {
+  adming: boolean;
+  avatar: string;
+  buds: Types.ObjectId[];
+  email: string;
+  name: string;
+  password: string;
+  received_bud_requests: Types.ObjectId[];
+  reset_token?: string;
+  reset_token_expiration?: typeof Date;
+  sent_bud_requests: Types.ObjectId[];
+  tokens: string[];
+}
+
+const accountSchema = new Schema<Account>({
   admin: {
     default: false,
     required: true,
@@ -16,8 +30,8 @@ const accountSchema = new mongoose.Schema({
   },
   buds: [
     {
-      ref: 'Account',
-      type: mongoose.Schema.Types.ObjectId
+      ref: 'AccountModel',
+      type: Types.ObjectId
     }
   ],
   email: {
@@ -45,38 +59,39 @@ const accountSchema = new mongoose.Schema({
   },
   received_bud_requests: [
     {
-      ref: 'Account',
-      type: mongoose.Schema.Types.ObjectId
+      ref: 'AccountModel',
+      type: Types.ObjectId
     }
   ],
   reset_token: String,
   reset_token_expiration: Date,
   sent_bud_requests: [
     {
-      ref: 'Account',
-      type: mongoose.Schema.Types.ObjectId
+      ref: 'AccountModel',
+      type: Types.ObjectId
     }
   ],
   tokens: [
     {
-      token: {
-        type: String,
-        required: true
-      }
+      type: String,
+      required: true
     }
   ]
 });
 
 accountSchema.methods.generateAuthenticationToken = async function () {
-  const token = jwt.sign({ _id: this._id.toString() }, process.env.JWT_SECRET);
+  const token = jwt.sign({ _id: this._id.toString() }, process.env.JWT_SECRET!);
 
-  this.tokens = this.tokens.concat({ token });
+  this.tokens = this.tokens.concat(token);
   await this.save();
   return token;
 };
 
-accountSchema.statics.findByCredentials = async (email, enteredPassword) => {
-  const user = await Account.findOne({ email });
+accountSchema.statics.findByCredentials = async (
+  email: string,
+  enteredPassword: string
+) => {
+  const user = await AccountModel.findOne({ email });
 
   if (!user) {
     throw new HttpError(
@@ -108,6 +123,6 @@ accountSchema.pre('save', async function (next) {
   next();
 });
 
-const Account = mongoose.model('Account', accountSchema);
+const AccountModel = model<Account>('Account', accountSchema);
 
-export default Account;
+export { AccountModel as default, Account };

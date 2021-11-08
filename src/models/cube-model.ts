@@ -1,6 +1,37 @@
-import mongoose from 'mongoose';
+import { model, Schema, Types } from 'mongoose';
 
-const cubeCardSchema = new mongoose.Schema({
+interface CubeCard {
+  cmc?: number;
+  color_identity?: string[];
+  name: string;
+  notes: string;
+  scryfall_id: string;
+  type_line?: string;
+}
+
+interface Module {
+  cards: CubeCard[];
+  name: string;
+}
+
+interface Rotation {
+  cards: CubeCard[];
+  name: string;
+  size: number;
+}
+
+interface Cube {
+  creator: Types.ObjectId;
+  description: string;
+  mainboard: CubeCard[];
+  modules: Module[];
+  name: string;
+  published: boolean;
+  rotations: Rotation[];
+  sideboard: CubeCard[];
+}
+
+const cubeCardSchema = new Schema<CubeCard>({
   cmc: Number,
   color_identity: {
     default: undefined,
@@ -23,7 +54,7 @@ const cubeCardSchema = new mongoose.Schema({
   type_line: String
 });
 
-const moduleSchema = new mongoose.Schema({
+const moduleSchema = new Schema<Module>({
   cards: [cubeCardSchema],
   name: {
     maxlength: 30,
@@ -33,7 +64,7 @@ const moduleSchema = new mongoose.Schema({
   }
 });
 
-const rotationSchema = new mongoose.Schema({
+const rotationSchema = new Schema<Rotation>({
   cards: [cubeCardSchema],
   name: {
     maxlength: 30,
@@ -47,11 +78,11 @@ const rotationSchema = new mongoose.Schema({
   }
 });
 
-const cubeSchema = new mongoose.Schema({
+const cubeSchema = new Schema<Cube>({
   creator: {
-    ref: 'Account',
+    ref: 'AccountModel',
     required: true,
-    type: mongoose.Schema.Types.ObjectId
+    type: Types.ObjectId
   },
   description: {
     default: '',
@@ -79,6 +110,6 @@ const cubeSchema = new mongoose.Schema({
 
 cubeSchema.index({ name: 'text', description: 'text' });
 
-const Cube = mongoose.model('Cube', cubeSchema);
+const CubeModel = model<Cube>('Cube', cubeSchema);
 
-export { Cube as default, cubeCardSchema };
+export { CubeModel as default, Cube, cubeCardSchema };

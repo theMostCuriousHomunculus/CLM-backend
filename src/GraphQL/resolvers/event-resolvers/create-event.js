@@ -1,7 +1,7 @@
 import HttpError from '../../../models/http-error.js';
 import randomSampleWithoutReplacement from '../../../utils/random-sample-wo-replacement.js';
 import shuffle from '../../../utils/shuffle.js';
-import { Event } from '../../../models/event-model.js';
+import Event from '../../../models/event-model.js';
 
 export default async function (parent, args, context) {
   const { account, cube } = context;

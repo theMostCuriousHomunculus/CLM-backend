@@ -1,6 +1,31 @@
-import mongoose from 'mongoose';
+import { model, Schema, Types } from 'mongoose';
 
-const deckCardSchema = new mongoose.Schema({
+enum Format {
+  CLASSY = 'Classy',
+  FREEFORM = 'Freeform',
+  LEGACY = 'Legacy',
+  MODERN = 'Modern',
+  PAUPER = 'Pauper',
+  PIONEER = 'Pioneer',
+  STANDARD = 'Standard',
+  VINTAGE = 'Vintage'
+}
+
+interface DeckCard {
+  name: string;
+  scryfall_id: string;
+}
+
+interface Deck {
+  creator: Types.ObjectId;
+  description: string;
+  format?: Format;
+  mainboard: DeckCard[];
+  name: string;
+  sideboard: DeckCard[];
+}
+
+const deckCardSchema = new Schema<DeckCard>({
   name: {
     required: true,
     type: String
@@ -11,11 +36,11 @@ const deckCardSchema = new mongoose.Schema({
   }
 });
 
-const deckSchema = new mongoose.Schema({
+const deckSchema = new Schema<Deck>({
   creator: {
-    ref: 'Account',
+    ref: 'AccountModel',
     required: true,
-    type: mongoose.Schema.Types.ObjectId
+    type: Types.ObjectId
   },
   description: {
     default: '',
@@ -53,6 +78,6 @@ const deckSchema = new mongoose.Schema({
 
 deckSchema.index({ name: 'text', description: 'text' });
 
-const Deck = mongoose.model('Deck', deckSchema);
+const DeckModel = model<Deck>('Deck', deckSchema);
 
-export { Deck as default };
+export { DeckModel as default, Deck, DeckCard, deckCardSchema };

@@ -1,4 +1,4 @@
-import Blog from '../../../models/blog-model.js';
+import BlogPostModel from '../../../models/blog-post-model.js';
 import HttpError from '../../../models/http-error.js';
 
 export default async function (parent, args, context) {
@@ -13,7 +13,7 @@ export default async function (parent, args, context) {
 
   try {
     const date = new Date();
-    const blogPost = new Blog({
+    const blogPost = new BlogPostModel({
       author: account._id,
       body,
       comments: [],

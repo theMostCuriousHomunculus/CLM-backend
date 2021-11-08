@@ -2,11 +2,11 @@ import jwt from 'jsonwebtoken';
 
 import pubsub from './pubsub.js';
 import Account from '../models/account-model.js';
-import Blog from '../models/blog-model.js';
+import Blog from '../models/blog-post-model.js';
 import Cube from '../models/cube-model.js';
 import Deck from '../models/deck-model.js';
 import Match from '../models/match-model.js';
-import { Event } from '../models/event-model.js';
+import Event from '../models/event-model.js';
 
 export default async function (context) {
   if (context.connectionParams.authToken) {
