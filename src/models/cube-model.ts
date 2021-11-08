@@ -1,6 +1,7 @@
 import { model, Schema, Types } from 'mongoose';
 
 interface CubeCard {
+  _id: Types.ObjectId;
   cmc?: number;
   color_identity?: string[];
   name: string;
@@ -10,17 +11,20 @@ interface CubeCard {
 }
 
 interface Module {
+  _id: Types.ObjectId;
   cards: CubeCard[];
   name: string;
 }
 
 interface Rotation {
+  _id: Types.ObjectId;
   cards: CubeCard[];
   name: string;
   size: number;
 }
 
 interface Cube {
+  _id: Types.ObjectId;
   creator: Types.ObjectId;
   description: string;
   mainboard: CubeCard[];

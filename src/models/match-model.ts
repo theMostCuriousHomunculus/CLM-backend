@@ -13,6 +13,7 @@ interface Counter {
 }
 
 interface MatchCard {
+  _id: Types.ObjectId;
   controller: Types.ObjectId;
   counters: Counter[];
   face_down: boolean;
@@ -46,6 +47,7 @@ interface Player {
 }
 
 interface Match {
+  _id: Types.ObjectId;
   cube?: Types.ObjectId;
   decks?: Types.ObjectId[];
   event?: Types.ObjectId;

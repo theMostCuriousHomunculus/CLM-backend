@@ -5,6 +5,7 @@ import { model, Schema, Types } from 'mongoose';
 import HttpError from './http-error.js';
 
 interface Account {
+  _id: Types.ObjectId;
   adming: boolean;
   avatar: string;
   buds: Types.ObjectId[];
@@ -13,7 +14,7 @@ interface Account {
   password: string;
   received_bud_requests: Types.ObjectId[];
   reset_token?: string;
-  reset_token_expiration?: typeof Date;
+  reset_token_expiration?: Date;
   sent_bud_requests: Types.ObjectId[];
   tokens: string[];
 }

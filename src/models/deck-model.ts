@@ -12,11 +12,13 @@ enum Format {
 }
 
 interface DeckCard {
+  _id: Types.ObjectId;
   name: string;
   scryfall_id: string;
 }
 
 interface Deck {
+  _id: Types.ObjectId;
   creator: Types.ObjectId;
   description: string;
   format?: Format;

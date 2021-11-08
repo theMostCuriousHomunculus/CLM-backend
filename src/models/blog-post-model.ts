@@ -1,21 +1,23 @@
 import { model, Schema, Types } from 'mongoose';
 
 interface Comment {
+  _id: Types.ObjectId;
   author: Types.ObjectId;
   body: string;
-  createdAt: typeof Date;
-  updatedAt: typeof Date;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 interface BlogPost {
+  _id: Types.ObjectId;
   author: Types.ObjectId;
   body: string;
   comments: Comment[];
-  createdAt: typeof Date;
+  createdAt: Date;
   image: string;
   subtitle: string;
   title: string;
-  updatedAt: typeof Date;
+  updatedAt: Date;
 }
 
 const commentSchema = new Schema<Comment>(

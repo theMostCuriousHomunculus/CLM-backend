@@ -11,12 +11,14 @@ interface Player {
 }
 
 interface Event {
-  createdAt: typeof Date;
+  _id: Types.ObjectId;
+  createdAt: Date;
   cube: Types.ObjectId;
   finished: boolean;
   host: Types.ObjectId;
   name: string;
   players: Player[];
+  updatedAt: Date;
 }
 
 const playerSchema = new Schema<Player>(
