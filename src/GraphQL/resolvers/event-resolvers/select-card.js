@@ -1,11 +1,11 @@
-import HttpError from '../../../models/http-error.js';
+import HTTPError from '../../../types/classes/HTTPError.js';
 
 export default async function (parent, args, context) {
   const { event, player, pubsub } = context;
   const { _id } = args;
 
   if (!event)
-    throw new HttpError(
+    throw new HTTPError(
       'An event with the provided ID does not exist or you were not invited to it.',
       404
     );
@@ -15,7 +15,7 @@ export default async function (parent, args, context) {
   );
 
   if (!cardDrafted)
-    throw new HttpError('You attempted to draft an invalid card.', 404);
+    throw new HTTPError('You attempted to draft an invalid card.', 404);
 
   player.mainboard.push(cardDrafted);
 

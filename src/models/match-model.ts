@@ -1,69 +1,17 @@
-import { model, Schema, Types } from 'mongoose';
+import { model, Schema } from 'mongoose';
 
-enum FaceDown {
-  FORETELL = 'foretell',
-  MANIFEST = 'manifest',
-  MORPH = 'morph',
-  STANDARD = 'standard'
-}
-
-interface Counter {
-  counterAmount: number;
-  counterType: string;
-}
-
-interface MatchCard {
-  _id: Types.ObjectId;
-  controller: Types.ObjectId;
-  counters: Counter[];
-  face_down: boolean;
-  face_down_image: FaceDown;
-  flipped: boolean;
-  isCopyToken: boolean;
-  index: number;
-  owner: Types.ObjectId;
-  scryfall_id: string;
-  sideboarded: boolean;
-  tapped: boolean;
-  targets: Types.ObjectId[];
-  visibility: Types.ObjectId[];
-  x_coordinate: number;
-  y_coordinate: number;
-}
-
-interface Player {
-  account: Types.ObjectId;
-  battlefield: MatchCard[];
-  energy: number;
-  exile: MatchCard[];
-  graveyard: MatchCard[];
-  hand: MatchCard[];
-  library: MatchCard[];
-  life: number;
-  mainboard: MatchCard[];
-  poison: number;
-  sideboard: MatchCard[];
-  temporary: MatchCard[];
-}
-
-interface Match {
-  _id: Types.ObjectId;
-  cube?: Types.ObjectId;
-  decks?: Types.ObjectId[];
-  event?: Types.ObjectId;
-  game_winners: Types.ObjectId[];
-  log: string[];
-  players: Player[];
-  stack: MatchCard[];
-}
+import Counter from '../types/interfaces/Counter';
+import Match from '../types/interfaces/Match';
+import MatchCard from '../types/interfaces/MatchCard';
+import MatchPlayer from '../types/interfaces/MatchPlayer';
 
 const counterSchema = new Schema<Counter>(
   {
-    counterAmount: {
+    amount: {
       required: true,
       type: Number
     },
-    counterType: {
+    type: {
       required: true,
       type: String
     }
@@ -77,7 +25,7 @@ const matchCardSchema = new Schema<MatchCard>({
   controller: {
     ref: 'AccountModel',
     required: true,
-    type: Types.ObjectId
+    type: 'ObjectId'
   },
   counters: [counterSchema],
   face_down: {
@@ -85,7 +33,6 @@ const matchCardSchema = new Schema<MatchCard>({
     type: Boolean
   },
   face_down_image: {
-    default: 'standard',
     enum: ['foretell', 'manifest', 'morph', 'standard'],
     required: true,
     type: String
@@ -105,7 +52,7 @@ const matchCardSchema = new Schema<MatchCard>({
   owner: {
     ref: 'AccountModel',
     required: true,
-    type: Types.ObjectId
+    type: 'ObjectId'
   },
   scryfall_id: {
     required: true,
@@ -124,14 +71,14 @@ const matchCardSchema = new Schema<MatchCard>({
   targets: [
     {
       ref: 'CardModel',
-      type: Types.ObjectId
+      type: 'ObjectId'
     }
   ],
   visibility: [
     {
       ref: 'AccountModel',
       required: true,
-      type: Types.ObjectId
+      type: 'ObjectId'
     }
   ],
   x_coordinate: {
@@ -152,12 +99,12 @@ function coordinateBoundaries(value: number) {
   return value >= 0 && value < 100;
 }
 
-const playerSchema = new Schema<Player>(
+const playerSchema = new Schema<MatchPlayer>(
   {
     account: {
       ref: 'AccountModel',
       required: true,
-      type: Types.ObjectId
+      type: 'ObjectId'
     },
     battlefield: [matchCardSchema],
     energy: {
@@ -191,25 +138,25 @@ const matchSchema = new Schema<Match>(
     cube: {
       ref: 'CubeModel',
       required: false,
-      type: Types.ObjectId
+      type: 'ObjectId'
     },
     decks: [
       {
         ref: 'DeckModel',
         required: false,
-        type: Types.ObjectId
+        type: 'ObjectId'
       }
     ],
     event: {
       ref: 'EventModel',
       required: false,
-      type: Types.ObjectId
+      type: 'ObjectId'
     },
     game_winners: [
       {
         ref: 'AccountModel',
         required: true,
-        type: Types.ObjectId
+        type: 'ObjectId'
       }
     ],
     log: [String],
@@ -223,4 +170,4 @@ const matchSchema = new Schema<Match>(
 
 const MatchModel = model('Match', matchSchema);
 
-export { MatchModel as default, Match, MatchCard, Player };
+export default MatchModel;

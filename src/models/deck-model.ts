@@ -1,31 +1,7 @@
-import { model, Schema, Types } from 'mongoose';
+import { model, Schema } from 'mongoose';
 
-enum Format {
-  CLASSY = 'Classy',
-  FREEFORM = 'Freeform',
-  LEGACY = 'Legacy',
-  MODERN = 'Modern',
-  PAUPER = 'Pauper',
-  PIONEER = 'Pioneer',
-  STANDARD = 'Standard',
-  VINTAGE = 'Vintage'
-}
-
-interface DeckCard {
-  _id: Types.ObjectId;
-  name: string;
-  scryfall_id: string;
-}
-
-interface Deck {
-  _id: Types.ObjectId;
-  creator: Types.ObjectId;
-  description: string;
-  format?: Format;
-  mainboard: DeckCard[];
-  name: string;
-  sideboard: DeckCard[];
-}
+import Deck from '../types/interfaces/Deck';
+import DeckCard from '../types/interfaces/DeckCard';
 
 const deckCardSchema = new Schema<DeckCard>({
   name: {
@@ -42,7 +18,7 @@ const deckSchema = new Schema<Deck>({
   creator: {
     ref: 'AccountModel',
     required: true,
-    type: Types.ObjectId
+    type: 'ObjectId'
   },
   description: {
     default: '',
@@ -82,4 +58,4 @@ deckSchema.index({ name: 'text', description: 'text' });
 
 const DeckModel = model<Deck>('Deck', deckSchema);
 
-export { DeckModel as default, Deck, DeckCard, deckCardSchema };
+export { DeckModel as default, deckCardSchema };

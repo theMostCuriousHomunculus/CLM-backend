@@ -1,7 +1,7 @@
 import crypto from 'crypto';
 
 import Account from '../../../models/account-model.js';
-import HttpError from '../../../models/http-error.js';
+import HTTPError from '../../../types/classes/HTTPError.js';
 import transporter from '../../../utils/sendgrid-transporter.js';
 
 export default async function (parent, args) {
@@ -11,7 +11,7 @@ export default async function (parent, args) {
   const account = await Account.findOne({ email });
 
   if (!account) {
-    throw new HttpError(
+    throw new HTTPError(
       'Could not find a user with the provided email address.',
       404
     );

@@ -1,4 +1,4 @@
-export default function (array) {
+export default function (array: any[]) {
   for (let i = array.length - 1; i > 0; i--) {
     let j = Math.floor(Math.random() * (i + 1));
     let dummy = array[i];

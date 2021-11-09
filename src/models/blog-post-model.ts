@@ -1,29 +1,12 @@
-import { model, Schema, Types } from 'mongoose';
+import { model, Schema } from 'mongoose';
 
-interface Comment {
-  _id: Types.ObjectId;
-  author: Types.ObjectId;
-  body: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
-
-interface BlogPost {
-  _id: Types.ObjectId;
-  author: Types.ObjectId;
-  body: string;
-  comments: Comment[];
-  createdAt: Date;
-  image: string;
-  subtitle: string;
-  title: string;
-  updatedAt: Date;
-}
+import BlogPost from '../types/interfaces/BlogPost';
+import Comment from '../types/interfaces/Comment';
 
 const commentSchema = new Schema<Comment>(
   {
     author: {
-      type: Types.ObjectId,
+      type: 'ObjectId',
       ref: 'AccountModel',
       required: true
     },
@@ -39,7 +22,7 @@ const commentSchema = new Schema<Comment>(
 
 const blogPostSchema = new Schema<BlogPost>({
   author: {
-    type: Types.ObjectId,
+    type: 'ObjectId',
     ref: 'AccountModel',
     required: true
   },
@@ -70,8 +53,8 @@ const blogPostSchema = new Schema<BlogPost>({
 
 blogPostSchema.index({ title: 'text', subtitle: 'text' });
 
-const BlogPostModel = model<BlogPost>('Blog', blogPostSchema);
+const BlogPostModel = model<BlogPost>('BlogPost', blogPostSchema);
 
 const CommentModel = model<Comment>('Comment', commentSchema);
 
-export { BlogPostModel as default, BlogPost, CommentModel };
+export { BlogPostModel as default, CommentModel };

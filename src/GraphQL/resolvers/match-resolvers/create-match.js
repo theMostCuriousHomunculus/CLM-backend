@@ -1,6 +1,6 @@
 import Account from '../../../models/account-model.js';
 import Deck from '../../../models/deck-model.js';
-import HttpError from '../../../models/http-error.js';
+import HTTPError from '../../../types/classes/HTTPError.js';
 import Match from '../../../models/match-model.js';
 import Event from '../../../models/event-model.js';
 
@@ -8,7 +8,7 @@ export default async function (parent, args, context) {
   const { account } = context;
 
   if (!account)
-    throw new HttpError('You must be logged in to create a match.', 401);
+    throw new HTTPError('You must be logged in to create a match.', 401);
 
   const { deckIDs, eventID, playerIDs } = args;
   const matchInfo = {

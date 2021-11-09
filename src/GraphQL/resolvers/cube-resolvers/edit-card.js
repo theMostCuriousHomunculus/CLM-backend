@@ -1,11 +1,11 @@
-import HttpError from '../../../models/http-error.js';
+import HTTPError from '../../../types/classes/HTTPError.js';
 import returnComponent from '../../../utils/return-component.js';
 
 export default async function (parent, args, context) {
   const { account, cube, pubsub } = context;
 
   if (!account || !cube || account._id.toString() !== cube.creator.toString())
-    throw new HttpError('You are not authorized to edit this cube.', 401);
+    throw new HTTPError('You are not authorized to edit this cube.', 401);
 
   const { cardID, componentID } = args;
 
@@ -13,7 +13,7 @@ export default async function (parent, args, context) {
   const card = component.id(cardID);
 
   if (!card) {
-    throw new HttpError(
+    throw new HTTPError(
       'Could not find a card with the provided ID in the provided component.',
       404
     );

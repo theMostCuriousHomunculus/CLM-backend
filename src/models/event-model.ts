@@ -1,30 +1,13 @@
-import { model, Schema, Types } from 'mongoose';
+import { model, Schema } from 'mongoose';
 
-import { DeckCard, deckCardSchema } from './deck-model.js';
+import { deckCardSchema } from './deck-model.js';
+import Event from '../types/interfaces/Event';
+import EventPlayer from '../types/interfaces/EventPlayer';
 
-interface Player {
-  account: Types.ObjectId;
-  mainboard: DeckCard[];
-  packs: DeckCard[][];
-  queue: DeckCard[][];
-  sideboard: DeckCard[];
-}
-
-interface Event {
-  _id: Types.ObjectId;
-  createdAt: Date;
-  cube: Types.ObjectId;
-  finished: boolean;
-  host: Types.ObjectId;
-  name: string;
-  players: Player[];
-  updatedAt: Date;
-}
-
-const playerSchema = new Schema<Player>(
+const playerSchema = new Schema<EventPlayer>(
   {
     account: {
-      type: Types.ObjectId,
+      type: 'ObjectId',
       ref: 'AccountModel',
       required: true
     },
@@ -43,7 +26,7 @@ const eventSchema = new Schema<Event>(
     cube: {
       ref: 'CubeModel',
       required: true,
-      type: Types.ObjectId
+      type: 'ObjectId'
     },
     finished: {
       default: false,
@@ -51,7 +34,7 @@ const eventSchema = new Schema<Event>(
       type: Boolean
     },
     host: {
-      type: Types.ObjectId,
+      type: 'ObjectId',
       ref: 'AccountModel',
       required: true
     },
@@ -69,4 +52,4 @@ const eventSchema = new Schema<Event>(
 
 const EventModel = model<Event>('Event', eventSchema);
 
-export { EventModel as default, Event, Player };
+export default EventModel;

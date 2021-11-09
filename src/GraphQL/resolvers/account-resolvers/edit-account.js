@@ -1,11 +1,11 @@
 import Account from '../../../models/account-model.js';
-import HttpError from '../../../models/http-error.js';
+import HTTPError from '../../../types/classes/HTTPError.js';
 
 export default async function (parent, args, context) {
   const { account } = context;
 
   if (!account)
-    throw new HttpError('You must be logged in to perform this action.', 401);
+    throw new HTTPError('You must be logged in to perform this action.', 401);
 
   const { action, other_user_id, return_other } = args;
 
@@ -32,14 +32,14 @@ export default async function (parent, args, context) {
       otherUser = await Account.findById(other_user_id);
 
       if (!otherUser) {
-        throw new HttpError(
+        throw new HTTPError(
           'We are unable to process your request because the other user does not exist in our database.',
           403
         );
       }
 
       if (otherUser._id === account._id) {
-        throw new HttpError("You must provide a different user's ID.", 403);
+        throw new HTTPError("You must provide a different user's ID.", 403);
       }
 
       switch (action) {
@@ -54,7 +54,7 @@ export default async function (parent, args, context) {
             otherUser.buds.push(account._id);
             break;
           } else {
-            throw new HttpError(
+            throw new HTTPError(
               'You cannot accept a bud request that you did not receive or that the other user did not send.',
               403
             );
@@ -80,13 +80,13 @@ export default async function (parent, args, context) {
             otherUser.received_bud_requests.push(account._id);
             break;
           } else {
-            throw new HttpError(
+            throw new HTTPError(
               'You cannot send a bud request to another user if you are already buds or if there is already a pending bud request from one of you to the other.',
               403
             );
           }
         default:
-          throw new HttpError(
+          throw new HTTPError(
             'Invalid action attempted.  Action must be "accept", "reject", "remove" or "send".',
             403
           );

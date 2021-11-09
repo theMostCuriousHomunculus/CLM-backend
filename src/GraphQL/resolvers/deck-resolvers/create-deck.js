@@ -2,12 +2,12 @@ import axios from 'axios';
 import CSVString from 'csv-string';
 
 import Deck from '../../../models/deck-model.js';
-import HttpError from '../../../models/http-error.js';
+import HTTPError from '../../../types/classes/HTTPError.js';
 // TODO: import deck list from tappedout or mtggoldfish
 
 export default async function (parent, args, context) {
   if (!context.account)
-    throw new HttpError('You must be logged in to create a deck.', 401);
+    throw new HTTPError('You must be logged in to create a deck.', 401);
 
   const { description, existingListID, format, name } = args;
   const deckInfo = {

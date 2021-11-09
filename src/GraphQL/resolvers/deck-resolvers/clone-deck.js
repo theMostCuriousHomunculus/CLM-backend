@@ -1,12 +1,12 @@
 import deleteDocumentIDs from '../../../utils/delete-document-ids.js';
 import Deck from '../../../models/deck-model.js';
-import HttpError from '../../../models/http-error.js';
+import HTTPError from '../../../types/classes/HTTPError.js';
 
 export default async function (parent, args, context) {
   const { account, deck } = context;
 
   if (!account)
-    throw new HttpError('You must be logged in to clone a deck.', 401);
+    throw new HTTPError('You must be logged in to clone a deck.', 401);
 
   const copy = JSON.parse(JSON.stringify(deck));
 

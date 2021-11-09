@@ -1,4 +1,8 @@
-export default function deleteDocumentIDs(copiedObjectWithID) {
+interface DocumentObject extends Object {
+  [key: string]: any;
+}
+
+export default function deleteDocumentIDs(copiedObjectWithID: DocumentObject) {
   if (
     copiedObjectWithID != null &&
     typeof copiedObjectWithID !== 'string' &&

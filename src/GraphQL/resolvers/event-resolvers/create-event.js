@@ -1,4 +1,4 @@
-import HttpError from '../../../models/http-error.js';
+import HTTPError from '../../../types/classes/HTTPError.js';
 import randomSampleWithoutReplacement from '../../../utils/random-sample-wo-replacement.js';
 import shuffle from '../../../utils/shuffle.js';
 import Event from '../../../models/event-model.js';
@@ -7,7 +7,7 @@ export default async function (parent, args, context) {
   const { account, cube } = context;
 
   if (!account)
-    throw new HttpError('You must be logged in to create an event.', 401);
+    throw new HTTPError('You must be logged in to create an event.', 401);
 
   const {
     cards_per_pack,

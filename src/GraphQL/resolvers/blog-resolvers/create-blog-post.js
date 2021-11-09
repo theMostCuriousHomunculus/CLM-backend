@@ -1,12 +1,12 @@
 import BlogPostModel from '../../../models/blog-post-model.js';
-import HttpError from '../../../models/http-error.js';
+import HTTPError from '../../../types/classes/HTTPError.js';
 
 export default async function (parent, args, context) {
   const { body, image, subtitle, title } = args;
   const { account } = context;
 
   if (!account || !account.admin)
-    throw new HttpError(
+    throw new HTTPError(
       'Only administrators may post articles on Cube Level Midnight.',
       401
     );

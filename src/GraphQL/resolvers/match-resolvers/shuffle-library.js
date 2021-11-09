@@ -1,10 +1,10 @@
-import HttpError from '../../../models/http-error.js';
+import HTTPError from '../../../types/classes/HTTPError.js';
 import shuffle from '../../../utils/shuffle.js';
 
 export default async function (parent, args, context) {
   const { account, match, player, pubsub } = context;
 
-  if (!player) throw new HttpError('You are only a spectator.', 401);
+  if (!player) throw new HTTPError('You are only a spectator.', 401);
 
   for (const card of player.library) {
     card.visibility = [];

@@ -1,4 +1,4 @@
-import HttpError from '../../../models/http-error.js';
+import HTTPError from '../../../types/classes/HTTPError.js';
 import transporter from '../../../utils/sendgrid-transporter.js';
 
 import Account from '../../../models/account-model.js';
@@ -9,7 +9,7 @@ export default async function (parent, args) {
   const existingUsersWithEmail = await Account.find({ email });
 
   if (existingUsersWithEmail.length > 0)
-    throw new HttpError(
+    throw new HTTPError(
       'An account with that email address already exists.  Use a different email address to register or try logging in instead.',
       409
     );
@@ -17,7 +17,7 @@ export default async function (parent, args) {
   const existingUsersWithName = await Account.find({ name });
 
   if (existingUsersWithName.length > 0)
-    throw new HttpError(
+    throw new HTTPError(
       'An account with that name already exists.  Please choose a different name so that other users can uniquely identify you.',
       409
     );

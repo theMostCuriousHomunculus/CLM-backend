@@ -1,4 +1,8 @@
-export default function (array, sampleSize) {
+interface ArrayObject {
+  [key: string]: any;
+}
+
+export default function (array: ArrayObject, sampleSize: number) {
   let sampleArray = [];
   let randomNumber;
   let randomCard;

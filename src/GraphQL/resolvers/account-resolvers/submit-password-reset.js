@@ -1,5 +1,5 @@
 import Account from '../../../models/account-model.js';
-import HttpError from '../../../models/http-error.js';
+import HTTPError from '../../../types/classes/HTTPError.js';
 
 export default async function (parent, args) {
   const { email, password, reset_token } = args;
@@ -9,7 +9,7 @@ export default async function (parent, args) {
     reset_token_expiration: { $gt: Date.now() }
   });
 
-  if (!account) throw new HttpError('Invalid reset token.', 401);
+  if (!account) throw new HTTPError('Invalid reset token.', 401);
 
   account.password = password;
   account.reset_token = null;

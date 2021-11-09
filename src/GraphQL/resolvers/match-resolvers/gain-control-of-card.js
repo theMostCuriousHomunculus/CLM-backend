@@ -1,9 +1,9 @@
-import HttpError from '../../../models/http-error.js';
+import HTTPError from '../../../types/classes/HTTPError.js';
 
 export default async function (parent, args, context) {
   const { account, match, player, pubsub } = context;
 
-  if (!player) throw new HttpError('You are only a spectator.', 401);
+  if (!player) throw new HTTPError('You are only a spectator.', 401);
 
   const {
     input: { cardID, controllerID, zone }
@@ -12,7 +12,7 @@ export default async function (parent, args, context) {
     (plr) => plr.account.toString() === controllerID
   );
 
-  if (!controller) throw new HttpError('Invalid controllerID.', 404);
+  if (!controller) throw new HTTPError('Invalid controllerID.', 404);
 
   let card;
 

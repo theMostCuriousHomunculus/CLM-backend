@@ -1,16 +1,16 @@
-import HttpError from '../../../models/http-error.js';
+import HTTPError from '../../../types/classes/HTTPError.js';
 
 export default async function (parent, args, context) {
   const { account, match, player, pubsub } = context;
 
-  if (!player) throw new HttpError('You are only a spectator.', 401);
+  if (!player) throw new HTTPError('You are only a spectator.', 401);
 
   const { cardID, controllerID, numberOfCopies, zone } = args;
   const controller = match.players.find(
     (plr) => plr.account.toString() === controllerID
   );
 
-  if (!controller) throw new HttpError('Invalid controllerID.', 404);
+  if (!controller) throw new HTTPError('Invalid controllerID.', 404);
 
   let card;
 
@@ -45,7 +45,7 @@ export default async function (parent, args, context) {
       });
     }
   } else {
-    throw new HttpError(
+    throw new HTTPError(
       'Copies can only exist on the stack or on the battlefield.',
       400
     );

@@ -1,9 +1,9 @@
-import HttpError from '../../../models/http-error.js';
+import HTTPError from '../../../types/classes/HTTPError.js';
 
 export default async function (parent, args, context) {
   const { match, player, pubsub } = context;
 
-  if (!player) throw new HttpError('You are only a spectator.', 401);
+  if (!player) throw new HTTPError('You are only a spectator.', 401);
 
   const { cardID } = args;
 
@@ -20,7 +20,7 @@ export default async function (parent, args, context) {
     card.sideboarded = false;
     player.mainboard.push(card);
   } else {
-    throw new HttpError(
+    throw new HTTPError(
       'A card with the provided ID does not exist in this deck.',
       404
     );

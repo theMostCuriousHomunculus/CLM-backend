@@ -1,16 +1,16 @@
-import HttpError from '../../../models/http-error.js';
+import HTTPError from '../../../types/classes/HTTPError.js';
 
 export default async function (parent, args, context) {
   const { account, blogPost, pubsub } = context;
 
   if (!blogPost)
-    throw new HttpError(
+    throw new HTTPError(
       'Could not find a blog post with the provided BlogPostID.',
       404
     );
 
   if (account._id.toString() !== blogPost.author.toString())
-    throw new HttpError('You are not authorized to edit this blog post.', 401);
+    throw new HTTPError('You are not authorized to edit this blog post.', 401);
 
   try {
     for (const field of ['body', 'image', 'subtitle', 'title']) {

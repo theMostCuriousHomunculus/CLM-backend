@@ -1,4 +1,4 @@
-class HttpError extends Error {
+class HTTPError extends Error {
   code: number;
   constructor(message: string, code: number) {
     super(message); // add a "message" property
@@ -6,4 +6,4 @@ class HttpError extends Error {
   }
 }
 
-export default HttpError;
+export default HTTPError;

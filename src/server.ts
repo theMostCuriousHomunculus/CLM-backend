@@ -1,25 +1,18 @@
 import express from 'express';
-import mongoose from 'mongoose';
+import { connect } from 'mongoose';
 import { createServer } from 'http';
 
 import context from './context.js';
 import graphqlHandler from './GraphQL/GRAPHQL-handler.js';
 
-mongoose.connect(
-  process.env.DB_CONNECTION!,
-  {
-    useCreateIndex: true,
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  },
-  (error) => {
-    if (error) {
-      console.log(error);
-    } else {
-      console.log('Connected to MongoDB');
-    }
+connect(process.env.DB_CONNECTION!, {}, (error) => {
+  if (error) {
+    console.log(`Name: ${error.name}`);
+    console.log(`Message: ${error.message}`);
+  } else {
+    console.log('Connected to MongoDB');
   }
-);
+});
 
 const app = express();
 

@@ -1,10 +1,10 @@
-import HttpError from '../../../models/http-error.js';
+import HTTPError from '../../../types/classes/HTTPError.js';
 
 export default async function (parent, args, context) {
   const { event, player, pubsub } = context;
 
   if (!event)
-    throw new HttpError(
+    throw new HTTPError(
       'An event with the provided ID does not exist or you were not invited to it.',
       404
     );
@@ -22,7 +22,7 @@ export default async function (parent, args, context) {
     player.sideboard.pull(cardID);
     player.mainboard.push(card);
   } else {
-    throw new HttpError(
+    throw new HTTPError(
       'A card with the provided ID does not exist in this deck.',
       404
     );

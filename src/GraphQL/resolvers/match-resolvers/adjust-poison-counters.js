@@ -1,14 +1,14 @@
-import HttpError from '../../../models/http-error.js';
+import HTTPError from '../../../types/classes/HTTPError.js';
 
 export default async function (parent, args, context) {
   const { account, match, player, pubsub } = context;
 
-  if (!player) throw new HttpError('You are only a spectator.', 401);
+  if (!player) throw new HTTPError('You are only a spectator.', 401);
 
   const { poison } = args;
 
   if (player.poison === poison) {
-    throw new HttpError('Poison counters did not change.', 400);
+    throw new HTTPError('Poison counters did not change.', 400);
   } else if (poison > player.poison) {
     match.log.push(
       `${account.name} gained ${poison - player.poison} poison counters; from ${

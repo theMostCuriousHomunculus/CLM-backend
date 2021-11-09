@@ -1,17 +1,17 @@
-import HttpError from '../../../models/http-error.js';
+import HTTPError from '../../../types/classes/HTTPError.js';
 import Account from '../../../models/account-model.js';
 
 export default async function (parent, args, context) {
   const { account, match, player, pubsub } = context;
 
-  if (!player) throw new HttpError('You are only a spectator.', 401);
+  if (!player) throw new HTTPError('You are only a spectator.', 401);
 
   const { controllerID, zone } = args;
   const controller = match.players.find(
     (plr) => plr.account.toString() === controllerID
   );
 
-  if (!controller) throw new HttpError('Invalid controllerID.', 404);
+  if (!controller) throw new HTTPError('Invalid controllerID.', 404);
 
   const controllerAccount = await Account.findById(controllerID);
 

@@ -1,14 +1,14 @@
-import HttpError from '../../../models/http-error.js';
+import HTTPError from '../../../types/classes/HTTPError.js';
 
 export default async function (parent, args, context) {
   const { account, match, player, pubsub } = context;
 
-  if (!player) throw new HttpError('You are only a spectator.', 401);
+  if (!player) throw new HTTPError('You are only a spectator.', 401);
 
   const { energy } = args;
 
   if (player.energy === energy) {
-    throw new HttpError('Energy counters did not change.', 400);
+    throw new HTTPError('Energy counters did not change.', 400);
   } else if (energy > player.energy) {
     match.log.push(
       `${account.name} gained ${energy - player.energy} energy counters; from ${

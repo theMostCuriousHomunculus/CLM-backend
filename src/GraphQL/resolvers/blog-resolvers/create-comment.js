@@ -1,11 +1,11 @@
 import { CommentModel } from '../../../models/blog-post-model.js';
-import HttpError from '../../../models/http-error.js';
+import HTTPError from '../../../types/classes/HTTPError.js';
 
 export default async function (parent, args, context) {
   const { account, blogPost, pubsub } = context;
 
   if (!account)
-    throw new HttpError('You must be logged in to comment on posts.', 401);
+    throw new HTTPError('You must be logged in to comment on posts.', 401);
 
   const { body } = args;
 

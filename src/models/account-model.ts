@@ -1,23 +1,9 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { model, Schema, Types } from 'mongoose';
+import { model, Schema } from 'mongoose';
 
-import HttpError from './http-error.js';
-
-interface Account {
-  _id: Types.ObjectId;
-  adming: boolean;
-  avatar: string;
-  buds: Types.ObjectId[];
-  email: string;
-  name: string;
-  password: string;
-  received_bud_requests: Types.ObjectId[];
-  reset_token?: string;
-  reset_token_expiration?: Date;
-  sent_bud_requests: Types.ObjectId[];
-  tokens: string[];
-}
+import HTTPError from '../types/classes/HTTPError.js';
+import Account from '../types/interfaces/Account';
 
 const accountSchema = new Schema<Account>({
   admin: {
@@ -32,7 +18,7 @@ const accountSchema = new Schema<Account>({
   buds: [
     {
       ref: 'AccountModel',
-      type: Types.ObjectId
+      type: 'ObjectId'
     }
   ],
   email: {
@@ -61,7 +47,7 @@ const accountSchema = new Schema<Account>({
   received_bud_requests: [
     {
       ref: 'AccountModel',
-      type: Types.ObjectId
+      type: 'ObjectId'
     }
   ],
   reset_token: String,
@@ -69,7 +55,7 @@ const accountSchema = new Schema<Account>({
   sent_bud_requests: [
     {
       ref: 'AccountModel',
-      type: Types.ObjectId
+      type: 'ObjectId'
     }
   ],
   tokens: [
@@ -95,7 +81,7 @@ accountSchema.statics.findByCredentials = async (
   const user = await AccountModel.findOne({ email });
 
   if (!user) {
-    throw new HttpError(
+    throw new HTTPError(
       'The provided email address and/or password were incorrect.  Please try again.',
       404
     );
@@ -104,7 +90,7 @@ accountSchema.statics.findByCredentials = async (
   const isMatch = await bcrypt.compare(enteredPassword, user.password);
 
   if (!isMatch) {
-    throw new HttpError(
+    throw new HTTPError(
       'The provided email address and/or password were incorrect.  Please try again.',
       404
     );
@@ -126,4 +112,4 @@ accountSchema.pre('save', async function (next) {
 
 const AccountModel = model<Account>('Account', accountSchema);
 
-export { AccountModel as default, Account };
+export default AccountModel;
