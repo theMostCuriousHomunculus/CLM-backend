@@ -1,7 +1,9 @@
-import { model, Schema } from 'mongoose';
+import mongoose from 'mongoose';
 
 import Deck from '../types/interfaces/Deck';
 import DeckCard from '../types/interfaces/DeckCard';
+
+const { model, Schema } = mongoose;
 
 const deckCardSchema = new Schema<DeckCard>({
   name: {

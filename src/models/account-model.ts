@@ -1,9 +1,11 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { model, Schema } from 'mongoose';
+import mongoose from 'mongoose';
 
 import HTTPError from '../types/classes/HTTPError.js';
 import Account from '../types/interfaces/Account';
+
+const { model, Schema } = mongoose;
 
 const accountSchema = new Schema<Account>({
   admin: {

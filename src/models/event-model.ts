@@ -1,8 +1,10 @@
-import { model, Schema } from 'mongoose';
+import mongoose from 'mongoose';
 
 import { deckCardSchema } from './deck-model.js';
 import Event from '../types/interfaces/Event';
 import EventPlayer from '../types/interfaces/EventPlayer';
+
+const { model, Schema } = mongoose;
 
 const playerSchema = new Schema<EventPlayer>(
   {

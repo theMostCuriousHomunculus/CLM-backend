@@ -1,9 +1,11 @@
-import { model, Schema } from 'mongoose';
+import mongoose from 'mongoose';
 
 import Cube from '../types/interfaces/Cube';
 import CubeCard from '../types/interfaces/CubeCard';
 import Module from '../types/interfaces/Module';
 import Rotation from '../types/interfaces/Rotation';
+
+const { model, Schema } = mongoose;
 
 const cubeCardSchema = new Schema<CubeCard>({
   cmc: Number,

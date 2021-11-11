@@ -1,11 +1,11 @@
 import express from 'express';
-import { connect } from 'mongoose';
+import mongoose from 'mongoose';
 import { createServer } from 'http';
 
 import context from './context.js';
 import graphqlHandler from './GraphQL/GRAPHQL-handler.js';
 
-connect(process.env.DB_CONNECTION!, {}, (error) => {
+mongoose.connect(process.env.DB_CONNECTION!, {}, (error) => {
   if (error) {
     console.log(`Name: ${error.name}`);
     console.log(`Message: ${error.message}`);
@@ -33,7 +33,11 @@ app.use(function (req, res, next) {
 
   next();
 });
-app.use(express.urlencoded());
+app.use(
+  express.urlencoded({
+    extended: true
+  })
+);
 
 app.use(context);
 

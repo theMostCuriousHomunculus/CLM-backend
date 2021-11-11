@@ -1,9 +1,11 @@
-import { model, Schema } from 'mongoose';
+import mongoose from 'mongoose';
 
 import Counter from '../types/interfaces/Counter';
 import Match from '../types/interfaces/Match';
 import MatchCard from '../types/interfaces/MatchCard';
 import MatchPlayer from '../types/interfaces/MatchPlayer';
+
+const { model, Schema } = mongoose;
 
 const counterSchema = new Schema<Counter>(
   {

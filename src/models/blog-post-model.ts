@@ -1,7 +1,9 @@
-import { model, Schema } from 'mongoose';
+import mongoose from 'mongoose';
 
 import BlogPost from '../types/interfaces/BlogPost';
 import Comment from '../types/interfaces/Comment';
+
+const { model, Schema } = mongoose;
 
 const commentSchema = new Schema<Comment>(
   {

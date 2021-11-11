@@ -3,19 +3,21 @@ import { NextFunction, RequestHandler, Request, Response } from 'express';
 import { PubSub } from 'graphql-subscriptions';
 
 import pubsub from './GraphQL/pubsub.js';
-import AccountModel, { Account } from './models/account-model.js';
-import BlogPostModel, { BlogPost } from './models/blog-post-model.js';
-import CubeModel, { Cube } from './models/cube-model.js';
-import DeckModel, { Deck } from './models/deck-model.js';
-import EventModel, {
-  Event,
-  Player as EventPlayer
-} from './models/event-model.js';
-import MatchModel, {
-  Match,
-  MatchCard,
-  Player as MatchPlayer
-} from './models/match-model.js';
+import Account from './types/interfaces/Account';
+import AccountModel from './models/account-model.js';
+import BlogPost from './types/interfaces/BlogPost';
+import BlogPostModel from './models/blog-post-model.js';
+import Cube from './types/interfaces/Cube';
+import CubeModel from './models/cube-model.js';
+import Deck from './types/interfaces/Deck';
+import DeckModel from './models/deck-model.js';
+import Event from './types/interfaces/Event';
+import EventModel from './models/event-model.js';
+import EventPlayer from './types/interfaces/EventPlayer';
+import Match from './types/interfaces/Match';
+import MatchCard from './types/interfaces/MatchCard';
+import MatchModel from './models/match-model.js';
+import MatchPlayer from './types/interfaces/MatchPlayer';
 
 interface ModifiedRequest extends Request {
   account?: Account | null;
@@ -75,6 +77,9 @@ export default <RequestHandler>(
 
       if (req.header('MatchID')) {
         const match = await MatchModel.findById(req.header('MatchID'));
+
+        if (!match)
+          throw new Error('Unable to find a match with the provided MatchID.');
 
         for (const plr of match.players) {
           plr.library.sort((a: MatchCard, b: MatchCard) => a.index - b.index);
