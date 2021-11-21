@@ -1,12 +1,12 @@
 import Account from '../../../types/interfaces/Account';
 import CubeModel from '../../../models/cube-model.js';
 
-import SubscriptionContext from '../../../types/interfaces/SubscriptionContext';
+import CLMRequest from '../../../types/interfaces/CLMRequest';
 
 export default async function (
   parent: Account,
   args: any,
-  context: SubscriptionContext
+  context: CLMRequest
 ) {
   if (
     context.account &&

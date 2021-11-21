@@ -1,12 +1,12 @@
-import { Types } from 'mongoose';
+import { Document, Types } from 'mongoose';
 
 import Comment from './Comment';
 
-export default interface BlogPost {
+export default interface BlogPost extends Document {
   _id: Types.ObjectId;
   author: Types.ObjectId;
   body: string;
-  comments: Comment[];
+  comments: Types.DocumentArray<Comment>;
   createdAt: Date;
   image: string;
   subtitle: string;

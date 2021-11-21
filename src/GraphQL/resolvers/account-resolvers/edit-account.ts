@@ -1,7 +1,22 @@
-import Account from '../../../models/account-model.js';
+import AccountModel from '../../../models/account-model.js';
 import HTTPError from '../../../types/classes/HTTPError.js';
+import CLMRequest from '../../../types/interfaces/CLMRequest';
 
-export default async function (parent, args, context) {
+interface EditAccountArgs {
+  action: string;
+  avatar: string;
+  email: string;
+  name: string;
+  other_user_id: string;
+  password: string;
+  return_other: boolean;
+}
+
+export default async function (
+  parent: any,
+  args: EditAccountArgs,
+  context: CLMRequest
+) {
   const { account } = context;
 
   if (!account)
@@ -14,11 +29,11 @@ export default async function (parent, args, context) {
 
     for (let field of mutableFields) {
       if (
-        args.input[field] &&
-        args.input[field] !== 'null' &&
-        args.input[field] !== 'undefined'
+        args[field] &&
+        args[field] !== 'null' &&
+        args[field] !== 'undefined'
       ) {
-        account[field] = args.input[field];
+        account[field] = args[field];
       }
     }
 
@@ -29,7 +44,7 @@ export default async function (parent, args, context) {
       other_user_id !== 'null' &&
       other_user_id !== 'undefined'
     ) {
-      otherUser = await Account.findById(other_user_id);
+      otherUser = await AccountModel.findById(other_user_id);
 
       if (!otherUser) {
         throw new HTTPError(

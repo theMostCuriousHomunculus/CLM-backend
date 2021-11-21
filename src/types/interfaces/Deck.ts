@@ -8,7 +8,7 @@ export default interface Deck {
   creator: Types.ObjectId;
   description: string;
   format?: Format;
-  mainboard: DeckCard[];
+  mainboard: Types.DocumentArray<DeckCard>;
   name: string;
-  sideboard: DeckCard[];
+  sideboard: Types.DocumentArray<DeckCard>;
 }

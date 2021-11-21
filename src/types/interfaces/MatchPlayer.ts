@@ -1,18 +1,18 @@
-import { Types } from 'mongoose';
+import { Document, Types } from 'mongoose';
 
 import MatchCard from './MatchCard';
 
-export default interface Player {
+export default interface Player extends Document {
   account: Types.ObjectId;
-  battlefield: MatchCard[];
+  battlefield: Types.DocumentArray<MatchCard>;
   energy: number;
-  exile: MatchCard[];
-  graveyard: MatchCard[];
-  hand: MatchCard[];
-  library: MatchCard[];
+  exile: Types.DocumentArray<MatchCard>;
+  graveyard: Types.DocumentArray<MatchCard>;
+  hand: Types.DocumentArray<MatchCard>;
+  library: Types.DocumentArray<MatchCard>;
   life: number;
-  mainboard: MatchCard[];
+  mainboard: Types.DocumentArray<MatchCard>;
   poison: number;
-  sideboard: MatchCard[];
-  temporary: MatchCard[];
+  sideboard: Types.DocumentArray<MatchCard>;
+  temporary: Types.DocumentArray<MatchCard>;
 }

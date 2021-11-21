@@ -3,10 +3,10 @@ import { Types } from 'mongoose';
 import Counter from './Counter';
 import FaceDown from '../enums/FaceDown';
 
-export default interface MatchCard {
+export default interface MatchCard extends Types.Subdocument {
   _id: Types.ObjectId;
   controller: Types.ObjectId;
-  counters: Counter[];
+  counters: Types.Array<Counter>;
   face_down: boolean;
   face_down_image: FaceDown;
   flipped: boolean;
@@ -16,8 +16,8 @@ export default interface MatchCard {
   scryfall_id: string;
   sideboarded: boolean;
   tapped: boolean;
-  targets: Types.ObjectId[];
-  visibility: Types.ObjectId[];
+  targets: Types.Array<Types.ObjectId>;
+  visibility: Types.Array<Types.ObjectId>;
   x_coordinate: number;
   y_coordinate: number;
 }

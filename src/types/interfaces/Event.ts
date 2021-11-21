@@ -9,6 +9,6 @@ export default interface Event {
   finished: boolean;
   host: Types.ObjectId;
   name: string;
-  players: EventPlayer[];
+  players: Types.DocumentArray<EventPlayer>;
   updatedAt: Date;
 }

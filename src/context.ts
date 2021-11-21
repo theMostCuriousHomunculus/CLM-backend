@@ -1,38 +1,20 @@
 import jwt, { JwtPayload } from 'jsonwebtoken';
-import { NextFunction, RequestHandler, Request, Response } from 'express';
-import { PubSub } from 'graphql-subscriptions';
+import { NextFunction, RequestHandler, Response } from 'express';
 
 import pubsub from './GraphQL/pubsub.js';
-import Account from './types/interfaces/Account';
 import AccountModel from './models/account-model.js';
-import BlogPost from './types/interfaces/BlogPost';
 import BlogPostModel from './models/blog-post-model.js';
-import Cube from './types/interfaces/Cube';
+import CLMRequest from './types/interfaces/CLMRequest';
 import CubeModel from './models/cube-model.js';
-import Deck from './types/interfaces/Deck';
 import DeckModel from './models/deck-model.js';
-import Event from './types/interfaces/Event';
 import EventModel from './models/event-model.js';
 import EventPlayer from './types/interfaces/EventPlayer';
-import Match from './types/interfaces/Match';
 import MatchCard from './types/interfaces/MatchCard';
 import MatchModel from './models/match-model.js';
 import MatchPlayer from './types/interfaces/MatchPlayer';
 
-interface ModifiedRequest extends Request {
-  account?: Account | null;
-  blogPost?: BlogPost | null;
-  cube?: Cube | null;
-  deck?: Deck | null;
-  event?: Event | null;
-  match?: Match | null;
-  player?: EventPlayer | MatchPlayer | null;
-  pubsub?: PubSub | null;
-  token?: string | null;
-}
-
 export default <RequestHandler>(
-  async function (req: ModifiedRequest, res: Response, next: NextFunction) {
+  async function (req: CLMRequest, res: Response, next: NextFunction) {
     try {
       if (req.header('Authorization')) {
         const token = req.header('Authorization')!.replace('Bearer ', '');

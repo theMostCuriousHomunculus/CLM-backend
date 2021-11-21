@@ -4,6 +4,6 @@ import CubeCard from './CubeCard';
 
 export default interface Module extends Types.Subdocument {
   _id: Types.ObjectId;
-  cards: CubeCard[];
+  cards: Types.DocumentArray<CubeCard>;
   name: string;
 }

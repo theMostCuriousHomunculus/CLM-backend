@@ -2,10 +2,10 @@ import { Types } from 'mongoose';
 
 import DeckCard from './DeckCard';
 
-export default interface Player {
+export default interface Player extends Types.Subdocument {
   account: Types.ObjectId;
-  mainboard: DeckCard[];
-  packs: DeckCard[][];
-  queue: DeckCard[][];
-  sideboard: DeckCard[];
+  mainboard: Types.DocumentArray<DeckCard>;
+  packs: Types.Array<Types.DocumentArray<DeckCard>>;
+  queue: Types.Array<Types.DocumentArray<DeckCard>>;
+  sideboard: Types.DocumentArray<DeckCard>;
 }
