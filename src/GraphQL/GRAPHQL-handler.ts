@@ -1,4 +1,4 @@
-import { graphqlHTTP, Options } from 'express-graphql';
+import { graphqlHTTP } from 'express-graphql';
 import { printError } from 'graphql';
 
 import schema from './schema.js';
