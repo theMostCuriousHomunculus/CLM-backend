@@ -1,4 +1,11 @@
-export default async function (parent, args, context) {
+import Account from '../../../types/interfaces/Account';
+import CLMRequest from '../../../types/interfaces/CLMRequest';
+
+export default async function (
+  parent: Account,
+  args: any,
+  context: CLMRequest
+) {
   const { account } = context;
 
   if (!account) {
@@ -9,7 +16,6 @@ export default async function (parent, args, context) {
     });
 
     await account.save();
-
     return true;
   }
 }

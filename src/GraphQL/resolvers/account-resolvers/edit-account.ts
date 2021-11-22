@@ -1,3 +1,6 @@
+import { MongoError } from 'mongodb';
+
+import Account from '../../../types/interfaces/Account';
 import AccountModel from '../../../models/account-model.js';
 import HTTPError from '../../../types/classes/HTTPError.js';
 import CLMRequest from '../../../types/interfaces/CLMRequest';
@@ -17,15 +20,19 @@ export default async function (
   args: EditAccountArgs,
   context: CLMRequest
 ) {
-  const { account } = context;
-
-  if (!account)
-    throw new HTTPError('You must be logged in to perform this action.', 401);
-
-  const { action, other_user_id, return_other } = args;
-
   try {
-    const mutableFields = ['avatar', 'email', 'name', 'password'];
+    const { account } = context;
+
+    if (!account)
+      throw new HTTPError('You must be logged in to perform this action.', 401);
+
+    const { action, other_user_id, return_other } = args;
+    const mutableFields = [
+      'avatar' as keyof (Account | EditAccountArgs),
+      'email' as keyof (Account | EditAccountArgs),
+      'name' as keyof (Account | EditAccountArgs),
+      'password' as keyof (Account | EditAccountArgs)
+    ];
 
     for (let field of mutableFields) {
       if (
@@ -37,14 +44,12 @@ export default async function (
       }
     }
 
-    let otherUser;
-
     if (
       other_user_id &&
       other_user_id !== 'null' &&
       other_user_id !== 'undefined'
     ) {
-      otherUser = await AccountModel.findById(other_user_id);
+      const otherUser = await AccountModel.findById(other_user_id);
 
       if (!otherUser) {
         throw new HTTPError(
@@ -108,23 +113,29 @@ export default async function (
       }
 
       await otherUser.save();
-    }
 
-    await account.save();
-
-    if (return_other) {
-      return otherUser;
+      if (return_other) {
+        await account.save();
+        return otherUser;
+      }
     } else {
+      await account.save();
       return account;
     }
   } catch (error) {
-    if (error.code === 11000) {
-      // 11000 appears to be the mongodb error code for a duplicate key
-      error.message =
-        'The provided email address and/or username are/is already in use.  Email addresses and usernames must be unique.';
-      error.code = 409;
+    if (error instanceof MongoError && error.code === 11000) {
+      throw new HTTPError(
+        'The provided email address and/or username are/is already in use.  Email addresses and usernames must be unique.',
+        409
+      );
+    } else if (error instanceof MongoError) {
+      throw new HTTPError(error.message, 500);
+    } else if (error instanceof HTTPError) {
+      throw error;
+    } else if (error instanceof Error) {
+      throw new HTTPError(error.message, 500);
+    } else {
+      throw new HTTPError('An unknown error occurred.', 500);
     }
-
-    throw error;
   }
 }

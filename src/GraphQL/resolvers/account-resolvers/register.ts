@@ -1,12 +1,19 @@
+import Account from '../../../types/interfaces/Account.js';
+import AccountModel from '../../../models/account-model.js';
 import HTTPError from '../../../types/classes/HTTPError.js';
 import transporter from '../../../utils/sendgrid-transporter.js';
 
-import Account from '../../../models/account-model.js';
+interface RegisterArgs {
+  avatar: string;
+  email: string;
+  name: string;
+  password: string;
+}
 
-export default async function (parent, args) {
+export default async function (parent: Account, args: RegisterArgs) {
   const { avatar, email, name, password } = args;
 
-  const existingUsersWithEmail = await Account.find({ email });
+  const existingUsersWithEmail = await AccountModel.find({ email });
 
   if (existingUsersWithEmail.length > 0)
     throw new HTTPError(
@@ -14,7 +21,7 @@ export default async function (parent, args) {
       409
     );
 
-  const existingUsersWithName = await Account.find({ name });
+  const existingUsersWithName = await AccountModel.find({ name });
 
   if (existingUsersWithName.length > 0)
     throw new HTTPError(
@@ -22,7 +29,7 @@ export default async function (parent, args) {
       409
     );
 
-  const account = new Account({ avatar, email, name, password });
+  const account = new AccountModel({ avatar, email, name, password });
 
   await account.generateAuthenticationToken();
 
