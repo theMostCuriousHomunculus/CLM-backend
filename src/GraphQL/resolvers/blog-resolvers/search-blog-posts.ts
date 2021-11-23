@@ -1,17 +1,17 @@
 import BlogPostModel from '../../../models/blog-post-model.js';
 
-export default async function (parent, args) {
-  let matchingBlogPosts;
+interface SearchBlogPostArgs {
+  search: string;
+}
 
+export default async function (parent: any, args: SearchBlogPostArgs) {
   // not sure if the if-else is necessary; will test later
   if (args.search) {
-    matchingBlogPosts = await BlogPostModel.find(
+    return await BlogPostModel.find(
       { $text: { $search: args.search } },
       { score: { $meta: 'textScore' } }
     ).sort({ score: { $meta: 'textScore' } });
   } else {
-    matchingBlogPosts = await BlogPostModel.find().sort('-createdAt');
+    return await BlogPostModel.find().sort('-createdAt');
   }
-
-  return matchingBlogPosts;
 }

@@ -15,11 +15,9 @@ export default async function (context: SubscriptionContext) {
       context.connectionParams.authToken as string,
       process.env.JWT_SECRET!
     );
-    const account = await AccountModel.findById(
+    context.account = await AccountModel.findById(
       (decodedToken as jwt.JwtPayload)._id
     );
-
-    context.account = account;
   }
 
   if (context.connectionParams?.blogPostID) {

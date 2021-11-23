@@ -28,18 +28,15 @@ export default <RequestHandler>(
       }
 
       if (req.header('BlogPostID')) {
-        const blogPost = await BlogPostModel.findById(req.header('BlogPostID'));
-        req.blogPost = blogPost;
+        req.blogPost = await BlogPostModel.findById(req.header('BlogPostID'));
       }
 
       if (req.header('CubeID')) {
-        const cube = await CubeModel.findById(req.header('CubeID'));
-        req.cube = cube;
+        req.cube = await CubeModel.findById(req.header('CubeID'));
       }
 
       if (req.header('DeckID')) {
-        const deck = await DeckModel.findById(req.header('DeckID'));
-        req.deck = deck;
+        req.deck = await DeckModel.findById(req.header('DeckID'));
       }
 
       if (req.header('EventID')) {

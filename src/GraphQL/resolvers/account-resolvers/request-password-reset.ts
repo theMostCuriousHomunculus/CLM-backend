@@ -1,14 +1,22 @@
 import crypto from 'crypto';
 
-import Account from '../../../models/account-model.js';
+import Account from '../../../types/interfaces/Account';
+import AccountModel from '../../../models/account-model.js';
 import HTTPError from '../../../types/classes/HTTPError.js';
 import transporter from '../../../utils/sendgrid-transporter.js';
 
-export default async function (parent, args) {
+interface RequestPasswordResetArgs {
+  email: string;
+}
+
+export default async function (
+  parent: Account,
+  args: RequestPasswordResetArgs
+) {
   const { email } = args;
   const buffer = crypto.randomBytes(32);
   const reset_token = buffer.toString('hex');
-  const account = await Account.findOne({ email });
+  const account = await AccountModel.findOne({ email });
 
   if (!account) {
     throw new HTTPError(
