@@ -1,10 +1,10 @@
-import { Types } from 'mongoose';
+import { Document, Types } from 'mongoose';
 
 import CubeCard from './CubeCard';
 import Module from './Module';
 import Rotation from './Rotation';
 
-export default interface Cube {
+export default interface Cube extends Document {
   _id: Types.ObjectId;
   creator: Types.ObjectId;
   description: string;

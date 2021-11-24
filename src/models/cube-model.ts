@@ -74,7 +74,7 @@ const cubeSchema = new Schema<Cube>({
       unique: true,
       collation: { locale: 'en', strength: 2 }
     },
-    maxlength: 30,
+    maxlength: 64,
     required: true,
     trim: true,
     type: String
