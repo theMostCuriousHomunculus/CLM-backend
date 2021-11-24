@@ -17,7 +17,7 @@ export default async function (
     return cube.rotations.id(componentID)!.cards;
   } else {
     throw new HTTPError(
-      'Could not find a component with the provided ID in the provided cube.',
+      `Could not find a component with ID "${componentID}" in ${cube.name}.`,
       404
     );
   }

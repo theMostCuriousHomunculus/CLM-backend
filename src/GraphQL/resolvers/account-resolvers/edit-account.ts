@@ -27,20 +27,16 @@ export default async function (
       throw new HTTPError('You must be logged in to perform this action.', 401);
 
     const { action, other_user_id, return_other } = args;
-    const mutableFields = [
-      'avatar' as keyof (Account | EditAccountArgs),
-      'email' as keyof (Account | EditAccountArgs),
-      'name' as keyof (Account | EditAccountArgs),
-      'password' as keyof (Account | EditAccountArgs)
-    ];
+    const mutableFields = ['avatar', 'email', 'name', 'password'];
 
     for (let field of mutableFields) {
       if (
-        args[field] &&
-        args[field] !== 'null' &&
-        args[field] !== 'undefined'
+        args[field as keyof EditAccountArgs] &&
+        args[field as keyof EditAccountArgs] !== 'null' &&
+        args[field as keyof EditAccountArgs] !== 'undefined'
       ) {
-        account[field] = args[field];
+        (account[field as keyof Account] as any) =
+          args[field as keyof EditAccountArgs];
       }
     }
 

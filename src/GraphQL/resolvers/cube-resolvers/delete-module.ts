@@ -1,13 +1,13 @@
 import CLMRequest from '../../../types/interfaces/CLMRequest.js';
 import HTTPError from '../../../types/classes/HTTPError.js';
 
-interface CreateModuleArgs {
-  name: string;
+interface DeleteModuleArgs {
+  _id: string;
 }
 
 export default async function (
   parent: any,
-  args: CreateModuleArgs,
+  args: DeleteModuleArgs,
   context: CLMRequest
 ) {
   const { account, cube, pubsub } = context;
@@ -20,23 +20,12 @@ export default async function (
     throw new HTTPError('You are not authorized to edit this cube.', 401);
   }
 
-  const { name } = args;
+  const { _id } = args;
 
-  if (
-    cube.modules.find(
-      (module) => module.name.toLowerCase() === name.toLowerCase()
-    )
-  ) {
-    throw new HTTPError(
-      'A module with the provided name already exists in this cube.  Module names must be unique within a cube.',
-      409
-    );
-  }
-
-  cube.modules.push({ name });
+  cube.modules.pull(_id);
 
   await cube.save();
   pubsub?.publish(cube._id.toString(), { subscribeCube: cube });
 
-  return cube;
+  return true;
 }

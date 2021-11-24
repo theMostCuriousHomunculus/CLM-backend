@@ -1,11 +1,27 @@
+import CLMRequest from '../../../types/interfaces/CLMRequest.js';
 import HTTPError from '../../../types/classes/HTTPError.js';
 import returnComponent from '../../../utils/return-component.js';
 
-export default async function (parent, args, context) {
+interface DeleteCardArgs {
+  cardID: string;
+  destinationID?: string;
+  originID: string;
+}
+
+export default async function (
+  parent: any,
+  args: DeleteCardArgs,
+  context: CLMRequest
+) {
   const { account, cube, pubsub } = context;
 
-  if (!account || !cube || account._id.toString() !== cube.creator.toString())
+  if (!cube) {
+    throw new HTTPError('Could not find a cube with the provided ID.', 404);
+  }
+
+  if (!account || account._id !== cube.creator) {
     throw new HTTPError('You are not authorized to edit this cube.', 401);
+  }
 
   const { cardID, destinationID, originID } = args;
 
@@ -14,7 +30,7 @@ export default async function (parent, args, context) {
 
   if (!card) {
     throw new HTTPError(
-      'Could not find a card with the provided ID in the provided component.',
+      `Could not find a card with ID "${cardID}" in the component with ID "${originID}"".`,
       404
     );
   }
@@ -27,7 +43,7 @@ export default async function (parent, args, context) {
   }
 
   await cube.save();
-  pubsub.publish(cube._id.toString(), { subscribeCube: cube });
+  pubsub?.publish(cube._id.toString(), { subscribeCube: cube });
 
   return true;
 }
