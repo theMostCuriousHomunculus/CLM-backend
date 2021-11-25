@@ -49,6 +49,7 @@ const deckSchema = new Schema<Deck>({
       unique: true,
       collation: { locale: 'en', strength: 2 }
     },
+    maxlength: 64,
     required: true,
     trim: true,
     type: String
