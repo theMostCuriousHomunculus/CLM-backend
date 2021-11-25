@@ -28,7 +28,7 @@ export default async function (
     )
   ) {
     throw new HTTPError(
-      'A module with the provided name already exists in this cube.  Module names must be unique within a cube.',
+      `A module named ${name} already exists in this cube.  Module names must be unique within a cube.`,
       409
     );
   }

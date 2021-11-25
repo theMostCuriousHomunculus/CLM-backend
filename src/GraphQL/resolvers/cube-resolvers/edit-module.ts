@@ -1,13 +1,14 @@
 import CLMRequest from '../../../types/interfaces/CLMRequest.js';
 import HTTPError from '../../../types/classes/HTTPError.js';
 
-interface CreateRotationArgs {
+interface EditModuleArgs {
+  moduleID: string;
   name: string;
 }
 
 export default async function (
   parent: any,
-  args: CreateRotationArgs,
+  args: EditModuleArgs,
   context: CLMRequest
 ) {
   const { account, cube, pubsub } = context;
@@ -20,20 +21,28 @@ export default async function (
     throw new HTTPError('You are not authorized to edit this cube.', 401);
   }
 
-  const { name } = args;
+  const { moduleID, name } = args;
+  const module = cube.modules.id(moduleID);
+
+  if (!module) {
+    throw new HTTPError(
+      `A module with ID "${moduleID}" was not found in ${cube.name}.`,
+      404
+    );
+  }
 
   if (
-    cube.rotations.find(
-      (rotation) => rotation.name.toLowerCase() === name.toLowerCase()
+    cube.modules.find(
+      (module) => module.name.toLowerCase() === name.toLowerCase()
     )
   ) {
     throw new HTTPError(
-      `A rotation named ${name} already exists in this cube.  Rotation names must be unique within a cube.`,
+      `A module named "${name}" already exists in this cube.  Module names must be unique within a cube.`,
       409
     );
   }
 
-  cube.rotations.push({ name, size: 0 });
+  module.name = name;
 
   await cube.save();
   pubsub?.publish(cube._id.toString(), { subscribeCube: cube });

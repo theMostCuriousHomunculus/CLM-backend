@@ -29,13 +29,11 @@ export default async function (
   }
 
   try {
-    for (const field of [
-      'body' as keyof (EditBlogPostArgs | BlogPost),
-      'image' as keyof (EditBlogPostArgs | BlogPost),
-      'subtitle' as keyof (EditBlogPostArgs | BlogPost),
-      'title' as keyof (EditBlogPostArgs | BlogPost)
-    ]) {
-      if (args[field]) blogPost[field] = args[field];
+    for (const field of ['body', 'image', 'subtitle', 'title']) {
+      if (args[field as keyof EditBlogPostArgs]) {
+        (blogPost[field as keyof BlogPost] as any) =
+          args[field as keyof EditBlogPostArgs];
+      }
     }
 
     blogPost.updatedAt = new Date();
