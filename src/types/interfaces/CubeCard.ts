@@ -1,7 +1,7 @@
-import { Types } from 'mongoose';
+import mongoose from 'mongoose';
 
-export default interface CubeCard extends Types.Subdocument {
-  _id: Types.ObjectId;
+export default interface CubeCard extends mongoose.Types.Subdocument {
+  _id: mongoose.Types.ObjectId;
   cmc?: number;
   color_identity?: string[];
   name: string;

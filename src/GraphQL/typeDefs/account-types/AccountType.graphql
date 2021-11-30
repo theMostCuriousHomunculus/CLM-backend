@@ -7,6 +7,7 @@ type AccountType {
   decks: [DeckType]
   email: String
   events: [EventType]
+  location: Location
   matches: [MatchType]
   name: String
   received_bud_requests: [AccountType]

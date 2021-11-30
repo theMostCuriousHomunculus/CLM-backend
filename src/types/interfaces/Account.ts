@@ -1,16 +1,19 @@
-import { Document, Types } from 'mongoose';
+import mongoose from 'mongoose';
 
-export default interface Account extends Document {
-  _id: Types.ObjectId;
+import Location from './Location';
+
+export default interface Account extends mongoose.Document {
+  _id: mongoose.Types.ObjectId;
   admin: boolean;
   avatar: string;
-  buds: Types.Array<Types.ObjectId>;
+  buds: mongoose.Types.Array<mongoose.Types.ObjectId>;
   email: string;
+  location?: Location;
   name: string;
   password: string;
-  received_bud_requests: Types.Array<Types.ObjectId>;
+  received_bud_requests: mongoose.Types.Array<mongoose.Types.ObjectId>;
   reset_token?: string;
   reset_token_expiration?: Date;
-  sent_bud_requests: Types.Array<Types.ObjectId>;
+  sent_bud_requests: mongoose.Types.Array<mongoose.Types.ObjectId>;
   tokens: string[];
 }

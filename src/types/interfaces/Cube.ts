@@ -1,17 +1,17 @@
-import { Document, Types } from 'mongoose';
+import mongoose from 'mongoose';
 
 import CubeCard from './CubeCard';
 import Module from './Module';
 import Rotation from './Rotation';
 
-export default interface Cube extends Document {
-  _id: Types.ObjectId;
-  creator: Types.ObjectId;
+export default interface Cube extends mongoose.Document {
+  _id: mongoose.Types.ObjectId;
+  creator: mongoose.Types.ObjectId;
   description: string;
-  mainboard: Types.DocumentArray<CubeCard>;
-  modules: Types.DocumentArray<Module>;
+  mainboard: mongoose.Types.DocumentArray<CubeCard>;
+  modules: mongoose.Types.DocumentArray<Module>;
   name: string;
   published: boolean;
-  rotations: Types.DocumentArray<Rotation>;
-  sideboard: Types.DocumentArray<CubeCard>;
+  rotations: mongoose.Types.DocumentArray<Rotation>;
+  sideboard: mongoose.Types.DocumentArray<CubeCard>;
 }

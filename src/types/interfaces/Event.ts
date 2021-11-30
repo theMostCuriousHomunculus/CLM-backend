@@ -1,14 +1,14 @@
-import { Types } from 'mongoose';
+import mongoose from 'mongoose';
 
 import EventPlayer from './EventPlayer';
 
 export default interface Event {
-  _id: Types.ObjectId;
+  _id: mongoose.Types.ObjectId;
   createdAt: Date;
-  cube: Types.ObjectId;
+  cube: mongoose.Types.ObjectId;
   finished: boolean;
-  host: Types.ObjectId;
+  host: mongoose.Types.ObjectId;
   name: string;
-  players: Types.DocumentArray<EventPlayer>;
+  players: mongoose.Types.DocumentArray<EventPlayer>;
   updatedAt: Date;
 }

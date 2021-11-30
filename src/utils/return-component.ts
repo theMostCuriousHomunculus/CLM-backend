@@ -1,11 +1,11 @@
-import { Types } from 'mongoose';
+import mongoose from 'mongoose';
 import HTTPError from '../types/classes/HTTPError.js';
 
 import Cube from '../types/interfaces/Cube';
 
 export default async function (
   cube: Cube,
-  componentID: string | Types.ObjectId
+  componentID: string | mongoose.Types.ObjectId
 ) {
   if (componentID === 'mainboard') {
     return cube.mainboard;

@@ -1,15 +1,15 @@
-import { Types } from 'mongoose';
+import mongoose from 'mongoose';
 
 import MatchCard from './MatchCard';
 import MatchPlayer from './MatchPlayer';
 
 export default interface Match {
-  _id: Types.ObjectId;
-  cube?: Types.ObjectId;
-  decks?: Types.Array<Types.ObjectId>;
-  event?: Types.ObjectId;
-  game_winners: Types.Array<Types.ObjectId>;
+  _id: mongoose.Types.ObjectId;
+  cube?: mongoose.Types.ObjectId;
+  decks?: mongoose.Types.Array<mongoose.Types.ObjectId>;
+  event?: mongoose.Types.ObjectId;
+  game_winners: mongoose.Types.Array<mongoose.Types.ObjectId>;
   log: string[];
-  players: Types.DocumentArray<MatchPlayer>;
-  stack: Types.DocumentArray<MatchCard>;
+  players: mongoose.Types.DocumentArray<MatchPlayer>;
+  stack: mongoose.Types.DocumentArray<MatchCard>;
 }

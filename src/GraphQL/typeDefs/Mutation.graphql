@@ -18,6 +18,7 @@ type Mutation {
     password: String!
   ): AccountType!
   requestPasswordReset(email: String!): Boolean
+  setLocation(latitude: Float!, longitude: Float!): AccountType!
   submitPasswordReset(
     email: String!
     password: String!

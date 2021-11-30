@@ -1,12 +1,12 @@
-import { Document, Types } from 'mongoose';
+import mongoose from 'mongoose';
 
 import Comment from './Comment';
 
-export default interface BlogPost extends Document {
-  _id: Types.ObjectId;
-  author: Types.ObjectId;
+export default interface BlogPost extends mongoose.Document {
+  _id: mongoose.Types.ObjectId;
+  author: mongoose.Types.ObjectId;
   body: string;
-  comments: Types.DocumentArray<Comment>;
+  comments: mongoose.Types.DocumentArray<Comment>;
   createdAt: Date;
   image: string;
   subtitle: string;

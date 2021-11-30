@@ -1,22 +1,51 @@
 import axios from 'axios';
 import CSVString from 'csv-string';
 
-import Deck from '../../../models/deck-model.js';
+import CLMRequest from '../../../types/interfaces/CLMRequest.js';
+import DeckModel from '../../../models/deck-model.js';
+import Format from '../../../types/enums/Format';
 import HTTPError from '../../../types/classes/HTTPError.js';
+
 // TODO: import deck list from tappedout or mtggoldfish
 
-export default async function (parent, args, context) {
-  if (!context.account)
+interface CardIdentifier {
+  [key: string]: string;
+}
+
+interface CreateDeckArgs {
+  description?: string;
+  existingListID?: string;
+  format?: Format;
+  name: string;
+}
+
+export default async function (
+  parent: any,
+  args: CreateDeckArgs,
+  context: CLMRequest
+) {
+  const { account } = context;
+
+  if (!account) {
     throw new HTTPError('You must be logged in to create a deck.', 401);
+  }
 
   const { description, existingListID, format, name } = args;
+
+  if (await DeckModel.findOne({ name })) {
+    throw new HTTPError(
+      `A deck named "${name}" already exists.  Deck names must be unique.`,
+      409
+    );
+  }
+
   const deckInfo = {
-    creator: context.account._id,
+    creator: account._id,
     description,
     format: format ? format.toString() : undefined,
-    mainboard: [],
+    mainboard: [] as CardIdentifier[],
     name,
-    sideboard: []
+    sideboard: [] as CardIdentifier[]
   };
 
   if (existingListID) {
@@ -47,7 +76,7 @@ export default async function (parent, args, context) {
     });
   }
 
-  const deck = new Deck(deckInfo);
+  const deck = new DeckModel(deckInfo);
   await deck.save();
 
   return deck;

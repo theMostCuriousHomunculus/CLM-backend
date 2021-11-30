@@ -3,7 +3,7 @@ import CSVString from 'csv-string';
 import { MongoError } from 'mongodb';
 
 import CLMRequest from '../../../types/interfaces/CLMRequest.js';
-import Cube from '../../../models/cube-model.js';
+import CubeModel from '../../../models/cube-model.js';
 import HTTPError from '../../../types/classes/HTTPError.js';
 
 interface CreateCubeArgs {
@@ -29,6 +29,14 @@ export default async function (
     }
 
     const { cobraID, description, name } = args;
+
+    if (await CubeModel.findOne({ name })) {
+      throw new HTTPError(
+        `A cube named "${name}" already exists.  Cube names must be unique.`,
+        409
+      );
+    }
+
     const cardArray = [] as CardIdentifier[];
 
     if (cobraID) {
@@ -71,7 +79,7 @@ export default async function (
       }
     }
 
-    const cube = new Cube({
+    const cube = new CubeModel({
       creator: account._id,
       description,
       mainboard: await Promise.all(cardArray),

@@ -1,5 +1,5 @@
 import CLMRequest from '../../../types/interfaces/CLMRequest';
-import HTTPError from '../../../types/classes/HTTPError';
+import HTTPError from '../../../types/classes/HTTPError.js';
 
 export default async function (parent: any, args: null, context: CLMRequest) {
   const { account, cube } = context;

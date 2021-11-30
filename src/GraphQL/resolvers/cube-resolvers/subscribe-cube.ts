@@ -1,4 +1,4 @@
-import HTTPError from '../../../types/classes/HTTPError';
+import HTTPError from '../../../types/classes/HTTPError.js';
 import SubscriptionContext from '../../../types/interfaces/SubscriptionContext';
 
 export default {

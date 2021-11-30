@@ -1,23 +1,23 @@
-import { Types } from 'mongoose';
+import mongoose from 'mongoose';
 
 import Counter from './Counter';
 import FaceDown from '../enums/FaceDown';
 
-export default interface MatchCard extends Types.Subdocument {
-  _id: Types.ObjectId;
-  controller: Types.ObjectId;
-  counters: Types.Array<Counter>;
+export default interface MatchCard extends mongoose.Types.Subdocument {
+  _id: mongoose.Types.ObjectId;
+  controller: mongoose.Types.ObjectId;
+  counters: mongoose.Types.Array<Counter>;
   face_down: boolean;
   face_down_image: FaceDown;
   flipped: boolean;
   isCopyToken: boolean;
   index: number;
-  owner: Types.ObjectId;
+  owner: mongoose.Types.ObjectId;
   scryfall_id: string;
   sideboarded: boolean;
   tapped: boolean;
-  targets: Types.Array<Types.ObjectId>;
-  visibility: Types.Array<Types.ObjectId>;
+  targets: mongoose.Types.Array<mongoose.Types.ObjectId>;
+  visibility: mongoose.Types.Array<mongoose.Types.ObjectId>;
   x_coordinate: number;
   y_coordinate: number;
 }

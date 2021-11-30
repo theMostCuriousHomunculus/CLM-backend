@@ -1,8 +1,8 @@
-import { Types } from 'mongoose';
+import mongoose from 'mongoose';
 
-export default interface Comment extends Types.Subdocument {
-  _id: Types.ObjectId;
-  author: Types.ObjectId;
+export default interface Comment extends mongoose.Types.Subdocument {
+  _id: mongoose.Types.ObjectId;
+  author: mongoose.Types.ObjectId;
   body: string;
   createdAt: Date;
   updatedAt: Date;

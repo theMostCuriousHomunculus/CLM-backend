@@ -2,10 +2,43 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
 
-import HTTPError from '../types/classes/HTTPError.js';
 import Account from '../types/interfaces/Account';
+import HTTPError from '../types/classes/HTTPError.js';
+import Location from '../types/interfaces/Location';
 
 const { model, Schema } = mongoose;
+
+const locationSchema = new Schema<Location>(
+  {
+    type: {
+      default: 'Point',
+      type: String
+    },
+    coordinates: {
+      type: [Number],
+      validate: {
+        message:
+          'Coordinates is an array with two numbers, the first longitude (-180, 180) and the second latitude (-90, 90).',
+        validator: function (value: [number, number]) {
+          if (
+            value.length !== 2 ||
+            value[0] < -180 ||
+            value[0] > 180 ||
+            value[1] < -90 ||
+            value[1] > 90
+          ) {
+            return false;
+          } else {
+            return true;
+          }
+        }
+      }
+    }
+  },
+  {
+    _id: false
+  }
+);
 
 const accountSchema = new Schema<Account>({
   admin: {
@@ -30,6 +63,7 @@ const accountSchema = new Schema<Account>({
     type: String,
     unique: true
   },
+  location: locationSchema,
   name: {
     index: {
       unique: true,

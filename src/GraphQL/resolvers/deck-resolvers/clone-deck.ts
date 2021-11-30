@@ -1,4 +1,4 @@
-import { Types } from 'mongoose';
+import mongoose from 'mongoose';
 
 import deleteDocumentIDs from '../../../utils/delete-document-ids.js';
 import CLMRequest from '../../../types/interfaces/CLMRequest.js';
@@ -20,7 +20,7 @@ export default async function (parent: any, args: null, context: CLMRequest) {
 
   deleteDocumentIDs(copy);
 
-  const newDeckID = new Types.ObjectId();
+  const newDeckID = new mongoose.Types.ObjectId();
   copy._id = newDeckID;
   // deck names must be unique and have a limit of 64 characters (IDs are 24 characters)
   copy.name = `Copy of ${deck.name.slice(0, 29)} - ${newDeckID}`;
