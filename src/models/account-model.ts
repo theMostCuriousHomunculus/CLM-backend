@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import Account from '../types/interfaces/Account';
 import HTTPError from '../types/classes/HTTPError.js';
 import Location from '../types/interfaces/Location';
+import MeasurementSystem from '../types/enums/MeasurementSystem';
 
 const { model, Schema } = mongoose;
 
@@ -40,6 +41,26 @@ const locationSchema = new Schema<Location>(
   }
 );
 
+// const settingsSchema = new Schema<>(
+//   {
+//     location_services: {
+//       default: false,
+//       type: Boolean
+//     },
+//     measurement_system: {
+//       default: MeasurementSystem.IMPERIAL,
+//       type: MeasurementSystem
+//     },
+//     radius: {
+//       default: 10,
+//       type: Number
+//     }
+//   },
+//   {
+//     _id: false
+//   }
+// );
+
 const accountSchema = new Schema<Account>({
   admin: {
     default: false,
@@ -74,6 +95,12 @@ const accountSchema = new Schema<Account>({
     trim: true,
     type: String
   },
+  nearby_users: [
+    {
+      ref: 'AccountModel',
+      type: 'ObjectId'
+    }
+  ],
   password: {
     minlength: 7,
     required: true,
@@ -94,6 +121,20 @@ const accountSchema = new Schema<Account>({
       type: 'ObjectId'
     }
   ],
+  settings: {
+    location_services: {
+      default: false,
+      type: Boolean
+    },
+    measurement_system: {
+      default: MeasurementSystem.IMPERIAL,
+      type: MeasurementSystem
+    },
+    radius: {
+      default: 10,
+      type: Number
+    }
+  },
   tokens: [
     {
       type: String,
@@ -138,7 +179,10 @@ accountSchema.statics.findByCredentials = async (
 // allows searching for other users by name for bud request purposes
 accountSchema.index({ name: 'text' });
 
-// Hash the plain text password before saving
+// allows searching for nearby users
+accountSchema.index({ location: '2dsphere' });
+
+// hash the plain text password before saving
 accountSchema.pre('save', async function (next) {
   if (this.isModified('password')) {
     this.password = await bcrypt.hash(this.password, 10);

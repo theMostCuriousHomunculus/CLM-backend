@@ -1,4 +1,5 @@
 type Query {
+  authenticate: AccountType!
   fetchAccountByID(_id: ID!): AccountType!
   searchAccounts(name: String): [AccountType]!
   fetchBlogPostByID: BlogPostType!

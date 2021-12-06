@@ -1,5 +1,6 @@
 // account
 // import deleteAccount from './account-resolvers/delete-account.js';
+import authenticate from './account-resolvers/authenticate.js';
 import editAccount from './account-resolvers/edit-account.js';
 import fetchAccountByID from './account-resolvers/fetch-account-by-id.js';
 import location from './account-resolvers/location.js';
@@ -235,6 +236,7 @@ export default {
   },
   Query: {
     // account
+    authenticate,
     fetchAccountByID,
     searchAccounts,
     // blog
