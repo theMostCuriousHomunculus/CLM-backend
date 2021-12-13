@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
 
-import AccountModel from '../../../models/account-model';
-import CLMRequest from '../../../types/interfaces/CLMRequest';
+import AccountModel from '../../../models/account-model.js';
+import CLMRequest from '../../../types/interfaces/CLMRequest.js';
 import HTTPError from '../../../types/classes/HTTPError.js';
-import MeasurementSystem from '../../../types/enums/MeasurementSystem';
+import MeasurementSystem from '../../../types/enums/MeasurementSystem.js';
 
 interface SetLocationArgs {
   latitude: number;
@@ -47,7 +47,7 @@ export default async function (
         },
         query: {
           _id: {
-            $not: account._id
+            $ne: account._id
           },
           'settings.location_services': true
         }

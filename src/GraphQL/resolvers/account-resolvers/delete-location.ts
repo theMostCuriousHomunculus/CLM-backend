@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
-import AccountModel from '../../../models/account-model';
-import CLMRequest from '../../../types/interfaces/CLMRequest';
+import AccountModel from '../../../models/account-model.js';
+import CLMRequest from '../../../types/interfaces/CLMRequest.js';
 import HTTPError from '../../../types/classes/HTTPError.js';
 
 export default async function (parent: any, args: null, context: CLMRequest) {

@@ -10,6 +10,7 @@ type AccountType {
   location: Location
   matches: [MatchType]
   name: String
+  nearby_users: [AccountType]
   received_bud_requests: [AccountType]
   sent_bud_requests: [AccountType]
   settings: Settings

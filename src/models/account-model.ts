@@ -5,7 +5,6 @@ import mongoose from 'mongoose';
 import Account from '../types/interfaces/Account';
 import HTTPError from '../types/classes/HTTPError.js';
 import Location from '../types/interfaces/Location';
-import MeasurementSystem from '../types/enums/MeasurementSystem';
 
 const { model, Schema } = mongoose;
 
@@ -127,8 +126,9 @@ const accountSchema = new Schema<Account>({
       type: Boolean
     },
     measurement_system: {
-      default: MeasurementSystem.IMPERIAL,
-      type: MeasurementSystem
+      default: 'imperial',
+      enum: ['imperial', 'metric'],
+      type: String
     },
     radius: {
       default: 10,
