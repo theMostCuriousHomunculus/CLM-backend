@@ -108,6 +108,7 @@ import host from './event-resolvers/host.js';
 import match_account from './match-resolvers/match-account.js';
 import match_decks from './match-resolvers/decks.js';
 import matches from './account-resolvers/matches.js';
+import nearby_users from './account-resolvers/nearby-users.js';
 import received_bud_requests from './account-resolvers/received-bud-requests.js';
 import sent_bud_requests from './account-resolvers/sent-bud-requests.js';
 import token from './account-resolvers/token.js';
@@ -123,6 +124,7 @@ export default {
     events,
     location,
     matches,
+    nearby_users,
     received_bud_requests,
     sent_bud_requests,
     token

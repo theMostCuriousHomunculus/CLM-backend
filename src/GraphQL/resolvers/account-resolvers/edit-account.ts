@@ -92,7 +92,9 @@ export default async function (
             !otherUser.received_bud_requests.includes(account._id) &&
             !otherUser.sent_bud_requests.includes(account._id)
           ) {
+            account.nearby_users.pull(otherUser._id);
             account.sent_bud_requests.push(otherUser._id);
+            otherUser.nearby_users.pull(account._id);
             otherUser.received_bud_requests.push(account._id);
             break;
           } else {
@@ -108,11 +110,13 @@ export default async function (
           );
       }
 
+      await account.save();
       await otherUser.save();
 
       if (return_other) {
-        await account.save();
         return otherUser;
+      } else {
+        return account;
       }
     } else {
       await account.save();

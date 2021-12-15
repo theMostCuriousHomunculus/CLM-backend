@@ -11,6 +11,29 @@ export default async function (
   if (!account || account._id.toString() !== parent._id.toString()) {
     return null;
   } else {
-    return await AccountModel.find({ _id: { $in: parent.nearby_users } });
+    return await AccountModel.find({
+      _id: { $in: parent.nearby_users },
+      buds: {
+        $not: {
+          $elemMatch: {
+            $eq: parent._id
+          }
+        }
+      },
+      received_bud_requests: {
+        $not: {
+          $elemMatch: {
+            $eq: parent._id
+          }
+        }
+      },
+      sent_bud_requests: {
+        $not: {
+          $elemMatch: {
+            $eq: parent._id
+          }
+        }
+      }
+    });
   }
 }

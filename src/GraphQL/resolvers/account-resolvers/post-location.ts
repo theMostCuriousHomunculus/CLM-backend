@@ -49,6 +49,34 @@ export default async function (
           _id: {
             $ne: account._id
           },
+          buds: {
+            $not: {
+              $elemMatch: {
+                $eq: account._id
+              }
+            }
+          },
+          nearby_users: {
+            $not: {
+              $elemMatch: {
+                $eq: account._id
+              }
+            }
+          },
+          received_bud_requests: {
+            $not: {
+              $elemMatch: {
+                $eq: account._id
+              }
+            }
+          },
+          sent_bud_requests: {
+            $not: {
+              $elemMatch: {
+                $eq: account._id
+              }
+            }
+          },
           'settings.location_services': true
         }
       }
@@ -56,19 +84,15 @@ export default async function (
   ]);
 
   nearbyUsers.forEach(async (aggregatedUser) => {
-    if (!account.nearby_users.find((id) => id === aggregatedUser._id)) {
-      account.nearby_users.push(aggregatedUser._id);
-    }
+    account.nearby_users.push(aggregatedUser._id);
+
     if (
-      !aggregatedUser.nearby_users.find(
-        (id: mongoose.Types.ObjectId) => id === account._id
-      ) &&
       aggregatedUser.meters_away <=
-        aggregatedUser.settings.radius *
-          (aggregatedUser.settings.measurement_system ===
-          MeasurementSystem.IMPERIAL
-            ? 1609.344
-            : 1000)
+      aggregatedUser.settings.radius *
+        (aggregatedUser.settings.measurement_system ===
+        MeasurementSystem.IMPERIAL
+          ? 1609.344
+          : 1000)
     ) {
       const user = await AccountModel.findById(aggregatedUser._id);
       user?.nearby_users.push(account._id);
@@ -77,6 +101,5 @@ export default async function (
   });
 
   await account.save();
-
   return account;
 }
