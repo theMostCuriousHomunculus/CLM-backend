@@ -16,7 +16,7 @@ export default async function (
     throw new HTTPError('Could not find a cube with the provided ID.', 404);
   }
 
-  if (!account || account._id !== cube.creator) {
+  if (!account || account._id.toString() !== cube.creator.toString()) {
     throw new HTTPError('You are not authorized to edit this cube.', 401);
   }
 

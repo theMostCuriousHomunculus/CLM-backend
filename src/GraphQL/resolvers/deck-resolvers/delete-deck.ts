@@ -9,7 +9,7 @@ export default async function (parent: any, args: null, context: CLMRequest) {
     throw new HTTPError('Could not find a deck with the provided ID.', 404);
   }
 
-  if (!account || account._id !== deck.creator) {
+  if (!account || account._id.toString() !== deck.creator.toString()) {
     throw new HTTPError('You are not authorized to edit this deck.', 401);
   }
 

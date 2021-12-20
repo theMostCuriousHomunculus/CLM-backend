@@ -54,7 +54,7 @@ export default async function (
         );
       }
 
-      if (otherUser._id === account._id) {
+      if (otherUser._id.toString() === account._id.toString()) {
         throw new HTTPError("You must provide a different user's ID.", 403);
       }
 
