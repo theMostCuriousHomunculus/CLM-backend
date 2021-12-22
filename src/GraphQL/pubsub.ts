@@ -1,3 +1,5 @@
 import { PubSub } from 'graphql-subscriptions';
 
-export default new PubSub();
+const pubsub = new PubSub();
+
+export default pubsub;

@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 import MatchCard from './MatchCard';
 
-export default interface Player extends mongoose.Document {
+export default interface MatchPlayer extends mongoose.Document {
   account: mongoose.Types.ObjectId;
   battlefield: mongoose.Types.DocumentArray<MatchCard>;
   energy: number;

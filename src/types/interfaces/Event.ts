@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 import EventPlayer from './EventPlayer';
 
-export default interface Event {
+export default interface Event extends mongoose.Document {
   _id: mongoose.Types.ObjectId;
   createdAt: Date;
   cube: mongoose.Types.ObjectId;
