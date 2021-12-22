@@ -9,7 +9,7 @@
     "dev": "nodemon -L ./dist/index.js",
     "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
     "lint": "eslint --ignore-path .gitignore .",
-    "postinstall": "npm run build",
+    "postinstall": "tsc",
     "start": "node dist/index.js",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config ./jest.config.json --watch --runInBand"
   },
