@@ -55,7 +55,7 @@ const blogPostSchema = new Schema<BlogPost>({
 
 blogPostSchema.index({ title: 'text', subtitle: 'text' });
 
-const BlogPostModel = model<BlogPost>('BlogPost', blogPostSchema);
+const BlogPostModel = model<BlogPost>('Blog', blogPostSchema);
 
 const CommentModel = model<Comment>('Comment', commentSchema);
 

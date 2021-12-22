@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 import Location from './Location';
-import MeasurementSystem from '../enums/MeasurementSystem';
+import Settings from './Settings';
 
 export default interface Account extends mongoose.Document {
   _id: mongoose.Types.ObjectId;
@@ -17,10 +17,6 @@ export default interface Account extends mongoose.Document {
   reset_token?: string;
   reset_token_expiration?: Date;
   sent_bud_requests: mongoose.Types.Array<mongoose.Types.ObjectId>;
-  settings: {
-    location_services: boolean;
-    measurement_system: MeasurementSystem;
-    radius: number;
-  };
+  settings: Settings;
   tokens: string[];
 }

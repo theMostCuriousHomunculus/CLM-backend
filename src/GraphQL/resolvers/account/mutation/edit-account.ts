@@ -1,18 +1,21 @@
 import { MongoError } from 'mongodb';
 
-import Account from '../../../../types/interfaces/Account';
+import Account from '../../../../types/interfaces/Account.js';
 import AccountModel from '../../../../models/account-model.js';
+import CLMRequest from '../../../../types/interfaces/CLMRequest.js';
 import HTTPError from '../../../../types/classes/HTTPError.js';
-import CLMRequest from '../../../../types/interfaces/CLMRequest';
+import MeasurementSystem from '../../../../types/enums/MeasurementSystem.js';
+import Settings from '../../../../types/interfaces/Settings.js';
 
 interface EditAccountArgs {
-  action: string;
-  avatar: string;
-  email: string;
-  name: string;
-  other_user_id: string;
-  password: string;
-  return_other: boolean;
+  action?: string;
+  avatar?: string;
+  email?: string;
+  name?: string;
+  other_user_id?: string;
+  password?: string;
+  return_other?: boolean;
+  settings?: Settings;
 }
 
 export default async function (
@@ -23,10 +26,11 @@ export default async function (
   try {
     const { bearer } = context;
 
-    if (!bearer)
+    if (!bearer) {
       throw new HTTPError('You must be logged in to perform this action.', 401);
+    }
 
-    const { action, other_user_id, return_other } = args;
+    const { action, other_user_id, return_other, settings } = args;
     const mutableFields = ['avatar', 'email', 'name', 'password'];
 
     for (let field of mutableFields) {
@@ -40,11 +44,68 @@ export default async function (
       }
     }
 
-    if (
-      other_user_id &&
-      other_user_id !== 'null' &&
-      other_user_id !== 'undefined'
-    ) {
+    if (settings) {
+      bearer.settings.location_services = settings.location_services;
+      bearer.settings.measurement_system = settings.measurement_system;
+      bearer.settings.radius = settings.radius;
+
+      const nearbyUsers = await AccountModel.aggregate([
+        {
+          $geoNear: {
+            distanceField: 'meters_away',
+            maxDistance:
+              bearer.settings.radius *
+              (bearer.settings.measurement_system === MeasurementSystem.IMPERIAL
+                ? 1609.344
+                : 1000),
+            near: {
+              type: 'Point',
+              coordinates: bearer.location?.coordinates
+            },
+            query: {
+              _id: {
+                $ne: bearer._id
+              },
+              buds: {
+                $not: {
+                  $elemMatch: {
+                    $eq: bearer._id
+                  }
+                }
+              },
+              nearby_users: {
+                $not: {
+                  $elemMatch: {
+                    $eq: bearer._id
+                  }
+                }
+              },
+              received_bud_requests: {
+                $not: {
+                  $elemMatch: {
+                    $eq: bearer._id
+                  }
+                }
+              },
+              sent_bud_requests: {
+                $not: {
+                  $elemMatch: {
+                    $eq: bearer._id
+                  }
+                }
+              },
+              'settings.location_services': true
+            }
+          }
+        }
+      ]);
+
+      nearbyUsers.forEach(async (aggregatedUser) => {
+        bearer.nearby_users.push(aggregatedUser._id);
+      });
+    }
+
+    if (other_user_id) {
       const otherUser = await AccountModel.findById(other_user_id);
 
       if (!otherUser) {

@@ -8,6 +8,7 @@ type Mutation {
     other_user_id: String
     password: String
     return_other: Boolean
+    settings: SettingsInput
   ): AccountType!
   login(email: String!, password: String!): AccountType!
   logoutAllDevices: Boolean
