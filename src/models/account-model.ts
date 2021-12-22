@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import Account from '../types/interfaces/Account';
 import HTTPError from '../types/classes/HTTPError.js';
 import Location from '../types/interfaces/Location';
+import AccountModelInterface from '../types/interfaces/AccountModel';
 
 const { model, Schema } = mongoose;
 
@@ -151,30 +152,30 @@ accountSchema.methods.generateAuthenticationToken = async function () {
   return token;
 };
 
-accountSchema.statics.findByCredentials = async (
-  email: string,
-  enteredPassword: string
-) => {
-  const user = await AccountModel.findOne({ email });
+accountSchema.static(
+  'findByCredentials',
+  async function findByCredentials(email: string, enteredPassword: string) {
+    const user = await AccountModel.findOne({ email });
 
-  if (!user) {
-    throw new HTTPError(
-      'The provided email address and/or password were incorrect.  Please try again.',
-      404
-    );
+    if (!user) {
+      throw new HTTPError(
+        'The provided email address and/or password were incorrect.  Please try again.',
+        404
+      );
+    }
+
+    const isMatch = await bcrypt.compare(enteredPassword, user.password);
+
+    if (!isMatch) {
+      throw new HTTPError(
+        'The provided email address and/or password were incorrect.  Please try again.',
+        404
+      );
+    }
+
+    return user;
   }
-
-  const isMatch = await bcrypt.compare(enteredPassword, user.password);
-
-  if (!isMatch) {
-    throw new HTTPError(
-      'The provided email address and/or password were incorrect.  Please try again.',
-      404
-    );
-  }
-
-  return user;
-};
+);
 
 // allows searching for other users by name for bud request purposes
 accountSchema.index({ name: 'text' });
@@ -190,6 +191,9 @@ accountSchema.pre('save', async function (next) {
   next();
 });
 
-const AccountModel = model<Account>('Account', accountSchema);
+const AccountModel = model<Account, AccountModelInterface>(
+  'Account',
+  accountSchema
+);
 
 export default AccountModel;

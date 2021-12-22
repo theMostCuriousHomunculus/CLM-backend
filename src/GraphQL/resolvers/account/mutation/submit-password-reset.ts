@@ -12,7 +12,7 @@ export default async function (parent: any, args: SubmitPasswordResetArgs) {
   const account = await AccountModel.findOne({
     email,
     reset_token,
-    reset_token_expiration: { $gt: Date.now() }
+    reset_token_expiration: { $gt: new Date() }
   });
 
   if (!account) throw new HTTPError('Invalid reset token.', 401);

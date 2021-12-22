@@ -25,7 +25,7 @@ export default async function (
     );
   } else {
     account.reset_token = reset_token;
-    account.reset_token_expiration = Date.now() + 900000;
+    account.reset_token_expiration = new Date(Date.now() + 900000);
     await account.save();
     transporter.sendMail({
       to: email,

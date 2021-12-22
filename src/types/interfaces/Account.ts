@@ -19,4 +19,5 @@ export default interface Account extends mongoose.Document {
   sent_bud_requests: mongoose.Types.Array<mongoose.Types.ObjectId>;
   settings: Settings;
   tokens: string[];
+  generateAuthenticationToken(): Promise<string>;
 }
