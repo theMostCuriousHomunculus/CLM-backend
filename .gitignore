@@ -3,3 +3,4 @@ jest-config.js
 node_modules/
 nodemon.json
 /dist
+dist/
