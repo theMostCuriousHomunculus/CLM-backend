@@ -1,4 +1,4 @@
-type AccountType {
+type AccountType implements Document {
   _id: ID
   admin: Boolean
   avatar: String

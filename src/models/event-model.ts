@@ -52,6 +52,8 @@ const eventSchema = new Schema<Event>(
   }
 );
 
+eventSchema.index({ name: 'text' });
+
 const EventModel = model<Event>('Event', eventSchema);
 
 export default EventModel;

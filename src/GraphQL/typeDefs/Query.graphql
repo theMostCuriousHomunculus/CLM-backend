@@ -9,4 +9,5 @@ type Query {
   fetchDeckByID: DeckType!
   fetchEventByID: EventType!
   fetchMatchByID: MatchType!
+  searchSite(search: String): [SearchSiteResult]!
 }

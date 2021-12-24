@@ -1,0 +1,6 @@
+union SearchSiteResult =
+    AccountType
+  | BlogPostType
+  | CubeType
+  | DeckType
+  | EventType

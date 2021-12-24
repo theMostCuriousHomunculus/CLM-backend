@@ -1,4 +1,4 @@
-type MatchType {
+type MatchType implements Document {
   _id: ID
   createdAt: String
   cube: CubeType

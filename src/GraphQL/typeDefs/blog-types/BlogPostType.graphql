@@ -1,4 +1,4 @@
-type BlogPostType {
+type BlogPostType implements Document {
   _id: ID
   author: AccountType
   body: String

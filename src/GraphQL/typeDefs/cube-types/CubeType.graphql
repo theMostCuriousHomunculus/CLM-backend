@@ -1,4 +1,4 @@
-type CubeType {
+type CubeType implements Document {
   _id: ID
   creator: AccountType
   description: String

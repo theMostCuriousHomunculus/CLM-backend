@@ -1,4 +1,4 @@
-type EventType {
+type EventType implements Document {
   _id: ID
   createdAt: String
   cube: CubeType

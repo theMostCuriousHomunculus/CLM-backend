@@ -92,6 +92,10 @@ import toggleMainboardSideboardEvent from './event/mutation/toggle-mainboard-sid
 // import viewCard from './match-resolvers/view-card.js';
 // import viewZone from './match-resolvers/view-zone.js';
 
+// misc
+import searchSite from './misc/query/search-site.js';
+import searchSiteResult from './misc/field/search-site-result.js';
+
 // custom field resolvers
 import account_decks from './account/field/decks.js';
 import author from './blog/field/author.js';
@@ -251,9 +255,14 @@ export default {
     // deck
     fetchDeckByID,
     // event
-    fetchEventByID
+    fetchEventByID,
     // match
     // fetchMatchByID
+    // misc
+    searchSite
+  },
+  SearchSiteResult: {
+    __resolveType: searchSiteResult
   },
   Subscription: {
     // account
