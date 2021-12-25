@@ -67,6 +67,7 @@ const cubeSchema = new Schema<Cube>({
     },
     type: String
   },
+  image: String,
   mainboard: [cubeCardSchema],
   modules: [moduleSchema],
   name: {

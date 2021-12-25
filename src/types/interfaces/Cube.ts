@@ -8,6 +8,7 @@ export default interface Cube extends mongoose.Document {
   _id: mongoose.Types.ObjectId;
   creator: mongoose.Types.ObjectId;
   description: string;
+  image: string;
   mainboard: mongoose.Types.DocumentArray<CubeCard>;
   modules: mongoose.Types.DocumentArray<Module>;
   name: string;

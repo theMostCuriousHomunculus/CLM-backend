@@ -43,6 +43,7 @@ const deckSchema = new Schema<Deck>({
     required: false,
     type: String
   },
+  image: String,
   mainboard: [deckCardSchema],
   name: {
     index: {

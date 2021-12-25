@@ -8,6 +8,7 @@ export default interface Deck extends mongoose.Document {
   creator: mongoose.Types.ObjectId;
   description: string;
   format?: Format;
+  image: string;
   mainboard: mongoose.Types.DocumentArray<DeckCard>;
   name: string;
   sideboard: mongoose.Types.DocumentArray<DeckCard>;

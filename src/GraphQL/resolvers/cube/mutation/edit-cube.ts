@@ -7,6 +7,7 @@ import pubsub from '../../../pubsub.js';
 
 interface EditCubeArgs {
   description?: string;
+  image?: string;
   name?: string;
   published?: boolean;
 }
@@ -26,7 +27,7 @@ export default async function (
     throw new HTTPError('You are not authorized to edit this cube.', 401);
   }
 
-  const validCubeProperties = ['description', 'name', 'published'];
+  const validCubeProperties = ['description', 'image', 'name', 'published'];
 
   for (let prop of validCubeProperties) {
     if (typeof args[prop as keyof EditCubeArgs] !== 'undefined') {

@@ -8,6 +8,7 @@ import pubsub from '../../../pubsub.js';
 interface EditDeckArgs {
   description?: string;
   format?: Format;
+  image?: string;
   name?: string;
 }
 
@@ -22,11 +23,13 @@ export default async function (
     throw new HTTPError('You are not authorized to edit this deck.', 401);
   }
 
-  const { description, format, name } = args;
+  const { description, format, image, name } = args;
 
   if (description) deck.description = description;
 
   if (format) deck.format = format;
+
+  if (image) deck.image = image;
 
   if (name) deck.name = name;
 

@@ -63,7 +63,12 @@ type Mutation {
     scryfall_id: String!
     type_line: String!
   ): CubeType
-  editCube(description: String, name: String, published: Boolean): CubeType
+  editCube(
+    description: String
+    image: String
+    name: String
+    published: Boolean
+  ): CubeType
   editModule(moduleID: ID!, name: String): CubeType
   editRotation(rotationID: ID!, name: String, size: Int): CubeType
   addCardsToDeck(
@@ -81,7 +86,12 @@ type Mutation {
     name: String
   ): DeckType
   deleteDeck: Boolean
-  editDeck(description: String, format: FormatEnum, name: String): DeckType
+  editDeck(
+    description: String
+    image: String
+    format: FormatEnum
+    name: String
+  ): DeckType
   removeCardsFromDeck(cardIDs: [ID]!, component: DeckComponentEnum!): DeckType
   toggleMainboardSideboardDeck(cardID: ID!): DeckType
   addBasics(
