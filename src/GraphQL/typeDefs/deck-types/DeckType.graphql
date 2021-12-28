@@ -6,5 +6,6 @@ type DeckType implements Document {
   image: String
   mainboard: [DeckCardType]
   name: String
+  published: Boolean
   sideboard: [DeckCardType]
 }

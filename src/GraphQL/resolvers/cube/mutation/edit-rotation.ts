@@ -47,7 +47,9 @@ export default async function (
 
   if (
     cube.rotations.find(
-      (rotation) => rotation.name.toLowerCase() === name.toLowerCase()
+      (rotation) =>
+        rotation.name.toLowerCase() === name.toLowerCase() &&
+        rotation._id.toString() !== rotationID
     )
   ) {
     throw new HTTPError(

@@ -91,6 +91,7 @@ type Mutation {
     image: String
     format: FormatEnum
     name: String
+    published: Boolean
   ): DeckType
   removeCardsFromDeck(cardIDs: [ID]!, component: DeckComponentEnum!): DeckType
   toggleMainboardSideboardDeck(cardID: ID!): DeckType

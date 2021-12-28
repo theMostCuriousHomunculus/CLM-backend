@@ -30,6 +30,7 @@ const deckSchema = new Schema<Deck>({
     type: String
   },
   format: {
+    default: 'Freeform',
     enum: [
       'Classy',
       'Freeform',
@@ -40,7 +41,6 @@ const deckSchema = new Schema<Deck>({
       'Standard',
       'Vintage'
     ],
-    required: false,
     type: String
   },
   image: String,
@@ -54,6 +54,10 @@ const deckSchema = new Schema<Deck>({
     required: true,
     trim: true,
     type: String
+  },
+  published: {
+    default: true,
+    type: Boolean
   },
   sideboard: [deckCardSchema]
 });

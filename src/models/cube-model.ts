@@ -80,7 +80,10 @@ const cubeSchema = new Schema<Cube>({
     trim: true,
     type: String
   },
-  published: Boolean,
+  published: {
+    default: true,
+    type: Boolean
+  },
   rotations: [rotationSchema],
   sideboard: [cubeCardSchema]
 });

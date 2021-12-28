@@ -36,7 +36,9 @@ export default async function (
 
   if (
     cube.modules.find(
-      (module) => module.name.toLowerCase() === name.toLowerCase()
+      (module) =>
+        module.name.toLowerCase() === name.toLowerCase() &&
+        module._id.toString() !== moduleID
     )
   ) {
     throw new HTTPError(

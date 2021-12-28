@@ -10,6 +10,7 @@ interface EditDeckArgs {
   format?: Format;
   image?: string;
   name?: string;
+  published?: boolean;
 }
 
 export default async function (
@@ -23,15 +24,17 @@ export default async function (
     throw new HTTPError('You are not authorized to edit this deck.', 401);
   }
 
-  const { description, format, image, name } = args;
+  const { description, format, image, name, published } = args;
 
-  if (description) deck.description = description;
+  if (description !== undefined) deck.description = description;
 
-  if (format) deck.format = format;
+  if (format !== undefined) deck.format = format;
 
   if (image) deck.image = image;
 
   if (name) deck.name = name;
+
+  if (published !== undefined) deck.published = published;
 
   try {
     await deck.save();
