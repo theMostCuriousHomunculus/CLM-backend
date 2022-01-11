@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 import Location from './Location';
+import PushSubscription from './PushSubscription';
 import Settings from './Settings';
 
 export default interface Account extends mongoose.Document {
@@ -13,6 +14,7 @@ export default interface Account extends mongoose.Document {
   name: string;
   nearby_users: mongoose.Types.Array<mongoose.Types.ObjectId>;
   password: string;
+  push_subscribed_devices: mongoose.Types.DocumentArray<PushSubscription>;
   received_bud_requests: mongoose.Types.Array<mongoose.Types.ObjectId>;
   reset_token?: string;
   reset_token_expiration?: Date;

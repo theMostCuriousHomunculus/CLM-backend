@@ -11,7 +11,8 @@
     "lint": "eslint --ignore-path .gitignore .",
     "postinstall": "tsc",
     "start": "node dist/index.js",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config ./jest.config.json --watch --runInBand"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config ./jest.config.json --watch --runInBand",
+    "web-push": "web-push"
   },
   "author": "Casey Johnson",
   "license": "ISC",
@@ -33,6 +34,7 @@
     "mongoose": "^6.0.12",
     "nodemailer": "^6.4.18",
     "nodemailer-sendgrid-transport": "^0.2.0",
+    "web-push": "^3.4.5",
     "ws": "^7.5.0"
   },
   "devDependencies": {

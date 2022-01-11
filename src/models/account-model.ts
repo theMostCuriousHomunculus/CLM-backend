@@ -6,6 +6,7 @@ import Account from '../types/interfaces/Account';
 import HTTPError from '../types/classes/HTTPError.js';
 import Location from '../types/interfaces/Location';
 import AccountModelInterface from '../types/interfaces/AccountModel';
+import PushSubscription from '../types/interfaces/PushSubscription';
 
 const { model, Schema } = mongoose;
 
@@ -40,6 +41,23 @@ const locationSchema = new Schema<Location>(
     _id: false
   }
 );
+
+const pushSubscriptionSchema = new Schema<PushSubscription>({
+  endpoint: {
+    required: true,
+    type: String
+  },
+  keys: {
+    auth: {
+      required: true,
+      type: String
+    },
+    p256dh: {
+      required: true,
+      type: String
+    }
+  }
+});
 
 // const settingsSchema = new Schema<>(
 //   {
@@ -107,6 +125,7 @@ const accountSchema = new Schema<Account>({
     trim: true,
     type: String
   },
+  push_subscribed_devices: [pushSubscriptionSchema],
   received_bud_requests: [
     {
       ref: 'AccountModel',
