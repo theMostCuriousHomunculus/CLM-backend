@@ -1,5 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import webpush from 'web-push';
 import { createServer } from 'http';
 
 import context from './context.js';
@@ -14,11 +15,18 @@ mongoose.connect(process.env.DB_CONNECTION!, {}, (error) => {
   }
 });
 
+webpush.setVapidDetails(
+  process.env.FRONT_END_URL!,
+  process.env.VAPID_PUBLIC_KEY!,
+  process.env.VAPID_PRIVATE_KEY!
+);
+
 const app = express();
 
 const HTTPserver = createServer(app);
 
 app.use(express.json());
+
 app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader(
@@ -33,6 +41,7 @@ app.use(function (req, res, next) {
 
   next();
 });
+
 app.use(
   express.urlencoded({
     extended: true

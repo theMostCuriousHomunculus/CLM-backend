@@ -26,6 +26,7 @@ type Mutation {
     password: String!
     reset_token: String!
   ): AccountType!
+  subscribeToPush(push_subscription: PushSubscriptionInput): AccountType!
   createBlogPost(
     body: String!
     image: String!

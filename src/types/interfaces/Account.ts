@@ -14,7 +14,7 @@ export default interface Account extends mongoose.Document {
   name: string;
   nearby_users: mongoose.Types.Array<mongoose.Types.ObjectId>;
   password: string;
-  push_subscribed_devices: mongoose.Types.DocumentArray<PushSubscription>;
+  push_subscriptions: mongoose.Types.DocumentArray<PushSubscription>;
   received_bud_requests: mongoose.Types.Array<mongoose.Types.ObjectId>;
   reset_token?: string;
   reset_token_expiration?: Date;

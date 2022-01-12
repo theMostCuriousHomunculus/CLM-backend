@@ -42,22 +42,27 @@ const locationSchema = new Schema<Location>(
   }
 );
 
-const pushSubscriptionSchema = new Schema<PushSubscription>({
-  endpoint: {
-    required: true,
-    type: String
-  },
-  keys: {
-    auth: {
+const pushSubscriptionSchema = new Schema<PushSubscription>(
+  {
+    endpoint: {
       required: true,
       type: String
     },
-    p256dh: {
-      required: true,
-      type: String
+    keys: {
+      auth: {
+        required: true,
+        type: String
+      },
+      p256dh: {
+        required: true,
+        type: String
+      }
     }
+  },
+  {
+    _id: false
   }
-});
+);
 
 // const settingsSchema = new Schema<>(
 //   {
@@ -125,7 +130,7 @@ const accountSchema = new Schema<Account>({
     trim: true,
     type: String
   },
-  push_subscribed_devices: [pushSubscriptionSchema],
+  push_subscriptions: [pushSubscriptionSchema],
   received_bud_requests: [
     {
       ref: 'AccountModel',

@@ -13,6 +13,7 @@ import register from './account/mutation/register.js';
 import requestPasswordReset from './account/mutation/request-password-reset.js';
 import searchAccounts from './account/query/search-accounts.js';
 import submitPasswordReset from './account/mutation/submit-password-reset.js';
+import subscribeToPush from './account/mutation/subscribe-to-push.js';
 
 // blog
 import createBlogPost from './blog/mutation/create-blog-post.js';
@@ -179,6 +180,7 @@ export default {
     register,
     requestPasswordReset,
     submitPasswordReset,
+    subscribeToPush,
     // blog
     createBlogPost,
     createComment,

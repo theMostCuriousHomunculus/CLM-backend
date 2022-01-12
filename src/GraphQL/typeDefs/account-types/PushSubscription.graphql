@@ -1,0 +1,14 @@
+# type PushSubscription {
+#   endpoint: String
+#   keys: PushSubscriptionKeys
+# }
+
+input PushSubscriptionKeysInput {
+  auth: String
+  p256dh: String
+}
+
+input PushSubscriptionInput {
+  endpoint: String
+  keys: PushSubscriptionKeysInput
+}
