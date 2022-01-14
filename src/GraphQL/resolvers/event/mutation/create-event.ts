@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
+import webpush from 'web-push';
 
+import AccountModel from '../../../../models/account-model.js';
 import CLMRequest from '../../../../types/interfaces/CLMRequest.js';
 import CubeCard from '../../../../types/interfaces/CubeCard.js';
 import EventModel from '../../../../models/event-model.js';
@@ -103,6 +105,28 @@ export default async function (
   });
 
   await event.save();
+
+  const otherPlayerAccounts = await AccountModel.find({
+    _id: {
+      $in: event.players
+        .map((plr) => plr.account)
+        .filter((accountID) => accountID !== bearer._id)
+    }
+  });
+  for (const playerAccount of otherPlayerAccounts) {
+    for (const pushSubscription of playerAccount.push_subscriptions) {
+      webpush.sendNotification(
+        pushSubscription,
+        JSON.stringify({
+          body: 'Wow; how thoughtful of them!  Make sure to mushroom stamp your competition real good.',
+          title: `${bearer.name} invited you to their cube ${
+            event_type === 'draft' ? 'draft' : 'sealed event'
+          }, ${event.name}.`,
+          url: `${process.env.FRONT_END_URL}/event/${event._id.toString()}`
+        })
+      );
+    }
+  }
 
   return event;
 }

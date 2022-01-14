@@ -12,7 +12,7 @@ type Mutation {
   ): AccountType!
   login(email: String!, password: String!): AccountType!
   logoutAllDevices: Boolean
-  logoutSingleDevice: Boolean
+  logoutSingleDevice(endpoint: String): Boolean
   postLocation(latitude: Float!, longitude: Float!): AccountType!
   register(
     avatar: String!
@@ -27,6 +27,7 @@ type Mutation {
     reset_token: String!
   ): AccountType!
   subscribeToPush(push_subscription: PushSubscriptionInput): AccountType!
+  unsubscribeFromPush(endpoint: String!): AccountType!
   createBlogPost(
     body: String!
     image: String!

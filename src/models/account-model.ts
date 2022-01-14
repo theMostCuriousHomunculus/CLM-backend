@@ -64,26 +64,6 @@ const pushSubscriptionSchema = new Schema<PushSubscription>(
   }
 );
 
-// const settingsSchema = new Schema<>(
-//   {
-//     location_services: {
-//       default: false,
-//       type: Boolean
-//     },
-//     measurement_system: {
-//       default: MeasurementSystem.IMPERIAL,
-//       type: MeasurementSystem
-//     },
-//     radius: {
-//       default: 10,
-//       type: Number
-//     }
-//   },
-//   {
-//     _id: false
-//   }
-// );
-
 const accountSchema = new Schema<Account>({
   admin: {
     default: false,
@@ -146,10 +126,6 @@ const accountSchema = new Schema<Account>({
     }
   ],
   settings: {
-    location_services: {
-      default: false,
-      type: Boolean
-    },
     measurement_system: {
       default: 'imperial',
       enum: ['imperial', 'metric'],

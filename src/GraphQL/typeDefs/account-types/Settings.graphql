@@ -1,11 +1,9 @@
 type Settings {
-  location_services: Boolean
   measurement_system: MeasurementSystemEnum
   radius: Int
 }
 
 input SettingsInput {
-  location_services: Boolean
   measurement_system: MeasurementSystemEnum
   radius: Int
 }

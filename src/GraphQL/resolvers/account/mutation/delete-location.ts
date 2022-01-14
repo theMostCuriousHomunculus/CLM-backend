@@ -17,7 +17,6 @@ export default async function (parent: any, args: null, context: CLMRequest) {
   bearer.location = undefined;
   bearer.nearby_users =
     [] as unknown[] as mongoose.Types.Array<mongoose.Types.ObjectId>;
-  bearer.settings.location_services = false;
 
   await AccountModel.updateMany(
     {},

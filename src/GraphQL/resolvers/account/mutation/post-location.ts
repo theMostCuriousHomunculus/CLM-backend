@@ -28,8 +28,6 @@ export default async function (
     type: 'Point'
   };
 
-  bearer.settings.location_services = true;
-
   const nearbyUsers = await AccountModel.aggregate([
     {
       $geoNear: {
@@ -74,8 +72,7 @@ export default async function (
                 $eq: bearer._id
               }
             }
-          },
-          'settings.location_services': true
+          }
         }
       }
     }

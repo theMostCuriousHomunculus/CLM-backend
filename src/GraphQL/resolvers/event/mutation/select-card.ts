@@ -1,8 +1,10 @@
+import webpush from 'web-push';
+
 import CLMRequest from '../../../../types/interfaces/CLMRequest.js';
-import Event from '../../../../types/interfaces/Event';
 import EventPlayer from '../../../../types/interfaces/EventPlayer.js';
 import HTTPError from '../../../../types/classes/HTTPError.js';
 import pubsub from '../../../pubsub.js';
+import AccountModel from '../../../../models/account-model.js';
 
 interface SelectCardArgs {
   _id: string;
@@ -52,6 +54,21 @@ export default async function (
 
   if (packMinusCardDrafted.length > 0) {
     event.players[otherPlayerIndex].queue.push(packMinusCardDrafted);
+    const otherPlayerAccount = await AccountModel.findById(
+      event.players[otherPlayerIndex].account
+    );
+    if (otherPlayerAccount) {
+      for (const pushSubscription of otherPlayerAccount.push_subscriptions) {
+        webpush.sendNotification(
+          pushSubscription,
+          JSON.stringify({
+            body: 'You have a pick to make.  Everyone else is waiting on you.',
+            title: `Hurry up, ${otherPlayerAccount.name}!`,
+            url: `${process.env.FRONT_END_URL}/event/${event._id.toString()}`
+          })
+        );
+      }
+    }
   }
 
   (player as EventPlayer).queue.shift();
@@ -68,6 +85,19 @@ export default async function (
     for (let plr of event.players) {
       plr.queue.push(plr.packs[0]);
       plr.packs.shift();
+      const plrAccount = await AccountModel.findById(plr.account);
+      if (plrAccount) {
+        for (const pushSubscription of plrAccount.push_subscriptions) {
+          webpush.sendNotification(
+            pushSubscription,
+            JSON.stringify({
+              body: "Oh boy!  I wonder what's inside!",
+              title: 'New pack!',
+              url: `${process.env.FRONT_END_URL}/event/${event._id.toString()}`
+            })
+          );
+        }
+      }
     }
   }
 

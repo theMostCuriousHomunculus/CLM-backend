@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import { MongoError } from 'mongodb';
 
 import Account from '../../../../types/interfaces/Account.js';
@@ -45,7 +46,6 @@ export default async function (
     }
 
     if (settings) {
-      bearer.settings.location_services = settings.location_services;
       bearer.settings.measurement_system = settings.measurement_system;
       bearer.settings.radius = settings.radius;
 
@@ -93,13 +93,14 @@ export default async function (
                     $eq: bearer._id
                   }
                 }
-              },
-              'settings.location_services': true
+              }
             }
           }
         }
       ]);
 
+      bearer.nearby_users =
+        [] as unknown[] as mongoose.Types.Array<mongoose.Types.ObjectId>;
       nearbyUsers.forEach(async (aggregatedUser) => {
         bearer.nearby_users.push(aggregatedUser._id);
       });

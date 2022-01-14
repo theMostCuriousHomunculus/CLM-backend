@@ -14,6 +14,7 @@ import requestPasswordReset from './account/mutation/request-password-reset.js';
 import searchAccounts from './account/query/search-accounts.js';
 import submitPasswordReset from './account/mutation/submit-password-reset.js';
 import subscribeToPush from './account/mutation/subscribe-to-push.js';
+import unsubscribeFromPush from './account/mutation/unsubscribe-from-push.js';
 
 // blog
 import createBlogPost from './blog/mutation/create-blog-post.js';
@@ -181,6 +182,7 @@ export default {
     requestPasswordReset,
     submitPasswordReset,
     subscribeToPush,
+    unsubscribeFromPush,
     // blog
     createBlogPost,
     createComment,

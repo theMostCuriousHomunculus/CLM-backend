@@ -1,5 +1,7 @@
+import webpush from 'web-push';
 import { MongoError } from 'mongodb';
 
+import AccountModel from '../../../../models/account-model.js';
 import BlogPostModel from '../../../../models/blog-post-model.js';
 import CLMRequest from '../../../../types/interfaces/CLMRequest.js';
 import HTTPError from '../../../../types/classes/HTTPError.js';
@@ -40,6 +42,21 @@ export default async function (
     });
 
     await blogPost.save();
+
+    const allAccounts = await AccountModel.find();
+
+    for (const account of allAccounts) {
+      for (const pushSubscription of account.push_subscriptions) {
+        webpush.sendNotification(
+          pushSubscription,
+          JSON.stringify({
+            body: `${blogPost.title}`,
+            title: `🔥🔥🔥 new article on Cube Level Midnight from ${bearer.name}!`,
+            url: `${process.env.FRONT_END_URL}/blog/${blogPost._id.toString()}`
+          })
+        );
+      }
+    }
 
     return blogPost;
   } catch (error) {
