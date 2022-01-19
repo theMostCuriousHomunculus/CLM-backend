@@ -3,8 +3,31 @@ import mongoose from 'mongoose';
 import { deckCardSchema } from './deck-model.js';
 import Event from '../types/interfaces/Event';
 import EventPlayer from '../types/interfaces/EventPlayer';
+import RTCSessionDescription from '../types/interfaces/RTCSessionDescription.js';
 
 const { model, Schema } = mongoose;
+
+const rtcSessionDescriptionSchema = new Schema<RTCSessionDescription>(
+  {
+    remote_account: {
+      type: 'ObjectId',
+      ref: 'AccountModel',
+      required: true
+    },
+    sdp: {
+      required: true,
+      type: String
+    },
+    type: {
+      enum: ['answer', 'offer', 'pranswer', 'rollback'],
+      required: true,
+      type: String
+    }
+  },
+  {
+    _id: false
+  }
+);
 
 const playerSchema = new Schema<EventPlayer>(
   {
@@ -13,8 +36,15 @@ const playerSchema = new Schema<EventPlayer>(
       ref: 'AccountModel',
       required: true
     },
+    answers: [rtcSessionDescriptionSchema],
+    // ice_candidates: { type: Array, default: [] as unknown[] },
     mainboard: [deckCardSchema],
+    offers: [rtcSessionDescriptionSchema],
     packs: [[deckCardSchema]],
+    present: {
+      default: false,
+      type: Boolean
+    },
     queue: [[deckCardSchema]],
     sideboard: [deckCardSchema]
   },

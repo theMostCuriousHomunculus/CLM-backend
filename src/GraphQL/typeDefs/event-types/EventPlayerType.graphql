@@ -1,6 +1,9 @@
 type EventPlayerType {
   account: AccountType
+  answers: [RTCSessionDescription]
   current_pack: [CubeCardType]
   mainboard: [CubeCardType]
+  offers: [RTCSessionDescription]
+  present: Boolean
   sideboard: [CubeCardType]
 }

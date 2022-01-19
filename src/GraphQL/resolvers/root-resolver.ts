@@ -58,7 +58,10 @@ import toggleMainboardSideboardDeck from './deck/mutation/toggle-mainboard-sideb
 // event
 import addBasics from './event/mutation/add-basics.js';
 import createEvent from './event/mutation/create-event.js';
+import createAnswerEvent from './event/mutation/create-answer-event.js';
+import createOfferEvent from './event/mutation/create-offer-event.js';
 import fetchEventByID from './event/query/fetch-event-by-id.js';
+import leaveEvent from './event/mutation/leave-event.js';
 import removeBasics from './event/mutation/remove-basics.js';
 import selectCard from './event/mutation/select-card.js';
 import subscribeEvent from './event/subscription/subscribe-event.js';
@@ -110,6 +113,8 @@ import deck_creator from './deck/field/deck-creator.js';
 import email from './account/field/email.js';
 import event from './match/event.js';
 import event_account from './event/field/event-account.js';
+import event_player_answers from './event/field/event-player-answers.js';
+import event_player_offers from './event/field/event-player-offers.js';
 import events from './account/field/events.js';
 import host from './event/field/host.js';
 import match_account from './match/match-account.js';
@@ -150,8 +155,10 @@ export default {
   },
   EventPlayerType: {
     account: event_account,
+    answers: event_player_answers,
     current_pack,
     mainboard: unknownArray,
+    offers: event_player_offers,
     sideboard: unknownArray
   },
   EventType: {
@@ -214,6 +221,9 @@ export default {
     // event
     addBasics,
     createEvent,
+    createAnswerEvent,
+    createOfferEvent,
+    leaveEvent,
     removeBasics,
     selectCard,
     toggleMainboardSideboardEvent

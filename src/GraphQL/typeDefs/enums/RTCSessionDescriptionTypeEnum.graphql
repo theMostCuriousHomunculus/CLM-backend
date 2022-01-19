@@ -1,0 +1,6 @@
+enum RTCSessionDescriptionTypeEnum {
+  answer
+  offer
+  pranswer
+  rollback
+}

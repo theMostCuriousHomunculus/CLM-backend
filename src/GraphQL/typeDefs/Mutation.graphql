@@ -111,6 +111,9 @@ type Mutation {
     other_players: [String]
     packs_per_player: Int!
   ): EventType!
+  createAnswerEvent(accountID: ID!, sdp: String!): EventType!
+  createOfferEvent(accountID: ID!, sdp: String!): EventType!
+  leaveEvent: Boolean
   toggleMainboardSideboardEvent(cardID: ID!): EventType
   removeBasics(cardIDs: [ID]!, component: DeckComponentEnum!): EventType
   selectCard(_id: ID!): EventType
