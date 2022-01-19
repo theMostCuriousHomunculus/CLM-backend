@@ -3,9 +3,32 @@ import mongoose from 'mongoose';
 import { deckCardSchema } from './deck-model.js';
 import Event from '../types/interfaces/Event';
 import EventPlayer from '../types/interfaces/EventPlayer';
+import ICECandidate from '../types/interfaces/ICECandidate';
 import RTCSessionDescription from '../types/interfaces/RTCSessionDescription.js';
 
 const { model, Schema } = mongoose;
+
+const iceCandidateSchema = new Schema<ICECandidate>(
+  {
+    // address: String,
+    candidate: String,
+    // component: String,
+    // foundation: String,
+    // port: Number,
+    // priority: Number,
+    // protocol: String,
+    // relatedAddress: String,
+    // relatedPort: Number,
+    sdpMLineIndex: Number,
+    sdpMid: String,
+    // tcpType: String,
+    // type: String,
+    usernameFragment: String
+  },
+  {
+    _id: false
+  }
+);
 
 const rtcSessionDescriptionSchema = new Schema<RTCSessionDescription>(
   {
@@ -37,7 +60,7 @@ const playerSchema = new Schema<EventPlayer>(
       required: true
     },
     answers: [rtcSessionDescriptionSchema],
-    // ice_candidates: { type: Array, default: [] as unknown[] },
+    ice_candidates: [iceCandidateSchema],
     mainboard: [deckCardSchema],
     offers: [rtcSessionDescriptionSchema],
     packs: [[deckCardSchema]],

@@ -30,7 +30,7 @@ export default async function (
   );
 
   if (otherPlayer) {
-    otherPlayer.answers.pull({ remote_account: player.account._id.toString() });
+    // otherPlayer.answers.pull({ remote_account: player.account._id.toString() });
 
     otherPlayer.answers.push({
       remote_account: player.account._id,
@@ -38,9 +38,9 @@ export default async function (
       sdp
     });
 
-    (player as EventPlayer).offers.pull({ remote_account: accountID });
+    // (player as EventPlayer).offers.pull({ remote_account: accountID });
 
-    await event.save();
+    // try not saving to database
     pubsub.publish(event._id.toString(), { subscribeEvent: event });
   }
 

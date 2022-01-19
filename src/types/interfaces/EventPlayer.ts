@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 import DeckCard from './DeckCard';
+import ICECandidate from './ICECandidate';
 import RTCSessionDescription from './RTCSessionDescription';
 
 export default interface EventPlayer extends mongoose.Types.Subdocument {
@@ -8,7 +9,7 @@ export default interface EventPlayer extends mongoose.Types.Subdocument {
   answers: mongoose.Types.Array<
     mongoose.Types.DocumentArray<RTCSessionDescription>
   >;
-  // ice_candidates: any[];
+  ice_candidates: mongoose.Types.DocumentArray<ICECandidate>;
   mainboard: mongoose.Types.DocumentArray<DeckCard>;
   offers: mongoose.Types.Array<
     mongoose.Types.DocumentArray<RTCSessionDescription>

@@ -103,6 +103,22 @@ type Mutation {
     numberOfCopies: Int!
     scryfall_id: String!
   ): EventType
+  addICECandidate(
+    # address: String
+    candidate: String
+    # component: String
+    # foundation: String
+    # port: Int
+    # priority: Int
+    # protocol: String
+    # relatedAddress: String
+    # relatedPort: Int
+    sdpMLineIndex: Int
+    sdpMid: String
+    # tcpType: String
+    # type: String
+    usernameFragment: String
+  ): EventType
   createEvent(
     cards_per_pack: Int!
     event_type: EventEnum!

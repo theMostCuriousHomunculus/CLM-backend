@@ -13,20 +13,24 @@ export default async function (parent: any, args: null, context: CLMRequest) {
   }
 
   try {
-    (player as EventPlayer).answers.splice(
+    // (player as EventPlayer).answers.splice(
+    //   0,
+    //   (player as EventPlayer).answers.length
+    // );
+    (player as EventPlayer).ice_candidates.slice(
       0,
-      (player as EventPlayer).answers.length
+      (player as EventPlayer).ice_candidates.length
     );
-    (player as EventPlayer).offers.splice(
-      0,
-      (player as EventPlayer).offers.length
-    );
+    // (player as EventPlayer).offers.splice(
+    //   0,
+    //   (player as EventPlayer).offers.length
+    // );
     (player as EventPlayer).present = false;
 
-    for (const plr of event.players) {
-      plr.answers.pull({ remote_account: player.account._id });
-      plr.offers.pull({ remote_account: player.account._id });
-    }
+    // for (const plr of event.players) {
+    //   plr.answers.pull({ remote_account: player.account._id });
+    //   plr.offers.pull({ remote_account: player.account._id });
+    // }
 
     await event.save();
 

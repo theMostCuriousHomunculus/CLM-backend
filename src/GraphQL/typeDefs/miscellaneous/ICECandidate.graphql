@@ -1,0 +1,16 @@
+type ICECandidate {
+  # address: String
+  candidate: String
+  # component: String
+  # foundation: String
+  # port: Int
+  # priority: Int
+  # protocol: String
+  # relatedAddress: String
+  # relatedPort: Int
+  sdpMLineIndex: Int
+  sdpMid: String
+  # tcpType: String
+  # type: String
+  usernameFragment: String
+}

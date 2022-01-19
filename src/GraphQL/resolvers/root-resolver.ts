@@ -57,6 +57,7 @@ import toggleMainboardSideboardDeck from './deck/mutation/toggle-mainboard-sideb
 
 // event
 import addBasics from './event/mutation/add-basics.js';
+import addICECandidate from './event/mutation/add-ICE-candidate.js';
 import createEvent from './event/mutation/create-event.js';
 import createAnswerEvent from './event/mutation/create-answer-event.js';
 import createOfferEvent from './event/mutation/create-offer-event.js';
@@ -220,6 +221,7 @@ export default {
     toggleMainboardSideboardDeck,
     // event
     addBasics,
+    addICECandidate,
     createEvent,
     createAnswerEvent,
     createOfferEvent,
