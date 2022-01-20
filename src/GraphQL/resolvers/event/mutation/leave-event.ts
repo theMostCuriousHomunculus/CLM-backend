@@ -17,10 +17,10 @@ export default async function (parent: any, args: null, context: CLMRequest) {
     //   0,
     //   (player as EventPlayer).answers.length
     // );
-    (player as EventPlayer).ice_candidates.slice(
-      0,
-      (player as EventPlayer).ice_candidates.length
-    );
+    // (player as EventPlayer).ice_candidates.splice(
+    //   0,
+    //   (player as EventPlayer).ice_candidates.length
+    // );
     // (player as EventPlayer).offers.splice(
     //   0,
     //   (player as EventPlayer).offers.length

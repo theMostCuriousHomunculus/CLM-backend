@@ -67,7 +67,7 @@ export default async function (
     usernameFragment
   });
 
-  await event.save();
+  // try not saving event
   pubsub.publish(event._id.toString(), { subscribeEvent: event });
 
   return event;

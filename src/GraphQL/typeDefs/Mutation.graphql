@@ -132,7 +132,7 @@ type Mutation {
   leaveEvent: Boolean
   toggleMainboardSideboardEvent(cardID: ID!): EventType
   removeBasics(cardIDs: [ID]!, component: DeckComponentEnum!): EventType
-  selectCard(_id: ID!): EventType
+  selectCard(cardID: ID!): EventType
   adjustCounters(
     cardID: ID!
     counterAmount: Int!

@@ -7,7 +7,6 @@ interface AddBasicsArgs {
   component: DeckComponent;
   name: string;
   numberOfCopies: number;
-  oracle_id: string;
   scryfall_id: string;
 }
 
@@ -24,12 +23,11 @@ export default async function (
       404
     );
 
-  const { component, name, numberOfCopies, oracle_id, scryfall_id } = args;
+  const { component, name, numberOfCopies, scryfall_id } = args;
 
   for (let i = 0; i < numberOfCopies; i++) {
     player[component].push({
       name,
-      oracle_id,
       scryfall_id
     });
   }

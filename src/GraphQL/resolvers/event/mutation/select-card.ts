@@ -7,7 +7,7 @@ import pubsub from '../../../pubsub.js';
 import AccountModel from '../../../../models/account-model.js';
 
 interface SelectCardArgs {
-  _id: string;
+  cardID: string;
 }
 
 export default async function (
@@ -16,7 +16,7 @@ export default async function (
   context: CLMRequest
 ) {
   const { event, player } = context;
-  const { _id } = args;
+  const { cardID } = args;
 
   if (!event || !player) {
     throw new HTTPError(
@@ -26,7 +26,7 @@ export default async function (
   }
 
   const cardDrafted = (player as EventPlayer).queue[0].find(
-    (card) => card._id.toString() === _id
+    (card) => card._id.toString() === cardID
   );
 
   if (!cardDrafted)
@@ -35,7 +35,7 @@ export default async function (
   player.mainboard.push(cardDrafted);
 
   const packMinusCardDrafted = (player as EventPlayer).queue[0].filter(
-    (card) => card._id.toString() !== _id
+    (card) => card._id.toString() !== cardID
   );
   const passRight = (player as EventPlayer).packs.length % 2 === 0;
   const passLeft = (player as EventPlayer).packs.length % 2 === 1;
