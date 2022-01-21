@@ -4,4 +4,5 @@ type Subscription {
   subscribeDeck: DeckType!
   subscribeEvent: EventType!
   subscribeMatch: MatchType!
+  subscribeWebRTC: RTCPeerConnectionRelay!
 }

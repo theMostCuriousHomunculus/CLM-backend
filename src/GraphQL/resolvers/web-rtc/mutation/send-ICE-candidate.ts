@@ -1,9 +1,10 @@
+import AccountModel from '../../../../models/account-model.js';
 import CLMRequest from '../../../../types/interfaces/CLMRequest.js';
-import EventPlayer from '../../../../types/interfaces/EventPlayer.js';
 import HTTPError from '../../../../types/classes/HTTPError.js';
 import pubsub from '../../../pubsub.js';
 
-interface AddICECandidateArgs {
+interface SendICECandidateArgs {
+  accountIDs: string[];
   // address: string;
   candidate: string;
   // component: string;
@@ -13,6 +14,7 @@ interface AddICECandidateArgs {
   // protocol: string;
   // relatedAddress: string;
   // relatedPort: number;
+  room: string;
   sdpMLineIndex: number;
   sdpMid: string;
   // tcpType: string;
@@ -22,18 +24,17 @@ interface AddICECandidateArgs {
 
 export default async function (
   parent: any,
-  args: AddICECandidateArgs,
+  args: SendICECandidateArgs,
   context: CLMRequest
 ) {
-  const { event, player } = context;
+  const { bearer } = context;
 
-  if (!event || !player)
-    throw new HTTPError(
-      'An event with the provided ID does not exist or you were not invited to it.',
-      404
-    );
+  if (!bearer) {
+    throw new HTTPError('Login to use this feature!', 401);
+  }
 
   const {
+    accountIDs,
     // address,
     candidate,
     // component,
@@ -43,6 +44,7 @@ export default async function (
     // protocol,
     // relatedAddress,
     // relatedPort,
+    room,
     sdpMLineIndex,
     sdpMid,
     // tcpType,
@@ -50,25 +52,25 @@ export default async function (
     usernameFragment
   } = args;
 
-  (player as EventPlayer).ice_candidates.push({
-    // address,
-    candidate,
-    // component,
-    // foundation,
-    // port,
-    // priority,
-    // protocol,
-    // relatedAddress,
-    // relatedPort,
-    sdpMLineIndex,
-    sdpMid,
-    // tcpType,
-    // type,
-    usernameFragment
-  });
+  try {
+    const otherAccounts = await AccountModel.find({ _id: { $in: accountIDs } });
 
-  // try not saving event
-  pubsub.publish(event._id.toString(), { subscribeEvent: event });
+    for (const otherAccount of otherAccounts) {
+      otherAccount.tokens.forEach((token) => {
+        pubsub.publish(`${room}-${token}`, {
+          subscribeWebRTC: {
+            candidate,
+            remote_account: bearer._id.toString(),
+            sdpMLineIndex,
+            sdpMid,
+            usernameFragment
+          }
+        });
+      });
+    }
 
-  return event;
+    return true;
+  } catch {
+    return false;
+  }
 }

@@ -1,6 +1,5 @@
 type RTCSessionDescription {
   remote_account: AccountType
   sdp: String
-  # type: RTCSessionDescriptionTypeEnum
-  type: String
+  type: RTCSessionDescriptionTypeEnum
 }

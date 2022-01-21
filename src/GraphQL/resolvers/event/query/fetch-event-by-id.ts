@@ -1,7 +1,5 @@
 import CLMRequest from '../../../../types/interfaces/CLMRequest.js';
-import EventPlayer from '../../../../types/interfaces/EventPlayer.js';
 import HTTPError from '../../../../types/classes/HTTPError.js';
-// import pubsub from '../../../pubsub.js';
 
 export default async function (parent: any, args: null, context: CLMRequest) {
   const { event, player } = context;
@@ -12,10 +10,6 @@ export default async function (parent: any, args: null, context: CLMRequest) {
       404
     );
   }
-
-  (player as EventPlayer).present = true;
-  await event.save();
-  // pubsub.publish(event._id.toString(), { subscribeEvent: event });
 
   return event;
 }

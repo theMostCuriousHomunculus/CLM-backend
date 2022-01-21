@@ -8,6 +8,7 @@ type ICECandidate {
   # protocol: String
   # relatedAddress: String
   # relatedPort: Int
+  remote_account: AccountType
   sdpMLineIndex: Int
   sdpMid: String
   # tcpType: String

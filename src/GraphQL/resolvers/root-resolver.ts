@@ -57,12 +57,10 @@ import toggleMainboardSideboardDeck from './deck/mutation/toggle-mainboard-sideb
 
 // event
 import addBasics from './event/mutation/add-basics.js';
-import addICECandidate from './event/mutation/add-ICE-candidate.js';
 import createEvent from './event/mutation/create-event.js';
 import createAnswerEvent from './event/mutation/create-answer-event.js';
 import createOfferEvent from './event/mutation/create-offer-event.js';
 import fetchEventByID from './event/query/fetch-event-by-id.js';
-import leaveEvent from './event/mutation/leave-event.js';
 import removeBasics from './event/mutation/remove-basics.js';
 import selectCard from './event/mutation/select-card.js';
 import subscribeEvent from './event/subscription/subscribe-event.js';
@@ -98,7 +96,13 @@ import toggleMainboardSideboardEvent from './event/mutation/toggle-mainboard-sid
 // import viewCard from './match-resolvers/view-card.js';
 // import viewZone from './match-resolvers/view-zone.js';
 
+// web-rtc
+import sendICECandidate from './web-rtc/mutation/send-ICE-candidate.js';
+import sendRTCSessionDescription from './web-rtc/mutation/send-RTC-session-description.js';
+import subscribeWebRTC from './web-rtc/subscription/subscribe-web-RTC.js';
+
 // misc
+import rtcPeerConnectionRelay from './misc/field/RTC-peer-connection-relay.js';
 import searchSite from './misc/query/search-site.js';
 import searchSiteResult from './misc/field/search-site-result.js';
 
@@ -221,14 +225,12 @@ export default {
     toggleMainboardSideboardDeck,
     // event
     addBasics,
-    addICECandidate,
     createEvent,
     createAnswerEvent,
     createOfferEvent,
-    leaveEvent,
     removeBasics,
     selectCard,
-    toggleMainboardSideboardEvent
+    toggleMainboardSideboardEvent,
     // match
     // adjustCounters,
     // adjustEnergyCounters,
@@ -256,6 +258,9 @@ export default {
     // turnCard,
     // viewCard,
     // viewZone
+    // web-rtc
+    sendICECandidate,
+    sendRTCSessionDescription
   },
   Query: {
     // account
@@ -277,6 +282,9 @@ export default {
     // misc
     searchSite
   },
+  RTCPeerConnectionRelay: {
+    __resolveType: rtcPeerConnectionRelay
+  },
   SearchSiteResult: {
     __resolveType: searchSiteResult
   },
@@ -289,8 +297,9 @@ export default {
     // deck
     subscribeDeck,
     // event
-    subscribeEvent
+    subscribeEvent,
     // match
     // subscribeMatch
+    subscribeWebRTC
   }
 };

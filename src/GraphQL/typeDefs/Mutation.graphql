@@ -103,22 +103,6 @@ type Mutation {
     numberOfCopies: Int!
     scryfall_id: String!
   ): EventType
-  addICECandidate(
-    # address: String
-    candidate: String
-    # component: String
-    # foundation: String
-    # port: Int
-    # priority: Int
-    # protocol: String
-    # relatedAddress: String
-    # relatedPort: Int
-    sdpMLineIndex: Int
-    sdpMid: String
-    # tcpType: String
-    # type: String
-    usernameFragment: String
-  ): EventType
   createEvent(
     cards_per_pack: Int!
     event_type: EventEnum!
@@ -129,7 +113,6 @@ type Mutation {
   ): EventType!
   createAnswerEvent(accountID: ID!, sdp: String!): EventType!
   createOfferEvent(accountID: ID!, sdp: String!): EventType!
-  leaveEvent: Boolean
   toggleMainboardSideboardEvent(cardID: ID!): EventType
   removeBasics(cardIDs: [ID]!, component: DeckComponentEnum!): EventType
   selectCard(cardID: ID!): EventType
@@ -188,4 +171,28 @@ type Mutation {
   turnCard(cardID: ID!, zone: PlayZoneEnum!): MatchType
   viewCard(cardID: ID!, controllerID: String!, zone: PlayZoneEnum!): MatchType
   viewZone(controllerID: ID!, zone: PlayZoneEnum!): MatchType
+  sendICECandidate(
+    accountIDs: [ID]!
+    # address: String
+    candidate: String!
+    # component: String
+    # foundation: String
+    # port: Int
+    # priority: Int
+    # protocol: String
+    # relatedAddress: String
+    # relatedPort: Int
+    room: String!
+    sdpMLineIndex: Int!
+    sdpMid: String!
+    # tcpType: String
+    # type: String
+    usernameFragment: String!
+  ): Boolean
+  sendRTCSessionDescription(
+    accountID: ID!
+    room: String!
+    sdp: String!
+    type: RTCSessionDescriptionTypeEnum!
+  ): Boolean
 }
