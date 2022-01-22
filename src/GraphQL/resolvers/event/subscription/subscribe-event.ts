@@ -3,13 +3,21 @@ import SubscriptionContext from '../../../../types/interfaces/SubscriptionContex
 import pubsub from '../../../pubsub.js';
 
 export default {
-  subscribe: function (parent: any, args: null, context: SubscriptionContext) {
-    const { event } = context;
+  subscribe: async function (
+    parent: any,
+    args: null,
+    context: SubscriptionContext
+  ) {
+    const { bearer, connectionParams } = context;
 
-    if (!event) {
-      throw new HTTPError('Could not find an event with the provided ID.', 404);
+    if (!bearer) {
+      throw new HTTPError('Login to use this feature!', 401);
     }
 
-    return pubsub.asyncIterator(event._id.toString());
+    if (!('eventID' in connectionParams!)) {
+      throw new HTTPError('You did not provide an eventID.', 400);
+    }
+
+    return pubsub.asyncIterator(connectionParams.eventID as string);
   }
 };

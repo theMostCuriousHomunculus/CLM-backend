@@ -1,10 +1,7 @@
 type EventPlayerType {
   account: AccountType
-  answers: [RTCSessionDescription]
   current_pack: [CubeCardType]
-  ice_candidates: [ICECandidate]
   mainboard: [CubeCardType]
-  offers: [RTCSessionDescription]
   present: Boolean
   sideboard: [CubeCardType]
 }

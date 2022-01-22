@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-export default interface ICECandidate extends mongoose.Types.Subdocument {
+export default interface ICECandidate {
   // address: string;
   candidate: string;
   // component: string;
@@ -10,6 +10,7 @@ export default interface ICECandidate extends mongoose.Types.Subdocument {
   // protocol: string;
   // relatedAddress: string;
   // relatedPort: number;
+  remote_account: mongoose.Types.ObjectId;
   sdpMLineIndex: number;
   sdpMid: string;
   // tcpType: string;

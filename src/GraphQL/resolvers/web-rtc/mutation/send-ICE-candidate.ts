@@ -53,19 +53,20 @@ export default async function (
   } = args;
 
   try {
-    const otherAccounts = await AccountModel.find({ _id: { $in: accountIDs } });
-
+    const otherAccounts = await AccountModel.find({
+      _id: {
+        $in: accountIDs
+      }
+    });
     for (const otherAccount of otherAccounts) {
-      otherAccount.tokens.forEach((token) => {
-        pubsub.publish(`${room}-${token}`, {
-          subscribeWebRTC: {
-            candidate,
-            remote_account: bearer._id.toString(),
-            sdpMLineIndex,
-            sdpMid,
-            usernameFragment
-          }
-        });
+      pubsub.publish(`${room}-${otherAccount._id.toString()}`, {
+        subscribeWebRTC: {
+          candidate,
+          remote_account: bearer._id,
+          sdpMLineIndex,
+          sdpMid,
+          usernameFragment
+        }
       });
     }
 

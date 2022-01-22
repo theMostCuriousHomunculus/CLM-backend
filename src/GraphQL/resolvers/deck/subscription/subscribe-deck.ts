@@ -3,13 +3,17 @@ import SubscriptionContext from '../../../../types/interfaces/SubscriptionContex
 import pubsub from '../../../pubsub.js';
 
 export default {
-  subscribe: function (parent: any, args: null, context: SubscriptionContext) {
-    const { deck } = context;
+  subscribe: async function (
+    parent: any,
+    args: null,
+    context: SubscriptionContext
+  ) {
+    const { bearer, connectionParams } = context;
 
-    if (!deck) {
-      throw new HTTPError('Could not find a deck with the provided ID.', 404);
+    if (!('deckID' in connectionParams!)) {
+      throw new HTTPError('You did not provide a deckID.', 400);
     }
 
-    return pubsub.asyncIterator(deck._id.toString());
+    return pubsub.asyncIterator(connectionParams.deckID as string);
   }
 };

@@ -111,8 +111,6 @@ type Mutation {
     other_players: [String]
     packs_per_player: Int!
   ): EventType!
-  createAnswerEvent(accountID: ID!, sdp: String!): EventType!
-  createOfferEvent(accountID: ID!, sdp: String!): EventType!
   toggleMainboardSideboardEvent(cardID: ID!): EventType
   removeBasics(cardIDs: [ID]!, component: DeckComponentEnum!): EventType
   selectCard(cardID: ID!): EventType
@@ -190,7 +188,7 @@ type Mutation {
     usernameFragment: String!
   ): Boolean
   sendRTCSessionDescription(
-    accountID: ID!
+    accountIDs: [ID]!
     room: String!
     sdp: String!
     type: RTCSessionDescriptionTypeEnum!

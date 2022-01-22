@@ -3,16 +3,17 @@ import SubscriptionContext from '../../../../types/interfaces/SubscriptionContex
 import pubsub from '../../../pubsub.js';
 
 export default {
-  subscribe: function (parent: any, args: null, context: SubscriptionContext) {
-    const { blogPost } = context;
+  subscribe: async function (
+    parent: any,
+    args: null,
+    context: SubscriptionContext
+  ) {
+    const { connectionParams } = context;
 
-    if (!blogPost) {
-      throw new HTTPError(
-        'Could not find a blog post with the provided ID.',
-        404
-      );
+    if (!connectionParams || !('blogPostID' in connectionParams)) {
+      throw new HTTPError('You did not provide a blogPostID.', 400);
     }
 
-    return pubsub.asyncIterator(blogPost._id.toString());
+    return pubsub.asyncIterator(connectionParams.blogPostID as string);
   }
 };

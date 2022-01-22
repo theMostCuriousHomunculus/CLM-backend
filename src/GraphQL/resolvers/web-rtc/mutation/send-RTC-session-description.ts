@@ -5,7 +5,7 @@ import pubsub from '../../../pubsub.js';
 import AccountModel from '../../../../models/account-model.js';
 
 interface SendRTCSessionDescriptionArgs {
-  accountID: string;
+  accountIDs: string[];
   room: string;
   sdp: string;
   type: RTCSessionDescriptionType;
@@ -22,20 +22,22 @@ export default async function (
     throw new HTTPError('Login to use this feature!', 401);
   }
 
-  const { accountID, room, sdp, type } = args;
+  const { accountIDs, room, sdp, type } = args;
 
   try {
-    const otherAccount = await AccountModel.findById(accountID);
+    const otherAccounts = await AccountModel.find({
+      _id: {
+        $in: accountIDs
+      }
+    });
 
-    if (otherAccount) {
-      otherAccount.tokens.forEach((token) => {
-        pubsub.publish(`${room}-${token}`, {
-          subscribeWebRTC: {
-            remote_account: bearer._id.toString(),
-            sdp,
-            type
-          }
-        });
+    for (const otherAccount of otherAccounts) {
+      pubsub.publish(`${room}-${otherAccount._id.toString()}`, {
+        subscribeWebRTC: {
+          remote_account: bearer._id,
+          sdp,
+          type
+        }
       });
     }
 
