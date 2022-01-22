@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 import Account from '../../../../types/interfaces/Account';
-import AccountModel from '../../../../models/account-model.js';
+import AccountModel from '../../../../mongodb/models/account.js';
 import CLMRequest from '../../../../types/interfaces/CLMRequest';
 
 interface LogoutSingleDeviceArgs {

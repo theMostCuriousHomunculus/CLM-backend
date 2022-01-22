@@ -1,5 +1,5 @@
 import Account from '../../../../types/interfaces/Account';
-import CubeModel from '../../../../models/cube-model.js';
+import CubeModel from '../../../../mongodb/models/cube.js';
 
 import CLMRequest from '../../../../types/interfaces/CLMRequest';
 

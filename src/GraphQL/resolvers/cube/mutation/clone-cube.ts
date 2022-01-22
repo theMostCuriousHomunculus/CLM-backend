@@ -3,7 +3,7 @@ import { MongoError } from 'mongodb';
 
 import deleteDocumentIDs from '../../../../utils/delete-document-ids.js';
 import CLMRequest from '../../../../types/interfaces/CLMRequest.js';
-import Cube from '../../../../models/cube-model.js';
+import CubeModel from '../../../../mongodb/models/cube.js';
 import HTTPError from '../../../../types/classes/HTTPError.js';
 
 export default async function (parent: any, args: null, context: CLMRequest) {
@@ -27,7 +27,7 @@ export default async function (parent: any, args: null, context: CLMRequest) {
   copy.name = `Copy of ${cube.name.slice(0, 29)} - ${newCubeID}`;
   copy.creator = bearer._id;
 
-  const clonedCube = new Cube(copy);
+  const clonedCube = new CubeModel(copy);
 
   try {
     await clonedCube.save();

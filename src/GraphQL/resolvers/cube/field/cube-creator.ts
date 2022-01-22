@@ -1,4 +1,4 @@
-import AccountModel from '../../../../models/account-model.js';
+import AccountModel from '../../../../mongodb/models/account.js';
 import Cube from '../../../../types/interfaces/Cube.js';
 
 export default async function (parent: Cube) {

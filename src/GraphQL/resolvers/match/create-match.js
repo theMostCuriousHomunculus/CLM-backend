@@ -1,8 +1,8 @@
-import Account from '../../../models/account-model.js';
-import Deck from '../../../models/deck-model.js';
+import AccountModel from '../../../mongodb/models/account.js';
+import DeckModel from '../../../mongodb/models/deck.js';
 import HTTPError from '../../../types/classes/HTTPError.js';
-import Match from '../../../models/match-model.js';
-import Event from '../../../models/event-model.js';
+import MatchModel from '../../../mongodb/models/match.js';
+import EventModel from '../../../mongodb/models/event.js';
 
 export default async function (parent, args, context) {
   const { account } = context;
@@ -19,7 +19,7 @@ export default async function (parent, args, context) {
   };
 
   if (eventID) {
-    const event = await Event.findById(eventID);
+    const event = await EventModel.findById(eventID);
     matchInfo.cube = event.cube;
     matchInfo.event = event._id;
 
@@ -68,8 +68,8 @@ export default async function (parent, args, context) {
     matchInfo.decks = deckIDs;
 
     for (let i = 0; i < deckIDs.length; i++) {
-      const deck = await Deck.findById(deckIDs[i]);
-      const player = await Account.findById(playerIDs[i]);
+      const deck = await DeckModel.findById(deckIDs[i]);
+      const player = await AccountModel.findById(playerIDs[i]);
       const plr = {
         account: player._id,
         battlefield: [],
@@ -110,7 +110,7 @@ export default async function (parent, args, context) {
     }
   }
 
-  const match = new Match(matchInfo);
+  const match = new MatchModel(matchInfo);
   await match.save();
 
   return match;

@@ -1,7 +1,7 @@
 import crypto from 'crypto';
 
 import Account from '../../../../types/interfaces/Account';
-import AccountModel from '../../../../models/account-model.js';
+import AccountModel from '../../../../mongodb/models/account.js';
 import HTTPError from '../../../../types/classes/HTTPError.js';
 import transporter from '../../../../utils/sendgrid-transporter.js';
 

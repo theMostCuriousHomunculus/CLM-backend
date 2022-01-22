@@ -1,5 +1,5 @@
 import HTTPError from '../../../types/classes/HTTPError.js';
-import Account from '../../../models/account-model.js';
+import AccountModel from '../../../mongodb/models/account.js';
 
 export default async function (parent, args, context) {
   const { account, match, player, pubsub } = context;
@@ -13,7 +13,7 @@ export default async function (parent, args, context) {
 
   if (!controller) throw new HTTPError('Invalid controllerID.', 404);
 
-  const controllerAccount = await Account.findById(controllerID);
+  const controllerAccount = await AccountModel.findById(controllerID);
 
   for (const card of controller[zone]) {
     if (card.face_down) card.face_down = false;

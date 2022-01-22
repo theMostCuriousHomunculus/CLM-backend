@@ -1,4 +1,4 @@
-import AccountModel from '../../../../models/account-model.js';
+import AccountModel from '../../../../mongodb/models/account.js';
 
 interface SearchAccountArgs {
   name: string;

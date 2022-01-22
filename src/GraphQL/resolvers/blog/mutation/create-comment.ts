@@ -1,6 +1,5 @@
 import { MongoError } from 'mongodb';
 
-import { CommentModel } from '../../../../models/blog-post-model.js';
 import CLMRequest from '../../../../types/interfaces/CLMRequest.js';
 import HTTPError from '../../../../types/classes/HTTPError.js';
 import pubsub from '../../../pubsub.js';
@@ -28,12 +27,10 @@ export default async function (
     );
   }
 
-  const comment = new CommentModel({
+  blogPost.comments.push({
     author: bearer._id,
     body
   });
-
-  blogPost.comments.push(comment);
 
   try {
     await blogPost.save();

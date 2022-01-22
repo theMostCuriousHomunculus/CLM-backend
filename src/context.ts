@@ -1,12 +1,12 @@
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import { NextFunction, RequestHandler, Response } from 'express';
 
-import AccountModel from './models/account-model.js';
-import BlogPostModel from './models/blog-post-model.js';
+import AccountModel from './mongodb/models/account.js';
+import BlogPostModel from './mongodb/models/blog-post.js';
 import CLMRequest from './types/interfaces/CLMRequest';
-import CubeModel from './models/cube-model.js';
-import DeckModel from './models/deck-model.js';
-import EventModel from './models/event-model.js';
+import CubeModel from './mongodb/models/cube.js';
+import DeckModel from './mongodb/models/deck.js';
+import EventModel from './mongodb/models/event.js';
 import EventPlayer from './types/interfaces/EventPlayer';
 // import MatchCard from './types/interfaces/MatchCard';
 // import MatchModel from './models/match-model.js';

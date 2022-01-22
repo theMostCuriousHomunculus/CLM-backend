@@ -1,4 +1,4 @@
-import Cube from '../../../../models/cube-model.js';
+import Cube from '../../../../mongodb/models/cube.js';
 
 interface SearchCubesArgs {
   search: string;

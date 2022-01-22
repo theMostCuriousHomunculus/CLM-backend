@@ -1,6 +1,6 @@
 import CLMRequest from '../../../../types/interfaces/CLMRequest.js';
 import HTTPError from '../../../../types/classes/HTTPError.js';
-import MatchModel from '../../../../models/match-model.js';
+import MatchModel from '../../../../mongodb/models/match.js';
 
 export default async function (parent: any, args: null, context: CLMRequest) {
   const { bearer, deck } = context;

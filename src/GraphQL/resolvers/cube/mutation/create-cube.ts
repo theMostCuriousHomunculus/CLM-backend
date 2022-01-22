@@ -3,7 +3,7 @@ import CSVString from 'csv-string';
 import { MongoError } from 'mongodb';
 
 import CLMRequest from '../../../../types/interfaces/CLMRequest.js';
-import CubeModel from '../../../../models/cube-model.js';
+import CubeModel from '../../../../mongodb/models/cube.js';
 import HTTPError from '../../../../types/classes/HTTPError.js';
 
 interface CreateCubeArgs {

@@ -1,10 +1,10 @@
 import mongoose from 'mongoose';
 import webpush from 'web-push';
 
-import AccountModel from '../../../../models/account-model.js';
-import CLMRequest from '../../../../types/interfaces/CLMRequest.js';
-import CubeCard from '../../../../types/interfaces/CubeCard.js';
-import EventModel from '../../../../models/event-model.js';
+import AccountModel from '../../../../mongodb/models/account.js';
+import CLMRequest from '../../../../types/interfaces/CLMRequest';
+import CubeCard from '../../../../types/interfaces/CubeCard';
+import EventModel from '../../../../mongodb/models/event.js';
 import HTTPError from '../../../../types/classes/HTTPError.js';
 import randomSampleWithoutReplacement from '../../../../utils/random-sample-wo-replacement.js';
 import shuffle from '../../../../utils/shuffle.js';

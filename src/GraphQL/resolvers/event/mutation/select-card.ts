@@ -4,7 +4,7 @@ import CLMRequest from '../../../../types/interfaces/CLMRequest.js';
 import EventPlayer from '../../../../types/interfaces/EventPlayer.js';
 import HTTPError from '../../../../types/classes/HTTPError.js';
 import pubsub from '../../../pubsub.js';
-import AccountModel from '../../../../models/account-model.js';
+import AccountModel from '../../../../mongodb/models/account.js';
 
 interface SelectCardArgs {
   cardID: string;

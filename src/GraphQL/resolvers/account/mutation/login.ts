@@ -1,5 +1,5 @@
 import Account from '../../../../types/interfaces/Account';
-import AccountModel from '../../../../models/account-model.js';
+import AccountModel from '../../../../mongodb/models/account.js';
 
 interface LoginArgs {
   email: string;

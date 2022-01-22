@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import { MongoError } from 'mongodb';
 
 import Account from '../../../../types/interfaces/Account.js';
-import AccountModel from '../../../../models/account-model.js';
+import AccountModel from '../../../../mongodb/models/account.js';
 import CLMRequest from '../../../../types/interfaces/CLMRequest.js';
 import HTTPError from '../../../../types/classes/HTTPError.js';
 import MeasurementSystem from '../../../../types/enums/MeasurementSystem.js';

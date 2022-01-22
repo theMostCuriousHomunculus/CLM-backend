@@ -1,8 +1,8 @@
 import webpush from 'web-push';
 import { MongoError } from 'mongodb';
 
-import AccountModel from '../../../../models/account-model.js';
-import BlogPostModel from '../../../../models/blog-post-model.js';
+import AccountModel from '../../../../mongodb/models/account.js';
+import BlogPostModel from '../../../../mongodb/models/blog-post.js';
 import CLMRequest from '../../../../types/interfaces/CLMRequest.js';
 import HTTPError from '../../../../types/classes/HTTPError.js';
 

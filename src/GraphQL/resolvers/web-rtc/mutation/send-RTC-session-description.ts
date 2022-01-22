@@ -2,7 +2,7 @@ import CLMRequest from '../../../../types/interfaces/CLMRequest.js';
 import HTTPError from '../../../../types/classes/HTTPError.js';
 import RTCSessionDescriptionType from '../../../../types/enums/RTCSessionDescriptionType.js';
 import pubsub from '../../../pubsub.js';
-import AccountModel from '../../../../models/account-model.js';
+import AccountModel from '../../../../mongodb/models/account.js';
 
 interface SendRTCSessionDescriptionArgs {
   accountIDs: string[];

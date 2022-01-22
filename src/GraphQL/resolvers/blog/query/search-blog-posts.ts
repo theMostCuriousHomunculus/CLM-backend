@@ -1,4 +1,4 @@
-import BlogPostModel from '../../../../models/blog-post-model.js';
+import BlogPostModel from '../../../../mongodb/models/blog-post.js';
 
 interface SearchBlogPostArgs {
   search: string;

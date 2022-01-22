@@ -1,7 +1,7 @@
-import Deck from '../../../models/deck-model.js';
+import DeckModel from '../../../mongodb/models/deck.js';
 
 export default async function (parent) {
-  const decks = await Deck.find({ _id: { $in: parent.decks } });
+  const decks = await DeckModel.find({ _id: { $in: parent.decks } });
 
   return decks;
 }

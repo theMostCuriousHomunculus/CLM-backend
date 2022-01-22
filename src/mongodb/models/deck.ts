@@ -1,22 +1,11 @@
 import mongoose from 'mongoose';
 
-import Deck from '../types/interfaces/Deck';
-import DeckCard from '../types/interfaces/DeckCard';
+import Deck from '../../types/interfaces/Deck';
+import DeckCardSchema from '../schemas/deck-card.js';
 
 const { model, Schema } = mongoose;
 
-const deckCardSchema = new Schema<DeckCard>({
-  name: {
-    required: true,
-    type: String
-  },
-  scryfall_id: {
-    required: true,
-    type: String
-  }
-});
-
-const deckSchema = new Schema<Deck>({
+const DeckSchema = new Schema<Deck>({
   creator: {
     ref: 'AccountModel',
     required: true,
@@ -44,7 +33,7 @@ const deckSchema = new Schema<Deck>({
     type: String
   },
   image: String,
-  mainboard: [deckCardSchema],
+  mainboard: [DeckCardSchema],
   name: {
     index: {
       unique: true,
@@ -59,11 +48,11 @@ const deckSchema = new Schema<Deck>({
     default: true,
     type: Boolean
   },
-  sideboard: [deckCardSchema]
+  sideboard: [DeckCardSchema]
 });
 
-deckSchema.index({ name: 'text', description: 'text' });
+DeckSchema.index({ name: 'text', description: 'text' });
 
-const DeckModel = model<Deck>('Deck', deckSchema);
+const DeckModel = model<Deck>('Deck', DeckSchema);
 
-export { DeckModel as default, deckCardSchema };
+export default DeckModel;

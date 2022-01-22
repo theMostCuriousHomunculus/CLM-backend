@@ -2,7 +2,7 @@ import axios from 'axios';
 import CSVString from 'csv-string';
 
 import CLMRequest from '../../../../types/interfaces/CLMRequest.js';
-import DeckModel from '../../../../models/deck-model.js';
+import DeckModel from '../../../../mongodb/models/deck.js';
 import Format from '../../../../types/enums/Format';
 import HTTPError from '../../../../types/classes/HTTPError.js';
 

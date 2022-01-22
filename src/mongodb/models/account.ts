@@ -2,69 +2,15 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
 
-import Account from '../types/interfaces/Account';
-import HTTPError from '../types/classes/HTTPError.js';
-import Location from '../types/interfaces/Location';
-import AccountModelInterface from '../types/interfaces/AccountModel';
-import PushSubscription from '../types/interfaces/PushSubscription';
+import Account from '../../types/interfaces/Account';
+import AccountModelInterface from '../../types/interfaces/AccountModel';
+import HTTPError from '../../types/classes/HTTPError.js';
+import LocationSchema from '../schemas/location.js';
+import PushSubscriptionSchema from '../schemas/push-subscription.js';
 
 const { model, Schema } = mongoose;
 
-const locationSchema = new Schema<Location>(
-  {
-    type: {
-      default: 'Point',
-      type: String
-    },
-    coordinates: {
-      type: [Number],
-      validate: {
-        message:
-          'Coordinates is an array with two numbers, the first longitude (-180, 180) and the second latitude (-90, 90).',
-        validator: function (value: [number, number]) {
-          if (
-            value.length !== 2 ||
-            value[0] < -180 ||
-            value[0] > 180 ||
-            value[1] < -90 ||
-            value[1] > 90
-          ) {
-            return false;
-          } else {
-            return true;
-          }
-        }
-      }
-    }
-  },
-  {
-    _id: false
-  }
-);
-
-const pushSubscriptionSchema = new Schema<PushSubscription>(
-  {
-    endpoint: {
-      required: true,
-      type: String
-    },
-    keys: {
-      auth: {
-        required: true,
-        type: String
-      },
-      p256dh: {
-        required: true,
-        type: String
-      }
-    }
-  },
-  {
-    _id: false
-  }
-);
-
-const accountSchema = new Schema<Account>({
+const AccountSchema = new Schema<Account>({
   admin: {
     default: false,
     required: true,
@@ -87,7 +33,7 @@ const accountSchema = new Schema<Account>({
     type: String,
     unique: true
   },
-  location: locationSchema,
+  location: LocationSchema,
   name: {
     index: {
       unique: true,
@@ -110,7 +56,7 @@ const accountSchema = new Schema<Account>({
     trim: true,
     type: String
   },
-  push_subscriptions: [pushSubscriptionSchema],
+  push_subscriptions: [PushSubscriptionSchema],
   received_bud_requests: [
     {
       ref: 'AccountModel',
@@ -144,7 +90,7 @@ const accountSchema = new Schema<Account>({
   ]
 });
 
-accountSchema.methods.generateAuthenticationToken = async function () {
+AccountSchema.methods.generateAuthenticationToken = async function () {
   const token = jwt.sign({ _id: this._id.toString() }, process.env.JWT_SECRET!);
 
   this.tokens = this.tokens.concat(token);
@@ -152,7 +98,7 @@ accountSchema.methods.generateAuthenticationToken = async function () {
   return token;
 };
 
-accountSchema.static(
+AccountSchema.static(
   'findByCredentials',
   async function findByCredentials(email: string, enteredPassword: string) {
     const user = await AccountModel.findOne({ email });
@@ -178,13 +124,13 @@ accountSchema.static(
 );
 
 // allows searching for other users by name for bud request purposes
-accountSchema.index({ name: 'text' });
+AccountSchema.index({ name: 'text' });
 
 // allows searching for nearby users
-accountSchema.index({ location: '2dsphere' });
+AccountSchema.index({ location: '2dsphere' });
 
 // hash the plain text password before saving
-accountSchema.pre('save', async function (next) {
+AccountSchema.pre('save', async function (next) {
   if (this.isModified('password')) {
     this.password = await bcrypt.hash(this.password, 10);
   }
@@ -193,7 +139,7 @@ accountSchema.pre('save', async function (next) {
 
 const AccountModel = model<Account, AccountModelInterface>(
   'Account',
-  accountSchema
+  AccountSchema
 );
 
 export default AccountModel;

@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 import deleteDocumentIDs from '../../../../utils/delete-document-ids.js';
 import CLMRequest from '../../../../types/interfaces/CLMRequest.js';
-import DeckModel from '../../../../models/deck-model.js';
+import DeckModel from '../../../../mongodb/models/deck.js';
 import HTTPError from '../../../../types/classes/HTTPError.js';
 
 export default async function (parent: any, args: null, context: CLMRequest) {
