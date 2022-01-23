@@ -2,7 +2,7 @@ type BlogPostType implements Document {
   _id: ID
   author: AccountType
   body: String
-  comments: [CommentType]
+  comments: [MessageType]
   createdAt: String
   image: String
   subtitle: String

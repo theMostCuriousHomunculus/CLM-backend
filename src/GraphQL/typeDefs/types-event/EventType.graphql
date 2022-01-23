@@ -1,5 +1,6 @@
 type EventType implements Document {
   _id: ID
+  chat_log: [MessageType]
   createdAt: String
   cube: CubeType
   finished: Boolean

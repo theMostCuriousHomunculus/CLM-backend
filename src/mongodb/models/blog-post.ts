@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 import BlogPost from '../../types/interfaces/BlogPost';
-import CommentSchema from '../schemas/comment.js';
+import MessageSchema from '../schemas/message.js';
 
 const { model, Schema } = mongoose;
 
@@ -15,7 +15,7 @@ const BlogPostSchema = new Schema<BlogPost>({
     required: true,
     type: String
   },
-  comments: [CommentSchema],
+  comments: [MessageSchema],
   createdAt: Date,
   image: {
     required: true,

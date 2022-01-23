@@ -1,4 +1,4 @@
-type CommentType {
+type MessageType {
   _id: ID
   author: AccountType
   body: String

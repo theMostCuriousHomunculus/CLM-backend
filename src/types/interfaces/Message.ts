@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-export default interface Comment extends mongoose.Types.Subdocument {
+export default interface Message extends mongoose.Types.Subdocument {
   _id: mongoose.Types.ObjectId;
   author: mongoose.Types.ObjectId;
   body: string;

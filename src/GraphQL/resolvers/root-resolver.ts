@@ -57,6 +57,7 @@ import toggleMainboardSideboardDeck from './deck/mutation/toggle-mainboard-sideb
 
 // event
 import addBasics from './event/mutation/add-basics.js';
+import createChatMessageEvent from './event/mutation/create-chat-message-event.js';
 import createEvent from './event/mutation/create-event.js';
 import fetchEventByID from './event/query/fetch-event-by-id.js';
 import removeBasics from './event/mutation/remove-basics.js';
@@ -146,7 +147,7 @@ export default {
   BlogPostType: {
     author
   },
-  CommentType: {
+  MessageType: {
     author
   },
   CubeType: {
@@ -223,6 +224,7 @@ export default {
     toggleMainboardSideboardDeck,
     // event
     addBasics,
+    createChatMessageEvent,
     createEvent,
     removeBasics,
     selectCard,

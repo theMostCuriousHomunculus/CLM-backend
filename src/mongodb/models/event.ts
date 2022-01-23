@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-import CommentSchema from '../schemas/comment.js';
+import MessageSchema from '../schemas/message.js';
 import Event from '../../types/interfaces/Event';
 import EventPlayerSchema from '../schemas/event-player.js';
 
@@ -8,7 +8,7 @@ const { model, Schema } = mongoose;
 
 const EventSchema = new Schema<Event>(
   {
-    chat_log: [CommentSchema],
+    chat_log: [MessageSchema],
     cube: {
       ref: 'CubeModel',
       required: true,

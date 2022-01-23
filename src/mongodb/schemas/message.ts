@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 
-import Comment from '../../types/interfaces/Comment';
+import Message from '../../types/interfaces/Message';
 
-const CommentSchema = new mongoose.Schema<Comment>(
+const MessageSchema = new mongoose.Schema<Message>(
   {
     author: {
       type: 'ObjectId',
@@ -19,4 +19,4 @@ const CommentSchema = new mongoose.Schema<Comment>(
   }
 );
 
-export default CommentSchema;
+export default MessageSchema;
