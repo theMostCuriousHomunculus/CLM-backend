@@ -23,7 +23,10 @@ export default async function (
   ).sort({ score: { $meta: 'textScore' } });
 
   const blogPosts = await BlogPostModel.find(
-    { $text: { $search: search } },
+    {
+      $text: { $search: search },
+      $or: [{ published: true }, { author: bearer?._id }]
+    },
     { score: { $meta: 'textScore' } }
   ).sort({ score: { $meta: 'textScore' } });
 

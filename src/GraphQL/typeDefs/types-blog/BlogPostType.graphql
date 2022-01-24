@@ -5,6 +5,7 @@ type BlogPostType implements Document {
   comments: [MessageType]
   createdAt: String
   image: String
+  published: Boolean
   subtitle: String
   title: String
   updatedAt: String

@@ -38,10 +38,11 @@ type Mutation {
   deleteBlogPost(_id: ID!): Boolean
   deleteComment(blogPostID: String!, commentID: String!): Boolean
   editBlogPost(
-    body: String!
-    image: String!
+    body: String
+    image: String
+    published: Boolean
     subtitle: String
-    title: String!
+    title: String
   ): BlogPostType
   addCardToCube(
     componentID: String!
@@ -103,7 +104,7 @@ type Mutation {
     numberOfCopies: Int!
     scryfall_id: String!
   ): EventType
-  createChatMessageEvent(body: String!): EventType
+  createEventChatMessage(body: String!): EventType
   createEvent(
     cards_per_pack: Int!
     event_type: EventEnum!

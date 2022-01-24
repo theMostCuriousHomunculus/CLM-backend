@@ -21,6 +21,10 @@ const BlogPostSchema = new Schema<BlogPost>({
     required: true,
     type: String
   },
+  published: {
+    default: false,
+    type: Boolean
+  },
   subtitle: {
     maxlength: 100,
     trim: true,

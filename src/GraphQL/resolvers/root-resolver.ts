@@ -57,7 +57,7 @@ import toggleMainboardSideboardDeck from './deck/mutation/toggle-mainboard-sideb
 
 // event
 import addBasics from './event/mutation/add-basics.js';
-import createChatMessageEvent from './event/mutation/create-chat-message-event.js';
+import createEventChatMessage from './event/mutation/create-event-chat-message.js';
 import createEvent from './event/mutation/create-event.js';
 import fetchEventByID from './event/query/fetch-event-by-id.js';
 import removeBasics from './event/mutation/remove-basics.js';
@@ -224,7 +224,7 @@ export default {
     toggleMainboardSideboardDeck,
     // event
     addBasics,
-    createChatMessageEvent,
+    createEventChatMessage,
     createEvent,
     removeBasics,
     selectCard,

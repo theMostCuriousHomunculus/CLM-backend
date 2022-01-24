@@ -1,5 +1,5 @@
 import HTTPError from '../../../../types/classes/HTTPError.js';
-import SubscriptionContext from '../../../../types/interfaces/SubscriptionContext.js';
+import SubscriptionContext from '../../../../types/interfaces/SubscriptionContext';
 import pubsub from '../../../pubsub.js';
 
 export default {
@@ -8,11 +8,7 @@ export default {
     args: null,
     context: SubscriptionContext
   ) {
-    const { bearer, connectionParams } = context;
-
-    if (!bearer) {
-      throw new HTTPError('Login to use this feature!', 401);
-    }
+    const { connectionParams } = context;
 
     if (!('eventID' in connectionParams!)) {
       throw new HTTPError('You did not provide an eventID.', 400);

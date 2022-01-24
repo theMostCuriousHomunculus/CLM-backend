@@ -8,7 +8,7 @@ export default {
     args: null,
     context: SubscriptionContext
   ) {
-    const { bearer, connectionParams } = context;
+    const { connectionParams } = context;
 
     if (!('deckID' in connectionParams!)) {
       throw new HTTPError('You did not provide a deckID.', 400);

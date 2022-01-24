@@ -2,13 +2,13 @@ import CLMRequest from '../../../../types/interfaces/CLMRequest.js';
 import HTTPError from '../../../../types/classes/HTTPError.js';
 import pubsub from '../../../pubsub.js';
 
-interface CreateChatMessageEventArgs {
+interface CreateEventChatMessageArgs {
   body: string;
 }
 
 export default async function (
   parent: any,
-  args: CreateChatMessageEventArgs,
+  args: CreateEventChatMessageArgs,
   context: CLMRequest
 ) {
   const { bearer, event } = context;

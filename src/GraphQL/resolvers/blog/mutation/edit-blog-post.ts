@@ -6,10 +6,11 @@ import HTTPError from '../../../../types/classes/HTTPError.js';
 import pubsub from '../../../pubsub.js';
 
 interface EditBlogPostArgs {
-  body: string;
-  image: string;
-  subtitle: string;
-  title: string;
+  body?: string;
+  image?: string;
+  published?: boolean;
+  subtitle?: string;
+  title?: string;
 }
 
 export default async function (
@@ -31,8 +32,8 @@ export default async function (
   }
 
   try {
-    for (const field of ['body', 'image', 'subtitle', 'title']) {
-      if (args[field as keyof EditBlogPostArgs]) {
+    for (const field of ['body', 'image', 'published', 'subtitle', 'title']) {
+      if (field in args) {
         (blogPost[field as keyof BlogPost] as any) =
           args[field as keyof EditBlogPostArgs];
       }
@@ -50,14 +51,8 @@ export default async function (
         'The provided title is already in use.  Titles must be unique.',
         409
       );
-    } else if (error instanceof MongoError) {
-      throw new HTTPError(error.message, 500);
-    } else if (error instanceof HTTPError) {
-      throw error;
-    } else if (error instanceof Error) {
-      throw new HTTPError(error.message, 500);
     } else {
-      throw new HTTPError('An unknown error occurred.', 500);
+      throw new HTTPError((error as Error).message, 500);
     }
   }
 }

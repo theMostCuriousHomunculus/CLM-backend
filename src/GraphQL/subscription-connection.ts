@@ -8,6 +8,7 @@ import EventModel from '../mongodb/models/event.js';
 import HTTPError from '../types/classes/HTTPError.js';
 // import MatchModel from '../models/match-model.js';
 import SubscriptionContext from '../types/interfaces/SubscriptionContext';
+import cube from './resolvers/match/cube.js';
 
 export default async function (context: SubscriptionContext) {
   if (context.connectionParams?.authToken) {
@@ -25,9 +26,13 @@ export default async function (context: SubscriptionContext) {
       context.connectionParams.blogPostID
     );
 
-    if (!blogPost) {
+    if (
+      !blogPost ||
+      (!blogPost.published &&
+        blogPost.author.toString() !== context.bearer?._id.toString())
+    ) {
       throw new HTTPError(
-        'A blog post with the provided blogPostID does not exist.',
+        'A blog post with the provided blogPostID does not exist or it has not been published by its author yet.',
         404
       );
     }

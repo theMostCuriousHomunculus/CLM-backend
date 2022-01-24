@@ -9,6 +9,7 @@ export default interface BlogPost extends mongoose.Document {
   comments: mongoose.Types.DocumentArray<Message>;
   createdAt: Date;
   image: string;
+  published: boolean;
   subtitle: string;
   title: string;
   updatedAt: Date;
