@@ -6,7 +6,7 @@ type AccountType implements Document {
   cubes: [CubeType]
   decks: [DeckType]
   email: String
-  events: [EventType]
+  events(limit: Int, skip: Int): [EventType]
   location: Location
   matches: [MatchType]
   name: String
@@ -15,4 +15,5 @@ type AccountType implements Document {
   sent_bud_requests: [AccountType]
   settings: Settings
   token: String
+  total_events: Int
 }

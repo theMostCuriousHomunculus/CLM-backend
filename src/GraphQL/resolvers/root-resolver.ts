@@ -127,6 +127,7 @@ import received_bud_requests from './account/field/received-bud-requests.js';
 import remote_account from './web-rtc/field/remote-account.js';
 import sent_bud_requests from './account/field/sent-bud-requests.js';
 import token from './account/field/token.js';
+import total_events from './account/field/total-events.js';
 import unknownArray from './event/field/unknown-array.js';
 import unknownCard from './match/unknown-card.js';
 
@@ -142,7 +143,8 @@ export default {
     nearby_users,
     received_bud_requests,
     sent_bud_requests,
-    token
+    token,
+    total_events
   },
   BlogPostType: {
     author
