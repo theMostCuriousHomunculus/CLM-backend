@@ -9,7 +9,8 @@ import HTTPError from '../../../../types/classes/HTTPError.js';
 interface CreateBlogPostArgs {
   body: string;
   image: string;
-  subtitle: string;
+  published: boolean;
+  subtitle?: string;
   title: string;
 }
 
@@ -18,7 +19,7 @@ export default async function (
   args: CreateBlogPostArgs,
   context: CLMRequest
 ) {
-  const { body, image, subtitle, title } = args;
+  const { body, image, published, subtitle, title } = args;
   const { bearer } = context;
 
   if (!bearer || !bearer.admin) {
@@ -36,6 +37,7 @@ export default async function (
       comments: [],
       createdAt: date,
       image,
+      published,
       subtitle,
       title,
       updatedAt: date

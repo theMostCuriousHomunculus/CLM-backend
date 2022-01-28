@@ -31,6 +31,7 @@ type Mutation {
   createBlogPost(
     body: String!
     image: String!
+    published: Boolean!
     subtitle: String
     title: String!
   ): BlogPostType
@@ -86,13 +87,13 @@ type Mutation {
     description: String
     existingListID: String
     format: FormatEnum
-    name: String
+    name: String!
   ): DeckType
   deleteDeck: Boolean
   editDeck(
     description: String
-    image: String
     format: FormatEnum
+    image: String
     name: String
     published: Boolean
   ): DeckType

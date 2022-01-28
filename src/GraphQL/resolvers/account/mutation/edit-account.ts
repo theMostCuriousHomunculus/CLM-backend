@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import webpush from 'web-push';
 import { MongoError } from 'mongodb';
 
 import Account from '../../../../types/interfaces/Account.js';
@@ -158,6 +159,18 @@ export default async function (
             bearer.sent_bud_requests.push(otherUser._id);
             otherUser.nearby_users.pull(bearer._id);
             otherUser.received_bud_requests.push(bearer._id);
+            for (const pushSubscription of otherUser.push_subscriptions) {
+              webpush.sendNotification(
+                pushSubscription,
+                JSON.stringify({
+                  body: `After looking you over, ${bearer.name} liked what they saw and has extended to you an official Cube Level Midnight bud request!`,
+                  title: 'New Bud Request!',
+                  url: `${
+                    process.env.FRONT_END_URL
+                  }/account/${bearer._id.toString()}`
+                })
+              );
+            }
             break;
           } else {
             throw new HTTPError(
