@@ -38,7 +38,7 @@ export default async function (
 
   const validRotationProperties = ['name', 'size'];
 
-  for (let prop of validRotationProperties) {
+  for (const prop of validRotationProperties) {
     if (typeof args[prop as keyof EditRotationArgs] !== 'undefined') {
       (rotation[prop as keyof Rotation] as any) =
         args[prop as keyof EditRotationArgs];

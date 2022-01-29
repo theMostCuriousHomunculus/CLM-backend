@@ -3,13 +3,11 @@ interface ArrayObject {
 }
 
 export default function (array: ArrayObject, sampleSize: number) {
-  let sampleArray = [];
-  let randomNumber;
-  let randomCard;
+  const sampleArray = [];
 
   for (let index = 0; index < sampleSize; index++) {
-    randomNumber = Math.floor(Math.random() * array.length);
-    randomCard = array[randomNumber];
+    const randomNumber = Math.floor(Math.random() * array.length);
+    const randomCard = array[randomNumber];
     sampleArray.push(randomCard);
     array.splice(randomNumber, 1);
   }

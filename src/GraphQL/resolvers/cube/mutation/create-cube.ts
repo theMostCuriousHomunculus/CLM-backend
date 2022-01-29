@@ -65,7 +65,7 @@ export default async function (
         scryfallRequestArrays.push(cardArray.splice(0, 75));
       }
 
-      for (let request of scryfallRequestArrays) {
+      for (const request of scryfallRequestArrays) {
         const scryfallResponse = await axios.post(
           'https://api.scryfall.com/cards/collection',
           {
@@ -73,7 +73,7 @@ export default async function (
           }
         );
 
-        for (let card of scryfallResponse.data.data) {
+        for (const card of scryfallResponse.data.data) {
           cardArray.push({ name: card.name, scryfall_id: card.id });
         }
       }

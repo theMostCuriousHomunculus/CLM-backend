@@ -57,7 +57,7 @@ export default async function (
 
   shuffle(eventCardPool);
 
-  let players = [
+  const players = [
     {
       account: bearer._id,
       mainboard: [] as CubeCard[],

@@ -51,7 +51,7 @@ export default async function (
     'type_line'
   ];
 
-  for (let prop of validCardProperties) {
+  for (const prop of validCardProperties) {
     (card[prop as keyof CubeCard] as any) = args[prop as keyof EditCardArgs];
   }
 

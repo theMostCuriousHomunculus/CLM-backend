@@ -82,7 +82,7 @@ export default async function (
   );
 
   if (nextPack) {
-    for (let plr of event.players) {
+    for (const plr of event.players) {
       plr.queue.push(plr.packs[0]);
       plr.packs.shift();
       const plrAccount = await AccountModel.findById(plr.account);

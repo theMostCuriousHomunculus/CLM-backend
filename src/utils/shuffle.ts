@@ -1,7 +1,7 @@
 export default function (array: any[]) {
   for (let i = array.length - 1; i > 0; i--) {
-    let j = Math.floor(Math.random() * (i + 1));
-    let dummy = array[i];
+    const j = Math.floor(Math.random() * (i + 1));
+    const dummy = array[i];
     array[i] = array[j];
     array[j] = dummy;
   }

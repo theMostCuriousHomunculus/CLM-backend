@@ -35,7 +35,7 @@ export default async function (
     const { action, other_user_id, return_other, settings } = args;
     const mutableFields = ['avatar', 'email', 'name', 'password'];
 
-    for (let field of mutableFields) {
+    for (const field of mutableFields) {
       if (
         args[field as keyof EditAccountArgs] &&
         args[field as keyof EditAccountArgs] !== 'null' &&

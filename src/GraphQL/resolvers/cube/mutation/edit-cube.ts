@@ -29,7 +29,7 @@ export default async function (
 
   const validCubeProperties = ['description', 'image', 'name', 'published'];
 
-  for (let prop of validCubeProperties) {
+  for (const prop of validCubeProperties) {
     if (typeof args[prop as keyof EditCubeArgs] !== 'undefined') {
       (cube[prop as keyof Cube] as any) = args[prop as keyof EditCubeArgs];
     }
