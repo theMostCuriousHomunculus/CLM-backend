@@ -22,7 +22,7 @@ export default async function (parent: any, args: null, context: CLMRequest) {
 
     await cube.delete();
 
-    return true;
+    return cube;
   } catch (error) {
     if (error instanceof MongoError) {
       throw new HTTPError(error.message, 500);

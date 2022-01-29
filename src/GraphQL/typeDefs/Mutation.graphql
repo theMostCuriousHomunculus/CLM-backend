@@ -55,7 +55,7 @@ type Mutation {
   createModule(name: String!): CubeType
   createRotation(name: String!): CubeType
   deleteCard(cardID: ID!, originID: ID!, destinationID: ID): Boolean
-  deleteCube: Boolean
+  deleteCube: CubeType
   deleteModule(_id: ID!): Boolean
   deleteRotation(_id: ID!): Boolean
   editCard(
@@ -89,7 +89,7 @@ type Mutation {
     format: FormatEnum
     name: String!
   ): DeckType
-  deleteDeck: Boolean
+  deleteDeck: DeckType
   editDeck(
     description: String
     format: FormatEnum

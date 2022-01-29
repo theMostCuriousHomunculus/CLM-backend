@@ -17,5 +17,5 @@ export default async function (parent: any, args: null, context: CLMRequest) {
 
   await deck.delete();
 
-  return true;
+  return deck;
 }
