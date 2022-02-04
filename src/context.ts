@@ -26,6 +26,10 @@ export default <RequestHandler>(
         req.token = token;
       }
 
+      if (req.header('AccountID')) {
+        req.account = await AccountModel.findById(req.header('AccountID'));
+      }
+
       if (req.header('BlogPostID')) {
         req.blogPost = await BlogPostModel.findById(req.header('BlogPostID'));
       }

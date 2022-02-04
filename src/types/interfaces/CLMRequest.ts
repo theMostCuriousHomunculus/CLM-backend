@@ -10,6 +10,7 @@ import Match from './Match';
 import MatchPlayer from './MatchPlayer';
 
 export default interface CLMRequest extends Request {
+  account?: Account | null;
   bearer?: Account | null;
   blogPost?: BlogPost | null;
   cube?: Cube | null;
