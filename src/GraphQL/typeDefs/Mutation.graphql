@@ -45,11 +45,7 @@ type Mutation {
     subtitle: String
     title: String
   ): BlogPostType
-  addCardToCube(
-    componentID: String!
-    name: String!
-    scryfall_id: String!
-  ): CubeType
+  addCardToCube(componentID: String!, scryfall_id: String!): CubeType
   cloneCube: CubeType!
   createCube(cobraID: String, description: String, name: String!): CubeType!
   createModule(name: String!): CubeType

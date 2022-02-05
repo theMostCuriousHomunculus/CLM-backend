@@ -7,7 +7,6 @@ import returnComponent from '../../../../utils/return-component.js';
 
 interface AddCardToCubeArgs {
   componentID: string;
-  name: string;
   scryfall_id: string;
 }
 
@@ -26,13 +25,10 @@ export default async function (
     throw new HTTPError('You are not authorized to edit this cube.', 401);
   }
 
-  const { componentID, name, scryfall_id } = args;
+  const { componentID, scryfall_id } = args;
   const component = await returnComponent(cube, componentID);
 
-  component.push({
-    name,
-    scryfall_id
-  });
+  component.push({ scryfall_id });
 
   try {
     await cube.save();

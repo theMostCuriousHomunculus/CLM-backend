@@ -8,10 +8,7 @@ const CubeCardSchema = new mongoose.Schema<CubeCard>({
     default: undefined,
     type: [String]
   },
-  name: {
-    required: true,
-    type: String
-  },
+  name: String,
   notes: {
     default: '',
     maxlength: 1000,
