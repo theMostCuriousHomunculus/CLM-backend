@@ -57,11 +57,11 @@ type Mutation {
   editCard(
     cardID: ID!
     componentID: ID!
-    cmc: Int!
+    cmc: Int
     color_identity: [String!]
-    notes: String!
-    scryfall_id: String!
-    type_line: String!
+    notes: String
+    scryfall_id: String
+    type_line: String
   ): CubeType
   editCube(
     description: String
