@@ -5,6 +5,7 @@ import { createServer } from 'http';
 
 import context from './context.js';
 import graphqlHandler from './GraphQL/GRAPHQL-handler.js';
+import pullScryfallData from './utils/pull-scryfall-data.js';
 
 mongoose.connect(process.env.DB_CONNECTION!, {}, (error) => {
   if (error) {
@@ -51,6 +52,9 @@ app.use(
 app.use(context);
 
 app.use('/graphql', graphqlHandler);
+
+pullScryfallData();
+setInterval(pullScryfallData, 43200000);
 
 app.use(function (req, res) {
   res.status(404).send();

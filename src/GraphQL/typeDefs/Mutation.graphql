@@ -75,7 +75,7 @@ type Mutation {
     component: DeckComponentEnum!
     name: String
     numberOfCopies: Int!
-    scryfall_id: String
+    scryfall_id: String!
   ): DeckType
   changeCardPrinting(input: String!): DeckType
   cloneDeck: DeckType!

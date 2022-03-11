@@ -11,6 +11,7 @@ export default interface Account extends mongoose.Document {
   buds: mongoose.Types.Array<mongoose.Types.ObjectId>;
   email: string;
   location?: Location;
+  mtgo_account?: string;
   name: string;
   nearby_users: mongoose.Types.Array<mongoose.Types.ObjectId>;
   password: string;

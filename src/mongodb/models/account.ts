@@ -34,6 +34,7 @@ const AccountSchema = new Schema<Account>({
     unique: true
   },
   location: LocationSchema,
+  mtgo_account: String,
   name: {
     index: {
       unique: true,
