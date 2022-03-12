@@ -1,22 +1,24 @@
 import mongoose from 'mongoose';
 
+import ScryfallCardBorderColor from '../enums/ScryfallCardBorderColor';
 import ScryfallCardColor from '../enums/ScryfallCardColor';
 import ScryfallCardFace from './ScryfallCardFace';
-import ScryfallCardLayout from '../enums/ScryfallCardLayout';
-import ScryfallCardLegality from '../enums/ScryfallCardLegality';
-import ScryfallCardBorderColor from '../enums/ScryfallCardBorderColor';
 import ScryfallCardFinish from '../enums/ScryfallCardFinish';
 import ScryfallCardFrame from '../enums/ScryfallCardFrame';
 import ScryfallCardFrameEffect from '../enums/ScryfallCardFrameEffect';
 import ScryfallCardGame from '../enums/ScryfallCardGame';
 import ScryfallCardImageStatus from '../enums/ScryfallCardImageStatus';
 import ScryfallCardImageURIs from './ScryfallCardImageURIs';
+import ScryfallCardLanguage from '../enums/ScryfallCardLanguage';
+import ScryfallCardLayout from '../enums/ScryfallCardLayout';
+import ScryfallCardLegality from '../enums/ScryfallCardLegality';
+import ScryfallCardPreview from './ScryfallCardPreview';
+import ScryfallCardPrices from './ScryfallCardPrices';
 import ScryfallCardPurchaseURIs from './ScryfallCardPurchaseURIs';
 import ScryfallCardRarity from '../enums/ScryfallCardRarity';
+import ScryfallCardRelatedCardObject from './ScryfallCardRelatedCardObject';
 import ScryfallCardRelatedURIs from './ScryfallCardRelatedURIs';
 import ScryfallCardSecurityStamp from '../enums/ScryfallCardSecurityStamp';
-import ScryfallCardPreview from './ScryfallCardPreview';
-import ScryfallCardRelatedCardObject from './ScryfallCardRelatedCardObject';
 
 export default interface ScryfallCard extends mongoose.Document {
   /*
@@ -26,7 +28,7 @@ export default interface ScryfallCard extends mongoose.Document {
   // This card’s Arena ID, if any. A large percentage of cards are not available on Arena and do not have this ID.
   arena_id?: number;
   // A language code for this printing.
-  lang: string;
+  lang: ScryfallCardLanguage;
   // This card’s Magic Online ID (also known as the Catalog ID), if any. A large percentage of cards are not available on Magic Online and do not have this ID.
   mtgo_id?: number;
   // This card’s foil Magic Online ID (also known as the Catalog ID), if any. A large percentage of cards are not available on Magic Online and do not have this ID.

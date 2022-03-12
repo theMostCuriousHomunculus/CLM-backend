@@ -46,7 +46,7 @@ export default async function (
       }
     }
 
-    if (settings) {
+    if (settings && bearer.location) {
       bearer.settings.measurement_system = settings.measurement_system;
       bearer.settings.radius = settings.radius;
 
@@ -61,7 +61,7 @@ export default async function (
                 : 1000),
             near: {
               type: 'Point',
-              coordinates: bearer.location?.coordinates
+              coordinates: bearer.location.coordinates
             },
             query: {
               _id: {
