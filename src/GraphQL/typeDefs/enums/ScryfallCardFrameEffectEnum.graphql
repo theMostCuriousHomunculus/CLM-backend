@@ -1,0 +1,22 @@
+enum ScryfallCardFrameEffectEnum {
+  legendary
+  miracle
+  nyxtouched
+  draft
+  devoid
+  fullart
+  tombstone
+  colorshifted
+  inverted
+  sunmoondfc
+  compasslanddfc
+  originpwdfc
+  mooneldrazidfc
+  waxingandwaningmoondfc
+  showcase
+  extendedart
+  companion
+  etched
+  snow
+  lesson
+}

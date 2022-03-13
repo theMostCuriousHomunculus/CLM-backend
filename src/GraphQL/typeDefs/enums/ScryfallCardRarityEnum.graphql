@@ -1,0 +1,8 @@
+enum ScryfallCardRarityEnum {
+  bonus
+  common
+  mythic
+  rare
+  special
+  uncommon
+}

@@ -108,7 +108,7 @@ export default interface ScryfallCard extends mongoose.Document {
   // This card’s border color: black, white, borderless, silver, or gold.
   border_color: ScryfallCardBorderColor;
   // The Scryfall ID for the card back design present on this card.
-  card_back_id: string;
+  card_back_id?: string;
   // This card’s collector number. Note that collector numbers can contain non-numeric characters, such as letters or ★.
   collector_number: string;
   // True if this card was only released in a video game.
@@ -132,7 +132,7 @@ export default interface ScryfallCard extends mongoose.Document {
   // A unique identifier for the card artwork that remains consistent across reprints. Newly spoiled cards may not have this field yet.
   illustration_id?: string;
   // A computer-readable indicator for the state of this card’s image, one of missing, placeholder, lowres, or highres_scan.
-  image_status?: ScryfallCardImageStatus;
+  image_status: ScryfallCardImageStatus;
   // An object listing available imagery for this card. See the Card Imagery article for more information.
   image_uris?: ScryfallCardImageURIs;
   // An object containing daily price information for this card, including usd, usd_foil, usd_etched, eur, and tix prices, as strings.
@@ -148,7 +148,7 @@ export default interface ScryfallCard extends mongoose.Document {
   // An array of strings describing what categories of promo cards this card falls into.
   promo_types?: string[];
   // An object providing URIs to this card’s listing on major marketplaces.
-  purchase_uris: ScryfallCardPurchaseURIs;
+  purchase_uris?: ScryfallCardPurchaseURIs;
   // This card’s rarity. One of common, uncommon, rare, special, mythic, or bonus.
   rarity: ScryfallCardRarity;
   // An object providing URIs to this card’s listing on other Magic: The Gathering online resources.
@@ -182,7 +182,7 @@ export default interface ScryfallCard extends mongoose.Document {
   // The security stamp on this card, if any. One of oval, triangle, acorn, or arena.
   security_stamp?: ScryfallCardSecurityStamp;
   // This card’s watermark, if any.
-  watermark: string;
+  watermark?: string;
   // Information about who previewed the card and when.
   preview?: ScryfallCardPreview;
 }

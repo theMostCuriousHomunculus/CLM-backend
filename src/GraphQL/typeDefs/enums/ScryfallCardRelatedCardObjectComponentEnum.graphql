@@ -1,0 +1,6 @@
+enum ScryfallCardRelatedCardObjectComponentEnum {
+  combo_piece
+  meld_part
+  meld_result
+  token
+}

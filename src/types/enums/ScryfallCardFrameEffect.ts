@@ -4,6 +4,7 @@ enum ScryfallCardFrameEffect {
   NYXTOUCHED = 'nyxtouched',
   DRAFT = 'draft',
   DEVOID = 'devoid',
+  FULLART = 'fullart',
   TOMBSTONE = 'tombstone',
   COLORSHIFTED = 'colorshifted',
   INVERTED = 'inverted',

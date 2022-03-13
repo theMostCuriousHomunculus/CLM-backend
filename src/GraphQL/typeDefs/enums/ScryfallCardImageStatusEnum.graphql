@@ -1,0 +1,6 @@
+enum ScryfallCardImageStatusEnum {
+  highres_scan
+  lowres
+  missing
+  placeholder
+}

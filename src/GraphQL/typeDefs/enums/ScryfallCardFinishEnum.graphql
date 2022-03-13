@@ -1,0 +1,6 @@
+enum ScryfallCardFinishEnum {
+  etched
+  foil
+  glossy
+  nonfoil
+}

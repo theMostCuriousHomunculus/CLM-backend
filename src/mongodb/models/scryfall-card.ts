@@ -1,22 +1,32 @@
 import mongoose from 'mongoose';
 
 import ScryfallCard from '../../types/interfaces/ScryfallCard';
-import ScryfallCardImageURIsSchema from '../schemas/scryfall-card-image-uris';
-import ScryfallCardPricesSchema from '../schemas/scryfall-card-prices';
-import ScryfallCardPurchaseURIsSchema from '../schemas/scryfall-card-purchase-uris';
-import ScryfallCardRarity from '../../types/enums/ScryfallCardRarity';
-import ScryfallCardRelatedURIsSchema from '../schemas/scryfall-card-related-uris';
-import ScryfallCardSecurityStamp from '../../types/enums/ScryfallCardSecurityStamp';
-import ScryfallCardPreviewSchema from '../schemas/scryfall-card-preview';
+import ScryfallCardColor from '../enums/scryfall-card-color.js';
+import ScryfallCardFaceSchema from '../schemas/scryfall-card-face.js';
+import ScryfallCardImageURIsSchema from '../schemas/scryfall-card-image-uris.js';
+import ScryfallCardLayout from '../enums/scryfall-card-layout.js';
+import ScryfallCardPreviewSchema from '../schemas/scryfall-card-preview.js';
+import ScryfallCardPricesSchema from '../schemas/scryfall-card-prices.js';
+import ScryfallCardPurchaseURIsSchema from '../schemas/scryfall-card-purchase-uris.js';
+import ScryfallCardRelatedURIsSchema from '../schemas/scryfall-card-related-uris.js';
+import ScryfallCardRelatedCardObjectSchema from '../schemas/scryfall-card-related-card-object.js';
+import ScryfallCardLegalitiesSchema from '../schemas/scryfall-card-legalities.js';
 
 const { model, Schema } = mongoose;
 
-const ScryfallCardColor = ['B', 'U', 'C', 'G', 'R', 'W'];
-
 const ScryfallCardSchema = new Schema<ScryfallCard>({
-  // all_parts: [ScryfallCardRelatedCardObject],
+  _id: String,
+  all_parts: {
+    default: undefined,
+    required: false,
+    type: [ScryfallCardRelatedCardObjectSchema]
+  },
   arena_id: Number,
-  // card_faces: [ScryfallCardFaceSchema],
+  card_faces: {
+    default: undefined,
+    required: false,
+    type: [ScryfallCardFaceSchema]
+  },
   cardmarket_id: Number,
   cmc: {
     required: true,
@@ -28,11 +38,15 @@ const ScryfallCardSchema = new Schema<ScryfallCard>({
     type: [String]
   },
   color_indicator: {
+    default: undefined,
     enum: ScryfallCardColor,
+    required: false,
     type: [String]
   },
   colors: {
+    default: undefined,
     enum: ScryfallCardColor,
+    required: false,
     type: [String]
   },
   edhrec_rank: Number,
@@ -43,43 +57,24 @@ const ScryfallCardSchema = new Schema<ScryfallCard>({
   },
   lang: String,
   layout: {
-    enum: [
-      'normal',
-      'split',
-      'flip',
-      'transform',
-      'modal_dfc',
-      'meld',
-      'leveler',
-      'class',
-      'saga',
-      'adventure',
-      'planar',
-      'scheme',
-      'vanguard',
-      'token',
-      'double_faced_token',
-      'emblem',
-      'augment',
-      'host',
-      'art_series',
-      'reversible_card'
-    ],
+    enum: ScryfallCardLayout,
     required: true,
     type: String
   },
-  // TODO: fix this
   legalities: {
-    enum: ['banned', 'legal', 'not_legal', 'restricted'],
     required: true,
-    type: String
+    type: ScryfallCardLegalitiesSchema
   },
   life_modifier: String,
   loyalty: String,
   mana_cost: String,
   mtgo_foil_id: Number,
   mtgo_id: Number,
-  multiverse_ids: [Number],
+  multiverse_ids: {
+    default: undefined,
+    required: false,
+    type: [Number]
+  },
   name: {
     required: true,
     type: String
@@ -99,7 +94,9 @@ const ScryfallCardSchema = new Schema<ScryfallCard>({
     type: String
   },
   produced_mana: {
+    default: undefined,
     enum: ScryfallCardColor,
+    required: false,
     type: [String]
   },
   reserved: {
@@ -135,10 +132,7 @@ const ScryfallCardSchema = new Schema<ScryfallCard>({
     required: true,
     type: String
   },
-  card_back_id: {
-    required: true,
-    type: String
-  },
+  card_back_id: String,
   collector_number: {
     required: true,
     type: String
@@ -160,12 +154,14 @@ const ScryfallCardSchema = new Schema<ScryfallCard>({
     type: String
   },
   frame_effects: {
+    default: undefined,
     enum: [
       'legendary',
       'miracle',
       'nyxtouched',
       'draft',
       'devoid',
+      'fullart',
       'tombstone',
       'colorshifted',
       'inverted',
@@ -181,6 +177,7 @@ const ScryfallCardSchema = new Schema<ScryfallCard>({
       'snow',
       'lesson'
     ],
+    required: false,
     type: [String]
   },
   full_art: {
@@ -188,7 +185,7 @@ const ScryfallCardSchema = new Schema<ScryfallCard>({
     type: Boolean
   },
   games: {
-    enum: ['arena', 'mtgo', 'paper'],
+    enum: ['arena', 'astral', 'mtgo', 'paper', 'sega'],
     required: true,
     type: [String]
   },
@@ -199,6 +196,7 @@ const ScryfallCardSchema = new Schema<ScryfallCard>({
   illustration_id: String,
   image_status: {
     enum: ['highres_scan', 'lowres', 'missing', 'placeholder'],
+    required: true,
     type: String
   },
   image_uris: ScryfallCardImageURIsSchema,
@@ -213,13 +211,14 @@ const ScryfallCardSchema = new Schema<ScryfallCard>({
     required: true,
     type: Boolean
   },
-  promo_types: [String],
-  purchase_uris: {
-    required: true,
-    type: ScryfallCardPurchaseURIsSchema
+  promo_types: {
+    default: undefined,
+    required: false,
+    type: [String]
   },
+  purchase_uris: ScryfallCardPurchaseURIsSchema,
   rarity: {
-    enum: ScryfallCardRarity,
+    enum: ['bonus', 'common', 'mythic', 'rare', 'special', 'uncommon'],
     required: true,
     type: String
   },
@@ -273,22 +272,15 @@ const ScryfallCardSchema = new Schema<ScryfallCard>({
     type: Boolean
   },
   variation_of: String,
-  security_stamp: ScryfallCardSecurityStamp,
-  watermark: {
-    required: true,
+  security_stamp: {
+    default: undefined,
+    enum: ['acorn', 'arena', 'oval', 'triangle'],
+    required: false,
     type: String
   },
+  watermark: String,
   preview: ScryfallCardPreviewSchema
-  // name: {
-  //   index: {
-  //     unique: true,
-  //     collation: { locale: 'en', strength: 2 }
-  //   },
-  //   type: String
-  // }
 });
-
-// ScryfallCardSchema.index({ name: 'text' });
 
 const ScryfallCardModel = model<ScryfallCard>(
   'ScryfallCard',
