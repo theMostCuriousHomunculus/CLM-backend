@@ -7,8 +7,8 @@ import ScryfallCardImageURIsSchema from '../schemas/scryfall-card-image-uris.js'
 import ScryfallCardLayout from '../enums/scryfall-card-layout.js';
 import ScryfallCardPreviewSchema from '../schemas/scryfall-card-preview.js';
 import ScryfallCardPricesSchema from '../schemas/scryfall-card-prices.js';
-import ScryfallCardPurchaseURIsSchema from '../schemas/scryfall-card-purchase-uris.js';
-import ScryfallCardRelatedURIsSchema from '../schemas/scryfall-card-related-uris.js';
+import ScryfallCardPurchaseURISchema from '../schemas/scryfall-card-purchase-uri.js';
+import ScryfallCardRelatedURISchema from '../schemas/scryfall-card-related-uri.js';
 import ScryfallCardRelatedCardObjectSchema from '../schemas/scryfall-card-related-card-object.js';
 import ScryfallCardLegalitiesSchema from '../schemas/scryfall-card-legalities.js';
 
@@ -216,7 +216,7 @@ const ScryfallCardSchema = new Schema<ScryfallCard>({
     required: false,
     type: [String]
   },
-  purchase_uris: ScryfallCardPurchaseURIsSchema,
+  purchase_uris: [ScryfallCardPurchaseURISchema],
   rarity: {
     enum: ['bonus', 'common', 'mythic', 'rare', 'special', 'uncommon'],
     required: true,
@@ -224,7 +224,7 @@ const ScryfallCardSchema = new Schema<ScryfallCard>({
   },
   related_uris: {
     required: true,
-    type: ScryfallCardRelatedURIsSchema
+    type: [ScryfallCardRelatedURISchema]
   },
   released_at: Date,
   reprint: {

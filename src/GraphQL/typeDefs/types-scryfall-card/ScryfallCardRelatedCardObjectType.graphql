@@ -1,0 +1,7 @@
+type ScryfallCardRelatedCardObjectType {
+  _id: ID!
+  component: ScryfallCardRelatedCardObjectComponentEnum!
+  name: String!
+  type_line: String!
+  uri: String!
+}

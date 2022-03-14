@@ -1,5 +1,6 @@
 type DeckCardType {
   _id: ID
-  name: String
-  scryfall_id: String
+  scryfall_card: ScryfallCardType
+  # name: String
+  # scryfall_id: String
 }

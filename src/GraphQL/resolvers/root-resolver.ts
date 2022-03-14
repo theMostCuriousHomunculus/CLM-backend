@@ -102,6 +102,7 @@ import subscribeWebRTC from './web-rtc/subscription/subscribe-web-RTC.js';
 
 // misc
 import rtcPeerConnectionRelay from './misc/field/RTC-peer-connection-relay.js';
+// import scryfallCardLayout from './misc/field/scryfall-card-layout.js';
 import searchSite from './misc/query/search-site.js';
 import searchSiteResult from './misc/field/search-site-result.js';
 
@@ -125,6 +126,7 @@ import matches from './account/field/matches.js';
 import nearby_users from './account/field/nearby-users.js';
 import received_bud_requests from './account/field/received-bud-requests.js';
 import remote_account from './web-rtc/field/remote-account.js';
+import scryfall_card from './deck/field/scryfall-card.js';
 import sent_bud_requests from './account/field/sent-bud-requests.js';
 import token from './account/field/token.js';
 import total_events from './account/field/total-events.js';
@@ -154,6 +156,9 @@ export default {
   },
   CubeType: {
     creator: cube_creator
+  },
+  DeckCardType: {
+    scryfall_card
   },
   DeckType: {
     creator: deck_creator
@@ -288,6 +293,9 @@ export default {
   RTCSessionDescription: {
     remote_account
   },
+  // ScryfallCardType: {
+  //   __resolveType: scryfallCardLayout
+  // },
   SearchSiteResult: {
     __resolveType: searchSiteResult
   },

@@ -48,15 +48,48 @@ export default async function pullScryfallData() {
               }
             }
 
+            const legalities = {
+              banned: [],
+              legal: [],
+              not_legal: [],
+              restricted: []
+            };
+
+            for (const [key, value] of Object.entries(card.legalities)) {
+              legalities[value].push(key);
+            }
+
+            card.legalities = legalities;
+
+            if ('purchase_uris' in card) {
+              const purchase_uris = [];
+
+              for (const [key, value] of Object.entries(card.purchase_uris)) {
+                purchase_uris.push({ marketplace: key, uri: value });
+              }
+
+              card.purchase_uris = purchase_uris;
+            }
+
+            const related_uris = [];
+
+            for (const [key, value] of Object.entries(card.related_uris)) {
+              related_uris.push({ site: key, uri: value });
+            }
+
+            card.related_uris = related_uris;
+
             ScryfallCardModel.findByIdAndUpdate(
               card._id,
-              { card },
+              { ...card },
               { upsert: true },
-              (err, doc) => {
-                console.log('***');
-                console.log(doc);
-                console.log(err);
-                console.log('***');
+              (err /* , doc */) => {
+                if (err) {
+                  console.log('***');
+                  console.log(card);
+                  console.log(err);
+                  console.log('***');
+                }
               }
             );
             // const cardDocument = new ScryfallCardModel(card);

@@ -1,0 +1,6 @@
+type ScryfallCardLegalitiesType {
+  banned: [String]
+  legal: [String]
+  not_legal: [String]
+  restricted: [String]
+}

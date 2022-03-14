@@ -1,81 +1,80 @@
 type ScryfallCardType implements Document {
-  _id: ID
-  # all_parts: [ScryfallCardRelatedCardObjectType]
+  _id: ID!
+  all_parts: [ScryfallCardRelatedCardObjectType]
   arena_id: Int
-  # card_faces: [ScryfallCardFaceType]
+  card_faces: [ScryfallCardFaceType]
   cardmarket_id: Int
-  cmc: Int
-  color_identity: [ScryfallCardColorEnum]
+  cmc: Float!
+  color_identity: [ScryfallCardColorEnum]!
   color_indicator: [ScryfallCardColorEnum]
   colors: [ScryfallCardColorEnum]
   edhrec_rank: Int
   hand_modifier: String
-  keywords: [String]
-  lang: String
-  layout: ScryfallCardLayoutEnum
-  # legalities: ScryfallCardLegalitiesType
+  keywords: [String]!
+  lang: String!
+  layout: ScryfallCardLayoutEnum!
+  legalities: ScryfallCardLegalitiesType!
   life_modifier: String
   loyalty: String
   mana_cost: String
   mtgo_foil_id: Int
   mtgo_id: Int
   multiverse_ids: [Int]
-  name: String
-  oracle_id: String
+  name: String!
+  oracle_id: String!
   oracle_text: String
   oversized: Boolean
   power: String
-  prints_search_uri: String
+  prints_search_uri: String!
   produced_mana: [ScryfallCardColorEnum]
-  reserved: Boolean
-  rulings_uri: String
-  scryfall_uri: String
+  reserved: Boolean!
+  rulings_uri: String!
+  scryfall_uri: String!
   tcgplayer_etched_id: Int
   tcgplayer_id: Int
   toughness: String
-  type_line: String
-  uri: String
+  type_line: String!
+  uri: String!
   artist: String
-  booster: Boolean
-  border_color: ScryfallCardBorderColorEnum
+  booster: Boolean!
+  border_color: ScryfallCardBorderColorEnum!
   card_back_id: String
-  collector_number: String
-  digital: Boolean
-  finishes: [ScryfallCardFinishEnum]
+  collector_number: String!
+  digital: Boolean!
+  finishes: [ScryfallCardFinishEnum]!
   flavor_name: String
   flavor_text: String
   frame: ScryfallCardFrameEnum
   frame_effects: [ScryfallCardFrameEffectEnum]
-  full_art: Boolean
-  games: [ScryfallCardGameEnum]
-  highres_image: Boolean
+  full_art: Boolean!
+  games: [ScryfallCardGameEnum]!
+  highres_image: Boolean!
   illustration_id: String
   image_status: ScryfallCardImageStatusEnum
-  # image_uris: ScryfallCardImageURIsType,
-  # prices: ScryfallCardPricesType
+  image_uris: ScryfallCardImageURIsType
+  prices: ScryfallCardPricesType!
   printed_name: String
   printed_text: String
   printed_type_line: String
   promo: Boolean
   promo_types: [String]
-  # purchase_uris: ScryfallCardPurchaseURIsType,
-  rarity: ScryfallCardRarityEnum
-  # related_uris: ScryfallCardRelatedURIsType
-  # released_at: Date,
-  released_at: String
-  reprint: Boolean
-  scryfall_set_uri: String
-  set_name: String
-  set_search_uri: String
-  set_type: String
-  set_uri: String
-  _set: String
-  set_id: String
-  story_spotlight: Boolean
-  textless: Boolean
-  variation: Boolean
+  purchase_uris: [ScryfallCardPurchaseURIType]!
+  rarity: ScryfallCardRarityEnum!
+  related_uris: [ScryfallCardRelatedURIsType]!
+  released_at: String!
+  reprint: Boolean!
+  scryfall_set_uri: String!
+  set_name: String!
+  set_search_uri: String!
+  set_type: String!
+  set_uri: String!
+  _set: String!
+  set_id: String!
+  story_spotlight: Boolean!
+  textless: Boolean!
+  variation: Boolean!
   variation_of: String
   security_stamp: ScryfallCardSecurityStampEnum
   watermark: String
-  # preview: ScryfallCardPreviewType
+  preview: ScryfallCardPreviewType
 }

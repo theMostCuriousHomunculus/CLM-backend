@@ -1,7 +1,7 @@
 enum ScryfallCardFrameEnum {
-  1993
-  1997
-  2003
-  2015
+  _1993
+  _1997
+  _2003
+  _2015
   future
 }

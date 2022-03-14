@@ -2,8 +2,22 @@ import mongoose from 'mongoose';
 
 const ScryfallCardLegalitiesSchema = new mongoose.Schema(
   {
-    // https://mongoosejs.com/docs/schematypes.html#mixed
-    any: {}
+    banned: {
+      required: true,
+      type: [String]
+    },
+    legal: {
+      required: true,
+      type: [String]
+    },
+    not_legal: {
+      required: true,
+      type: [String]
+    },
+    restricted: {
+      required: true,
+      type: [String]
+    }
   },
   {
     _id: false

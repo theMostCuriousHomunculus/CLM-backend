@@ -11,13 +11,13 @@ import ScryfallCardImageStatus from '../enums/ScryfallCardImageStatus';
 import ScryfallCardImageURIs from './ScryfallCardImageURIs';
 import ScryfallCardLanguage from '../enums/ScryfallCardLanguage';
 import ScryfallCardLayout from '../enums/ScryfallCardLayout';
-import ScryfallCardLegality from '../enums/ScryfallCardLegality';
+import ScryfallCardLegalities from './ScryfallCardLegalities';
 import ScryfallCardPreview from './ScryfallCardPreview';
 import ScryfallCardPrices from './ScryfallCardPrices';
-import ScryfallCardPurchaseURIs from './ScryfallCardPurchaseURIs';
+import ScryfallCardPurchaseURI from './ScryfallCardPurchaseURI';
 import ScryfallCardRarity from '../enums/ScryfallCardRarity';
 import ScryfallCardRelatedCardObject from './ScryfallCardRelatedCardObject';
-import ScryfallCardRelatedURIs from './ScryfallCardRelatedURIs';
+import ScryfallCardRelatedURI from './ScryfallCardRelatedURI';
 import ScryfallCardSecurityStamp from '../enums/ScryfallCardSecurityStamp';
 
 export default interface ScryfallCard extends mongoose.Document {
@@ -75,7 +75,7 @@ export default interface ScryfallCard extends mongoose.Document {
   // A code for this card’s layout.
   layout: ScryfallCardLayout;
   // An object describing the legality of this card across play formats. Possible legalities are legal, not_legal, restricted, and banned.
-  legalities: { [keys: string]: ScryfallCardLegality };
+  legalities: ScryfallCardLegalities;
   // This card’s life modifier, if it is Vanguard card. This value will contain a delta, such as +2.
   life_modifier?: string;
   // This loyalty if any. Note that some cards have loyalties that are not numeric, such as X.
@@ -148,11 +148,11 @@ export default interface ScryfallCard extends mongoose.Document {
   // An array of strings describing what categories of promo cards this card falls into.
   promo_types?: string[];
   // An object providing URIs to this card’s listing on major marketplaces.
-  purchase_uris?: ScryfallCardPurchaseURIs;
+  purchase_uris?: ScryfallCardPurchaseURI[];
   // This card’s rarity. One of common, uncommon, rare, special, mythic, or bonus.
   rarity: ScryfallCardRarity;
   // An object providing URIs to this card’s listing on other Magic: The Gathering online resources.
-  related_uris: ScryfallCardRelatedURIs;
+  related_uris: ScryfallCardRelatedURI[];
   // The date this card was first released.
   released_at: Date;
   // True if this card is a reprint.
