@@ -53,8 +53,8 @@ app.use(context);
 
 app.use('/graphql', graphqlHandler);
 
-pullScryfallData();
-setInterval(pullScryfallData, 43200000);
+// pullScryfallData();
+// setInterval(pullScryfallData, 43200000);
 
 app.use(function (req, res) {
   res.status(404).send();

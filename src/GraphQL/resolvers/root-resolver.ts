@@ -110,23 +110,23 @@ import searchSiteResult from './misc/field/search-site-result.js';
 import account_decks from './account/field/decks.js';
 import author from './blog/field/author.js';
 import buds from './account/field/buds.js';
-import cube_creator from './cube/field/cube-creator.js';
+import creator from './misc/field/creator.js';
 import cube from './match/cube.js';
 import cubes from './account/field/cubes.js';
 import current_pack from './event/field/current-pack.js';
-import deck_creator from './deck/field/deck-creator.js';
 import email from './account/field/email.js';
 import event from './match/event.js';
 import event_account from './event/field/event-account.js';
 import events from './account/field/events.js';
 import host from './event/field/host.js';
+import image from './misc/field/image.js';
 import match_account from './match/match-account.js';
 import match_decks from './match/decks.js';
 import matches from './account/field/matches.js';
 import nearby_users from './account/field/nearby-users.js';
 import received_bud_requests from './account/field/received-bud-requests.js';
 import remote_account from './web-rtc/field/remote-account.js';
-import scryfall_card from './deck/field/scryfall-card.js';
+import scryfall_card from './misc/field/scryfall-card.js';
 import sent_bud_requests from './account/field/sent-bud-requests.js';
 import token from './account/field/token.js';
 import total_events from './account/field/total-events.js';
@@ -154,14 +154,19 @@ export default {
   MessageType: {
     author
   },
+  CubeCardType: {
+    scryfall_card
+  },
   CubeType: {
-    creator: cube_creator
+    creator,
+    image
   },
   DeckCardType: {
     scryfall_card
   },
   DeckType: {
-    creator: deck_creator
+    creator,
+    image
   },
   EventPlayerType: {
     account: event_account,

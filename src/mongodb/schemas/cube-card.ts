@@ -16,6 +16,7 @@ const CubeCardSchema = new mongoose.Schema<CubeCard>({
     type: String
   },
   scryfall_id: {
+    ref: 'ScryfallCardModel',
     required: true,
     type: String
   },

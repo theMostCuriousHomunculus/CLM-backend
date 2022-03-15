@@ -32,7 +32,10 @@ const DeckSchema = new Schema<Deck>({
     ],
     type: String
   },
-  image: String,
+  image: {
+    ref: 'ScryfallCardModel',
+    type: String
+  },
   mainboard: [DeckCardSchema],
   name: {
     index: {

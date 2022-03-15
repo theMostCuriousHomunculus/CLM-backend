@@ -2,7 +2,7 @@ type CubeType implements Document {
   _id: ID
   creator: AccountType
   description: String
-  image: String
+  image: ScryfallCardType
   mainboard: [CubeCardType]
   modules: [ModuleType]
   name: String

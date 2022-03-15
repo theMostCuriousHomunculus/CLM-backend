@@ -1,6 +1,4 @@
 type DeckCardType {
   _id: ID
   scryfall_card: ScryfallCardType
-  # name: String
-  # scryfall_id: String
 }
