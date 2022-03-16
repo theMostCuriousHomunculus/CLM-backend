@@ -71,12 +71,6 @@ type Mutation {
   ): CubeType
   editModule(moduleID: ID!, name: String): CubeType
   editRotation(rotationID: ID!, name: String, size: Int): CubeType
-  addCardsToDeck(
-    component: DeckComponentEnum!
-    name: String
-    numberOfCopies: Int!
-    scryfall_id: String!
-  ): DeckType
   changeCardPrinting(input: String!): DeckType
   cloneDeck: DeckType!
   createDeck(
@@ -93,8 +87,11 @@ type Mutation {
     name: String
     published: Boolean
   ): DeckType
-  removeCardsFromDeck(cardIDs: [ID]!, component: DeckComponentEnum!): DeckType
-  toggleMainboardSideboardDeck(cardID: ID!): DeckType
+  setNumberOfDeckCardCopies(
+    mainboard_count: Int!
+    scryfall_id: String!
+    sideboard_count: Int!
+  ): DeckType
   addBasics(
     component: DeckComponentEnum!
     name: String!

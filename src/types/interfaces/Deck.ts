@@ -5,12 +5,11 @@ import Format from '../enums/Format';
 
 export default interface Deck extends mongoose.Document {
   _id: mongoose.Types.ObjectId;
+  cards: mongoose.Types.DocumentArray<DeckCard>;
   creator: mongoose.Types.ObjectId;
   description: string;
   format?: Format;
   image: string;
-  mainboard: mongoose.Types.DocumentArray<DeckCard>;
   name: string;
   published: boolean;
-  sideboard: mongoose.Types.DocumentArray<DeckCard>;
 }

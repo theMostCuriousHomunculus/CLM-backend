@@ -6,6 +6,7 @@ import { createServer } from 'http';
 import context from './context.js';
 import graphqlHandler from './GraphQL/GRAPHQL-handler.js';
 import pullScryfallData from './utils/pull-scryfall-data.js';
+import convertDecks from './utils/convert-decks.js';
 
 mongoose.connect(process.env.DB_CONNECTION!, {}, (error) => {
   if (error) {
@@ -52,6 +53,8 @@ app.use(
 app.use(context);
 
 app.use('/graphql', graphqlHandler);
+
+// convertDecks();
 
 // pullScryfallData();
 // setInterval(pullScryfallData, 43200000);

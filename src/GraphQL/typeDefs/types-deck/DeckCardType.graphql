@@ -1,4 +1,6 @@
 type DeckCardType {
-  _id: ID
-  scryfall_card: ScryfallCardType
+  _id: ID!
+  mainboard_count: Int!
+  scryfall_card: ScryfallCardType!
+  sideboard_count: Int!
 }

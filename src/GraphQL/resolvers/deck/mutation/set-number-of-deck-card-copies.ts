@@ -1,21 +1,19 @@
 import { MongoError } from 'mongodb';
 
 import CLMRequest from '../../../../types/interfaces/CLMRequest.js';
-import Deck from '../../../../types/interfaces/Deck.js';
 import DeckComponent from '../../../../types/enums/DeckComponent.js';
 import HTTPError from '../../../../types/classes/HTTPError.js';
 import pubsub from '../../../pubsub.js';
 
-interface AddCardsToDeckArgs {
-  component: DeckComponent;
-  name: string;
-  numberOfCopies: number;
+interface SetNumberOfDeckCardCopiesArgs {
+  mainboard_count: number;
   scryfall_id: string;
+  sideboard_count: number;
 }
 
 export default async function (
   parent: any,
-  args: AddCardsToDeckArgs,
+  args: SetNumberOfDeckCardCopiesArgs,
   context: CLMRequest
 ) {
   const { bearer, deck } = context;
@@ -28,12 +26,30 @@ export default async function (
     throw new HTTPError('You are not authorized to edit this deck.', 401);
   }
 
-  const { component, name, numberOfCopies, scryfall_id } = args;
+  const { mainboard_count, scryfall_id, sideboard_count } = args;
 
-  for (let i = 0; i < numberOfCopies; i++) {
-    deck[component].push({
-      name,
-      scryfall_id
+  if (mainboard_count < 0 || sideboard_count < 0) {
+    throw new HTTPError("Negative copies aren't allowed.", 400);
+  }
+
+  const existingCard = deck.cards.find(
+    (card) => card.scryfall_id === scryfall_id
+  );
+
+  if (existingCard) {
+    if (mainboard_count + sideboard_count === 0) {
+      deck.cards.pull(existingCard._id);
+    } else {
+      existingCard.mainboard_count = mainboard_count;
+      existingCard.sideboard_count = sideboard_count;
+    }
+  }
+
+  if (!existingCard && mainboard_count + sideboard_count > 0) {
+    deck.cards.push({
+      mainboard_count,
+      scryfall_id,
+      sideboard_count
     });
   }
 

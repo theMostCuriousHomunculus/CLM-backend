@@ -1,11 +1,10 @@
 type DeckType implements Document {
-  _id: ID
-  creator: AccountType
+  _id: ID!
+  cards: [DeckCardType]!
+  creator: AccountType!
   description: String
   format: FormatEnum
   image: ScryfallCardType
-  mainboard: [DeckCardType]
-  name: String
+  name: String!
   published: Boolean
-  sideboard: [DeckCardType]
 }

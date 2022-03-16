@@ -6,6 +6,7 @@ import DeckCardSchema from '../schemas/deck-card.js';
 const { model, Schema } = mongoose;
 
 const DeckSchema = new Schema<Deck>({
+  cards: [DeckCardSchema],
   creator: {
     ref: 'AccountModel',
     required: true,
@@ -36,7 +37,6 @@ const DeckSchema = new Schema<Deck>({
     ref: 'ScryfallCardModel',
     type: String
   },
-  mainboard: [DeckCardSchema],
   name: {
     index: {
       unique: true,
@@ -50,8 +50,7 @@ const DeckSchema = new Schema<Deck>({
   published: {
     default: true,
     type: Boolean
-  },
-  sideboard: [DeckCardSchema]
+  }
 });
 
 DeckSchema.index({ name: 'text', description: 'text' });

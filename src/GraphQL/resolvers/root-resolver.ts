@@ -45,15 +45,13 @@ import searchCubes from './cube/query/search-cubes.js';
 import subscribeCube from './cube/subscription/subscribe-cube.js';
 
 // deck
-import addCardsToDeck from './deck/mutation/add-cards-to-deck.js';
 import cloneDeck from './deck/mutation/clone-deck.js';
 import createDeck from './deck/mutation/create-deck.js';
 import deleteDeck from './deck/mutation/delete-deck.js';
 import editDeck from './deck/mutation/edit-deck.js';
 import fetchDeckByID from './deck/query/fetch-deck-by-id.js';
-import removeCardsFromDeck from './deck/mutation/remove-cards-from-deck.js';
+import setNumberOfDeckCardCopies from './deck/mutation/set-number-of-deck-card-copies.js';
 import subscribeDeck from './deck/subscription/subscribe-deck.js';
-import toggleMainboardSideboardDeck from './deck/mutation/toggle-mainboard-sideboard-deck.js';
 
 // event
 import addBasics from './event/mutation/add-basics.js';
@@ -227,13 +225,11 @@ export default {
     editModule,
     editRotation,
     // deck
-    addCardsToDeck,
     cloneDeck,
     createDeck,
     deleteDeck,
     editDeck,
-    removeCardsFromDeck,
-    toggleMainboardSideboardDeck,
+    setNumberOfDeckCardCopies,
     // event
     addBasics,
     createEventChatMessage,
