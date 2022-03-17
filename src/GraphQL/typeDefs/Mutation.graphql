@@ -89,6 +89,7 @@ type Mutation {
   ): DeckType
   setNumberOfDeckCardCopies(
     mainboard_count: Int!
+    maybeboard_count: Int!
     scryfall_id: String!
     sideboard_count: Int!
   ): DeckType

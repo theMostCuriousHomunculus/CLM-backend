@@ -1,6 +1,7 @@
 type DeckCardType {
   _id: ID!
   mainboard_count: Int!
+  maybeboard_count: Int!
   scryfall_card: ScryfallCardType!
   sideboard_count: Int!
 }
