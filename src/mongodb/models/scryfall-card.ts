@@ -282,6 +282,8 @@ const ScryfallCardSchema = new Schema<ScryfallCard>({
   preview: ScryfallCardPreviewSchema
 });
 
+ScryfallCardSchema.index({ name: 'text', type_line: 'text' });
+
 const ScryfallCardModel = model<ScryfallCard>(
   'ScryfallCard',
   ScryfallCardSchema
