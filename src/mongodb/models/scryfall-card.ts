@@ -282,7 +282,9 @@ const ScryfallCardSchema = new Schema<ScryfallCard>({
   preview: ScryfallCardPreviewSchema
 });
 
-ScryfallCardSchema.index({ name: 'text', type_line: 'text' });
+ScryfallCardSchema.index({ name: 'text' });
+
+ScryfallCardSchema.index({ released_at: -1 });
 
 const ScryfallCardModel = model<ScryfallCard>(
   'ScryfallCard',

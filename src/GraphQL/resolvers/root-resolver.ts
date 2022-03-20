@@ -28,6 +28,7 @@ import subscribeBlogPost from './blog/subscription/subscribe-blog-post.js';
 
 // card
 import searchCard from './card/query/search-card.js';
+import searchPrintings from './card/query/search-printings.js';
 
 // cube
 import addCardToCube from './cube/mutation/add-card-to-cube.js';
@@ -281,6 +282,7 @@ export default {
     searchBlogPosts,
     // card
     searchCard,
+    searchPrintings,
     // cube
     fetchCubeByID,
     searchCubes,

@@ -12,13 +12,12 @@ export default async function (
 ) {
   const { search } = args;
 
-  return await ScryfallCardModel.find(
-    { $text: { $search: search } },
-    { score: { $meta: 'textScore' } }
-  )
-    .sort({ score: { $meta: 'textScore' } })
-    .limit(25)
-    .sort({ released_at: -1 });
-
-  // return await ScryfallCardModel.aggregate([ { $group: { _id: "$oracle_id" } }]);
+  return await ScryfallCardModel.aggregate([
+    { $match: { $text: { $search: search }, layout: { $ne: 'art_series' } } },
+    { $addFields: { score: { $meta: 'textScore' } } },
+    { $sort: { released_at: -1 } },
+    { $group: { _id: '$oracle_id', group: { $first: '$$ROOT' } } },
+    { $replaceRoot: { newRoot: '$group' } },
+    { $sort: { score: -1 } }
+  ]);
 }
