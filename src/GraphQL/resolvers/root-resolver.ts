@@ -111,6 +111,7 @@ import searchSiteResult from './misc/field/search-site-result.js';
 // custom field resolvers
 import account_decks from './account/field/decks.js';
 import author from './blog/field/author.js';
+import avatar from './account/field/avatar.js';
 import buds from './account/field/buds.js';
 import creator from './misc/field/creator.js';
 import cube from './match/cube.js';
@@ -137,6 +138,7 @@ import unknownCard from './match/unknown-card.js';
 
 export default {
   AccountType: {
+    avatar,
     buds,
     cubes,
     decks: account_decks,

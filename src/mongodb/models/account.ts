@@ -17,6 +17,7 @@ const AccountSchema = new Schema<Account>({
     type: Boolean
   },
   avatar: {
+    ref: 'ScryfallCardModel',
     required: true,
     type: String
   },

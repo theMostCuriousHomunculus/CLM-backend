@@ -14,12 +14,7 @@ type Mutation {
   logoutAllDevices: Boolean
   logoutSingleDevice(endpoint: String): Boolean
   postLocation(latitude: Float!, longitude: Float!): AccountType!
-  register(
-    avatar: String!
-    email: String!
-    name: String!
-    password: String!
-  ): AccountType!
+  register(email: String!, name: String!, password: String!): AccountType!
   requestPasswordReset(email: String!): Boolean
   submitPasswordReset(
     email: String!

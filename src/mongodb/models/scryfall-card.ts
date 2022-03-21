@@ -286,6 +286,11 @@ ScryfallCardSchema.index({ name: 'text' });
 
 ScryfallCardSchema.index({ released_at: -1 });
 
+ScryfallCardSchema.index({
+  released_at: -1,
+  collector_number: 1
+});
+
 const ScryfallCardModel = model<ScryfallCard>(
   'ScryfallCard',
   ScryfallCardSchema

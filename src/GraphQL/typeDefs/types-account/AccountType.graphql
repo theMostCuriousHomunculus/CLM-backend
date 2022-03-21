@@ -1,15 +1,15 @@
 type AccountType implements Document {
-  _id: ID
-  admin: Boolean
-  avatar: String
+  _id: ID!
+  admin: Boolean!
+  avatar: ScryfallCardType!
   buds: [AccountType]
-  cubes: [CubeType]
-  decks: [DeckType]
+  cubes: [CubeType]!
+  decks: [DeckType]!
   email: String
-  events(limit: Int, skip: Int): [EventType]
+  events(limit: Int, skip: Int): [EventType]!
   location: Location
   matches: [MatchType]
-  name: String
+  name: String!
   nearby_users: [AccountType]
   received_bud_requests: [AccountType]
   sent_bud_requests: [AccountType]

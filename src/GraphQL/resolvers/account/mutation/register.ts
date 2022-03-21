@@ -2,16 +2,17 @@ import Account from '../../../../types/interfaces/Account.js';
 import AccountModel from '../../../../mongodb/models/account.js';
 import HTTPError from '../../../../types/classes/HTTPError.js';
 import transporter from '../../../../utils/sendgrid-transporter.js';
+import ScryfallCardModel from '../../../../mongodb/models/scryfall-card.js';
+import ScryfallCard from '../../../../types/interfaces/ScryfallCard.js';
 
 interface RegisterArgs {
-  avatar: string;
   email: string;
   name: string;
   password: string;
 }
 
 export default async function (parent: Account, args: RegisterArgs) {
-  const { avatar, email, name, password } = args;
+  const { email, name, password } = args;
 
   const existingUsersWithEmail = await AccountModel.find({ email });
 
@@ -29,7 +30,16 @@ export default async function (parent: Account, args: RegisterArgs) {
       409
     );
 
-  const account = new AccountModel({ avatar, email, name, password });
+  const avatar = (await ScryfallCardModel.aggregate([
+    { $sample: { size: 1 } }
+  ])) as unknown as ScryfallCard[];
+
+  const account = new AccountModel({
+    avatar: avatar[0]._id,
+    email,
+    name,
+    password
+  });
 
   await account.generateAuthenticationToken();
 

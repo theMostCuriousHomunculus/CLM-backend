@@ -7,6 +7,7 @@ import context from './context.js';
 import graphqlHandler from './GraphQL/GRAPHQL-handler.js';
 import pullScryfallData from './utils/pull-scryfall-data.js';
 import convertDecks from './utils/convert-decks.js';
+import convertAvatars from './utils/convert-avatars.js';
 
 mongoose.connect(process.env.DB_CONNECTION!, {}, (error) => {
   if (error) {
@@ -54,6 +55,7 @@ app.use(context);
 
 app.use('/graphql', graphqlHandler);
 
+// convertAvatars();
 // convertDecks();
 
 // pullScryfallData();
