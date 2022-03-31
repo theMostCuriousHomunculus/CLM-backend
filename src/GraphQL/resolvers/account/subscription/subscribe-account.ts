@@ -10,10 +10,10 @@ export default {
   ) {
     const { connectionParams } = context;
 
-    if (!connectionParams || !('cubeID' in connectionParams)) {
-      throw new HTTPError('You did not provide a cubeID.', 400);
+    if (!connectionParams || !('accountID' in connectionParams)) {
+      throw new HTTPError('You did not provide an accountID.', 400);
     }
 
-    return pubsub.asyncIterator(connectionParams.cubeID as string);
+    return pubsub.asyncIterator(connectionParams.accountID as string);
   }
 };

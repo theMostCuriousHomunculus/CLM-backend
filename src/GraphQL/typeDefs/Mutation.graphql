@@ -1,21 +1,24 @@
 type Mutation {
   deleteLocation: AccountType!
   editAccount(
-    action: String
     avatar: String
     email: String
+    measurement_system: MeasurementSystemEnum
     name: String
-    other_user_id: String
-    password: String
-    return_other: Boolean
-    settings: SettingsInput
+    radius: Int
   ): AccountType!
+  initiateBudRequest(other_user_id: String!): AccountType!
   login(email: String!, password: String!): AccountType!
   logoutAllDevices: Boolean
   logoutSingleDevice(endpoint: String): Boolean
   postLocation(latitude: Float!, longitude: Float!): AccountType!
   register(email: String!, name: String!, password: String!): AccountType!
   requestPasswordReset(email: String!): Boolean
+  respondToBudRequest(
+    other_user_id: String!
+    response: BudRequestResponseEnum!
+  ): AccountType!
+  revokeBudship(other_user_id: String!): AccountType!
   submitPasswordReset(
     email: String!
     password: String!

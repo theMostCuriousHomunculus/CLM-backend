@@ -54,9 +54,7 @@ export default async function (
 
   try {
     const otherAccounts = await AccountModel.find({
-      _id: {
-        $in: accountIDs
-      }
+      _id: { $in: accountIDs }
     });
     for (const otherAccount of otherAccounts) {
       pubsub.publish(`${room}-${otherAccount._id.toString()}`, {

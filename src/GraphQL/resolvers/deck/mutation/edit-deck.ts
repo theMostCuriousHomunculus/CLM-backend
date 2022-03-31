@@ -1,6 +1,7 @@
 import { MongoError } from 'mongodb';
 
-import CLMRequest from '../../../../types/interfaces/CLMRequest.js';
+import CLMRequest from '../../../../types/interfaces/CLMRequest';
+import Deck from '../../../../types/interfaces/Deck';
 import Format from '../../../../types/enums/Format.js';
 import HTTPError from '../../../../types/classes/HTTPError.js';
 import pubsub from '../../../pubsub.js';
@@ -24,17 +25,9 @@ export default async function (
     throw new HTTPError('You are not authorized to edit this deck.', 401);
   }
 
-  const { description, format, image, name, published } = args;
-
-  if (description !== undefined) deck.description = description;
-
-  if (format !== undefined) deck.format = format;
-
-  if (image) deck.image = image;
-
-  if (name) deck.name = name;
-
-  if (published !== undefined) deck.published = published;
+  for (const [key, value] of Object.entries(args)) {
+    (deck[key as keyof Deck] as any) = value;
+  }
 
   try {
     await deck.save();

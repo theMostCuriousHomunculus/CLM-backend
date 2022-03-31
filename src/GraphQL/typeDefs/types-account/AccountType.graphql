@@ -9,11 +9,12 @@ type AccountType implements Document {
   events(limit: Int, skip: Int): [EventType]!
   location: Location
   matches: [MatchType]
+  measurement_system: MeasurementSystemEnum
   name: String!
   nearby_users: [AccountType]
+  radius: Int
   received_bud_requests: [AccountType]
   sent_bud_requests: [AccountType]
-  settings: Settings
   token: String
   total_events: Int
 }

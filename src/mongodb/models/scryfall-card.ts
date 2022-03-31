@@ -284,6 +284,8 @@ const ScryfallCardSchema = new Schema<ScryfallCard>({
 
 ScryfallCardSchema.index({ name: 'text' });
 
+ScryfallCardSchema.index({ oracle_id: -1 });
+
 ScryfallCardSchema.index({ released_at: -1 });
 
 ScryfallCardSchema.index({

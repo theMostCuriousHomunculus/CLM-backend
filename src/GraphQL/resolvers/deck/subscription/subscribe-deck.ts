@@ -10,7 +10,7 @@ export default {
   ) {
     const { connectionParams } = context;
 
-    if (!('deckID' in connectionParams!)) {
+    if (!connectionParams || !('deckID' in connectionParams)) {
       throw new HTTPError('You did not provide a deckID.', 400);
     }
 

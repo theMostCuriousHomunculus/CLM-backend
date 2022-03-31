@@ -73,16 +73,14 @@ const AccountSchema = new Schema<Account>({
       type: 'ObjectId'
     }
   ],
-  settings: {
-    measurement_system: {
-      default: 'imperial',
-      enum: ['imperial', 'metric'],
-      type: String
-    },
-    radius: {
-      default: 10,
-      type: Number
-    }
+  measurement_system: {
+    default: 'imperial',
+    enum: ['imperial', 'metric'],
+    type: String
+  },
+  radius: {
+    default: 10,
+    type: Number
   },
   tokens: [
     {

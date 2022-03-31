@@ -1,0 +1,4 @@
+enum BudRequestResponseEnum {
+  accept
+  reject
+}
