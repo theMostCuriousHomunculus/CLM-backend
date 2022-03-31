@@ -1,4 +1,5 @@
 type Subscription {
+  subscribeAccount: AccountType!
   subscribeBlogPost: BlogPostType!
   subscribeCube: CubeType!
   subscribeDeck: DeckType!

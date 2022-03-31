@@ -4,6 +4,7 @@ import authenticate from './account/query/authenticate.js';
 import deleteLocation from './account/mutation/delete-location.js';
 import editAccount from './account/mutation/edit-account.js';
 import fetchAccountByID from './account/query/fetch-account-by-id.js';
+import initiateBudRequest from './account/mutation/initiate-bud-request.js';
 import location from './account/field/location.js';
 import login from './account/mutation/login.js';
 import logoutAllDevices from './account/mutation/logout-all-devices.js';
@@ -11,8 +12,11 @@ import logoutSingleDevice from './account/mutation/logout-single-device.js';
 import postLocation from './account/mutation/post-location.js';
 import register from './account/mutation/register.js';
 import requestPasswordReset from './account/mutation/request-password-reset.js';
+import respondToBudRequest from './account/mutation/respond-to-bud-request.js';
+import revokeBudship from './account/mutation/revoke-budship.js';
 import searchAccounts from './account/query/search-accounts.js';
 import submitPasswordReset from './account/mutation/submit-password-reset.js';
+import subscribeAccount from './account/subscription/subscribe-account.js';
 import subscribeToPush from './account/mutation/subscribe-to-push.js';
 import unsubscribeFromPush from './account/mutation/unsubscribe-from-push.js';
 
@@ -201,12 +205,15 @@ export default {
     // deleteAccount,
     deleteLocation,
     editAccount,
+    initiateBudRequest,
     login,
     logoutAllDevices,
     logoutSingleDevice,
     postLocation,
     register,
     requestPasswordReset,
+    respondToBudRequest,
+    revokeBudship,
     submitPasswordReset,
     subscribeToPush,
     unsubscribeFromPush,
@@ -311,6 +318,7 @@ export default {
   },
   Subscription: {
     // account
+    subscribeAccount,
     // blog
     subscribeBlogPost,
     // cube

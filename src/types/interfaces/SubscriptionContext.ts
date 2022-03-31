@@ -8,6 +8,7 @@ import Event from './Event';
 import Match from './Match';
 
 export default interface ExtendedContext extends Context {
+  account?: Account | null;
   bearer?: Account | null;
   blogPost?: BlogPost | null;
   cube?: Cube | null;
