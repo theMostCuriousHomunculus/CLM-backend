@@ -2,10 +2,10 @@ import webpush from 'web-push';
 import { MongoError } from 'mongodb';
 
 import AccountModel from '../../../../mongodb/models/account.js';
+import BudRequestResponse from '../../../../types/enums/BudRequestResponse.js';
 import CLMRequest from '../../../../types/interfaces/CLMRequest';
 import HTTPError from '../../../../types/classes/HTTPError.js';
 import pubsub from '../../../pubsub.js';
-import BudRequestResponse from '../../../../types/enums/BudRequestResponse';
 
 interface RespondToBudRequestArgs {
   other_user_id: BudRequestResponse;
