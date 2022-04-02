@@ -8,12 +8,15 @@ export default {
     args: null,
     context: SubscriptionContext
   ) {
-    const { connectionParams } = context;
+    const { account, bearer } = context;
 
-    if (!connectionParams || !('accountID' in connectionParams)) {
-      throw new HTTPError('You did not provide an accountID.', 400);
-    }
+    if (account) return pubsub.asyncIterator(account._id.toString());
 
-    return pubsub.asyncIterator(connectionParams.accountID as string);
+    if (bearer) return pubsub.asyncIterator(bearer._id.toString());
+
+    throw new HTTPError(
+      'You must provide an accountID or an authentication token.',
+      400
+    );
   }
 };
