@@ -3,6 +3,7 @@ type AccountType implements Document {
   admin: Boolean!
   avatar: ScryfallCardType!
   buds: [AccountType]
+  conversations: [ConversationType]!
   cubes: [CubeType]!
   decks: [DeckType]!
   email: String

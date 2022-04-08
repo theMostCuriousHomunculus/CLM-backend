@@ -34,6 +34,9 @@ import subscribeBlogPost from './blog/subscription/subscribe-blog-post.js';
 import searchCard from './card/query/search-card.js';
 import searchPrintings from './card/query/search-printings.js';
 
+// conversation
+import createConversationMessage from './conversation/mutation/create-conversation-message.js';
+
 // cube
 import addCardToCube from './cube/mutation/add-card-to-cube.js';
 import cloneCube from './cube/mutation/clone-cube.js';
@@ -114,9 +117,10 @@ import searchSiteResult from './misc/field/search-site-result.js';
 
 // custom field resolvers
 import account_decks from './account/field/decks.js';
-import author from './blog/field/author.js';
+import author from './misc/field/author.js';
 import avatar from './account/field/avatar.js';
 import buds from './account/field/buds.js';
+import conversations from './account/field/conversations.js';
 import creator from './misc/field/creator.js';
 import cube from './match/cube.js';
 import cubes from './account/field/cubes.js';
@@ -131,6 +135,7 @@ import match_account from './match/match-account.js';
 import match_decks from './match/decks.js';
 import matches from './account/field/matches.js';
 import nearby_users from './account/field/nearby-users.js';
+import participants from './conversation/field/participants.js';
 import received_bud_requests from './account/field/received-bud-requests.js';
 import remote_account from './web-rtc/field/remote-account.js';
 import scryfall_card from './misc/field/scryfall-card.js';
@@ -144,6 +149,7 @@ export default {
   AccountType: {
     avatar,
     buds,
+    conversations,
     cubes,
     decks: account_decks,
     email,
@@ -158,6 +164,9 @@ export default {
   },
   BlogPostType: {
     author
+  },
+  ConversationType: {
+    participants
   },
   MessageType: {
     author
@@ -223,6 +232,8 @@ export default {
     deleteBlogPost,
     deleteComment,
     editBlogPost,
+    // conversation
+    createConversationMessage,
     // cube
     addCardToCube,
     cloneCube,

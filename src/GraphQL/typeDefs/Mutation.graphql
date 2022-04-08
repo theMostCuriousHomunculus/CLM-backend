@@ -43,6 +43,10 @@ type Mutation {
     subtitle: String
     title: String
   ): BlogPostType
+  createConversationMessage(
+    body: String!
+    participants: [String]
+  ): ConversationType!
   addCardToCube(componentID: String!, scryfall_id: String!): CubeType
   cloneCube: CubeType!
   createCube(cobraID: String, description: String, name: String!): CubeType!

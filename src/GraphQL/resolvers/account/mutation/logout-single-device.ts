@@ -16,33 +16,31 @@ export default async function (
   const { bearer, token } = context;
   const { endpoint } = args;
 
-  if (!bearer) {
-    return false;
-  } else {
-    bearer.tokens = bearer.tokens.filter((tkn) => {
-      return tkn !== token;
-    });
+  if (!bearer) return false;
 
-    if (endpoint) {
-      bearer.push_subscriptions.pull({ endpoint });
-    }
+  bearer.tokens = bearer.tokens.filter((tkn) => {
+    return tkn !== token;
+  });
 
-    if (bearer.location) {
-      bearer.location = undefined;
-      bearer.nearby_users =
-        [] as unknown[] as mongoose.Types.Array<mongoose.Types.ObjectId>;
-
-      await AccountModel.updateMany(
-        {},
-        {
-          $pull: {
-            nearby_users: bearer._id
-          }
-        }
-      );
-    }
-
-    await bearer.save();
-    return true;
+  if (endpoint) {
+    bearer.push_subscriptions.pull({ endpoint });
   }
+
+  if (bearer.location) {
+    bearer.location = undefined;
+    bearer.nearby_users =
+      [] as unknown[] as mongoose.Types.Array<mongoose.Types.ObjectId>;
+
+    await AccountModel.updateMany(
+      {},
+      {
+        $pull: {
+          nearby_users: bearer._id
+        }
+      }
+    );
+  }
+
+  await bearer.save();
+  return true;
 }

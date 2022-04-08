@@ -4,6 +4,7 @@ import { NextFunction, RequestHandler, Response } from 'express';
 import AccountModel from './mongodb/models/account.js';
 import BlogPostModel from './mongodb/models/blog-post.js';
 import CLMRequest from './types/interfaces/CLMRequest';
+import ConversationModel from './mongodb/models/conversation.js';
 import CubeModel from './mongodb/models/cube.js';
 import DeckModel from './mongodb/models/deck.js';
 import EventModel from './mongodb/models/event.js';
@@ -32,6 +33,12 @@ export default <RequestHandler>(
 
       if (req.header('BlogPostID')) {
         req.blogPost = await BlogPostModel.findById(req.header('BlogPostID'));
+      }
+
+      if (req.header('ConversationID')) {
+        req.conversation = await ConversationModel.findById(
+          req.header('ConversationID')
+        );
       }
 
       if (req.header('CubeID')) {
@@ -82,6 +89,7 @@ export default <RequestHandler>(
       }
     } catch (error) {
       req.bearer = null;
+      req.conversation = null;
       req.cube = null;
       req.deck = null;
       req.event = null;
