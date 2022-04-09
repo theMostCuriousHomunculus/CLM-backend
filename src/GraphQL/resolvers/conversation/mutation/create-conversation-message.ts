@@ -20,9 +20,6 @@ export default async function (
     throw new HTTPError('You must be logged in to send messages.', 401);
   }
 
-  console.log(args.body);
-  console.log(args.participants);
-
   const { body, participants } = args;
 
   if (conversation) {
@@ -79,7 +76,6 @@ export default async function (
         throw new HTTPError((error as Error).message, 500);
       }
     } else {
-      console.log('made it here');
       const newConversation = new ConversationModel({
         participants,
         messages: [
