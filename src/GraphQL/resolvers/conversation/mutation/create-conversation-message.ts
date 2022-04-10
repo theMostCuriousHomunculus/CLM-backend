@@ -1,7 +1,10 @@
+import webpush from 'web-push';
+
 import AccountModel from '../../../../mongodb/models/account.js';
 import CLMRequest from '../../../../types/interfaces/CLMRequest.js';
 import ConversationModel from '../../../../mongodb/models/conversation.js';
 import HTTPError from '../../../../types/classes/HTTPError.js';
+import ScryfallCardModel from '../../../../mongodb/models/scryfall-card.js';
 import pubsub from '../../../pubsub.js';
 
 interface CreateConversationMessageArgs {
@@ -20,6 +23,8 @@ export default async function (
     throw new HTTPError('You must be logged in to send messages.', 401);
   }
 
+  const avatarCard = await ScryfallCardModel.findById(bearer.avatar);
+
   const { body, participants } = args;
 
   if (conversation) {
@@ -33,9 +38,27 @@ export default async function (
 
       for (const participantID of conversation.participants) {
         const participant = await AccountModel.findById(participantID);
-        pubsub.publish(participantID.toString(), {
-          subscribeAccount: participant
-        });
+
+        if (participant) {
+          pubsub.publish(participantID.toString(), {
+            subscribeAccount: participant
+          });
+
+          if (bearer._id.toString() !== participantID.toString()) {
+            for (const pushSubscription of participant.push_subscriptions) {
+              webpush.sendNotification(
+                pushSubscription,
+                JSON.stringify({
+                  body,
+                  icon: avatarCard!.image_uris
+                    ? avatarCard!.image_uris.art_crop
+                    : avatarCard!.card_faces![0].image_uris!.art_crop,
+                  title: bearer.name
+                })
+              );
+            }
+          }
+        }
       }
 
       return conversation;
@@ -66,9 +89,27 @@ export default async function (
 
         for (const participantID of existingConversation.participants) {
           const participant = await AccountModel.findById(participantID);
-          pubsub.publish(participantID.toString(), {
-            subscribeAccount: participant
-          });
+
+          if (participant) {
+            pubsub.publish(participantID.toString(), {
+              subscribeAccount: participant
+            });
+
+            if (bearer._id.toString() !== participantID.toString()) {
+              for (const pushSubscription of participant.push_subscriptions) {
+                webpush.sendNotification(
+                  pushSubscription,
+                  JSON.stringify({
+                    body,
+                    icon: avatarCard!.image_uris
+                      ? avatarCard!.image_uris.art_crop
+                      : avatarCard!.card_faces![0].image_uris!.art_crop,
+                    title: bearer.name
+                  })
+                );
+              }
+            }
+          }
         }
 
         return existingConversation;
@@ -91,9 +132,27 @@ export default async function (
 
         for (const participantID of newConversation.participants) {
           const participant = await AccountModel.findById(participantID);
-          pubsub.publish(participantID.toString(), {
-            subscribeAccount: participant
-          });
+
+          if (participant) {
+            pubsub.publish(participantID.toString(), {
+              subscribeAccount: participant
+            });
+
+            if (bearer._id.toString() !== participantID.toString()) {
+              for (const pushSubscription of participant.push_subscriptions) {
+                webpush.sendNotification(
+                  pushSubscription,
+                  JSON.stringify({
+                    body,
+                    icon: avatarCard!.image_uris
+                      ? avatarCard!.image_uris.art_crop
+                      : avatarCard!.card_faces![0].image_uris!.art_crop,
+                    title: bearer.name
+                  })
+                );
+              }
+            }
+          }
         }
 
         return newConversation;
