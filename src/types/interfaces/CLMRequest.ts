@@ -2,6 +2,7 @@ import { Request } from 'express';
 
 import Account from './Account';
 import BlogPost from './BlogPost';
+import Conversation from './Conversation';
 import Cube from './Cube';
 import Deck from './Deck';
 import Event from './Event';
@@ -13,6 +14,7 @@ export default interface CLMRequest extends Request {
   account?: Account | null;
   bearer?: Account | null;
   blogPost?: BlogPost | null;
+  conversation?: Conversation | null;
   cube?: Cube | null;
   deck?: Deck | null;
   event?: Event | null;

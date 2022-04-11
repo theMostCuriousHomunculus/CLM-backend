@@ -1,26 +1,24 @@
 type Mutation {
   deleteLocation: AccountType!
   editAccount(
-    action: String
     avatar: String
     email: String
+    measurement_system: MeasurementSystemEnum
     name: String
-    other_user_id: String
-    password: String
-    return_other: Boolean
-    settings: SettingsInput
+    radius: Int
   ): AccountType!
+  initiateBudRequest(other_user_id: String!): AccountType!
   login(email: String!, password: String!): AccountType!
   logoutAllDevices: Boolean
   logoutSingleDevice(endpoint: String): Boolean
   postLocation(latitude: Float!, longitude: Float!): AccountType!
-  register(
-    avatar: String!
-    email: String!
-    name: String!
-    password: String!
-  ): AccountType!
+  register(email: String!, name: String!, password: String!): AccountType!
   requestPasswordReset(email: String!): Boolean
+  respondToBudRequest(
+    other_user_id: String!
+    response: BudRequestResponseEnum!
+  ): AccountType!
+  revokeBudship(other_user_id: String!): AccountType!
   submitPasswordReset(
     email: String!
     password: String!
@@ -45,6 +43,10 @@ type Mutation {
     subtitle: String
     title: String
   ): BlogPostType
+  createConversationMessage(
+    body: String!
+    participants: [String]
+  ): ConversationType!
   addCardToCube(componentID: String!, scryfall_id: String!): CubeType
   cloneCube: CubeType!
   createCube(cobraID: String, description: String, name: String!): CubeType!
@@ -57,11 +59,11 @@ type Mutation {
   editCard(
     cardID: ID!
     componentID: ID!
-    cmc: Int!
+    cmc: Int
     color_identity: [String!]
-    notes: String!
-    scryfall_id: String!
-    type_line: String!
+    notes: String
+    scryfall_id: String
+    type_line: String
   ): CubeType
   editCube(
     description: String
@@ -71,12 +73,6 @@ type Mutation {
   ): CubeType
   editModule(moduleID: ID!, name: String): CubeType
   editRotation(rotationID: ID!, name: String, size: Int): CubeType
-  addCardsToDeck(
-    component: DeckComponentEnum!
-    name: String
-    numberOfCopies: Int!
-    scryfall_id: String
-  ): DeckType
   changeCardPrinting(input: String!): DeckType
   cloneDeck: DeckType!
   createDeck(
@@ -93,8 +89,12 @@ type Mutation {
     name: String
     published: Boolean
   ): DeckType
-  removeCardsFromDeck(cardIDs: [ID]!, component: DeckComponentEnum!): DeckType
-  toggleMainboardSideboardDeck(cardID: ID!): DeckType
+  setNumberOfDeckCardCopies(
+    mainboard_count: Int!
+    maybeboard_count: Int!
+    scryfall_id: String!
+    sideboard_count: Int!
+  ): DeckType
   addBasics(
     component: DeckComponentEnum!
     name: String!

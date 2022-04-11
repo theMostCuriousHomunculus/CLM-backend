@@ -1,9 +1,0 @@
-type Settings {
-  measurement_system: MeasurementSystemEnum
-  radius: Int
-}
-
-input SettingsInput {
-  measurement_system: MeasurementSystemEnum
-  radius: Int
-}

@@ -20,7 +20,10 @@ const CubeSchema = new Schema<Cube>({
     },
     type: String
   },
-  image: String,
+  image: {
+    ref: 'ScryfallCardModel',
+    type: String
+  },
   mainboard: [CubeCardSchema],
   modules: [ModuleSchema],
   name: {

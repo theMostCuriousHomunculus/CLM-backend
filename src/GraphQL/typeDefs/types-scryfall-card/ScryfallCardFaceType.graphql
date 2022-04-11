@@ -1,0 +1,22 @@
+type ScryfallCardFaceType {
+  artist: String
+  cmc: Float
+  color_indicator: [ScryfallCardColorEnum]
+  colors: [ScryfallCardColorEnum]
+  flavor_text: String
+  illustration_id: String
+  image_uris: ScryfallCardImageURIsType
+  layout: ScryfallCardLayoutEnum
+  loyalty: String
+  mana_cost: String!
+  name: String!
+  oracle_id: String
+  oracle_text: String
+  power: String
+  printed_name: String
+  printed_text: String
+  printed_type_line: String
+  toughness: String
+  type_line: String
+  watermark: String
+}

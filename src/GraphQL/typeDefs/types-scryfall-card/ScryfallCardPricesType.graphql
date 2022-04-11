@@ -1,0 +1,8 @@
+type ScryfallCardPricesType {
+  eur: String
+  eur_foil: String
+  tix: String
+  usd: String
+  usd_etched: String
+  usd_foil: String
+}

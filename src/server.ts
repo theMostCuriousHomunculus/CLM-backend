@@ -5,6 +5,9 @@ import { createServer } from 'http';
 
 import context from './context.js';
 import graphqlHandler from './GraphQL/GRAPHQL-handler.js';
+import pullScryfallData from './utils/pull-scryfall-data.js';
+import convertDecks from './utils/convert-decks.js';
+import convertAvatars from './utils/convert-avatars.js';
 
 mongoose.connect(process.env.DB_CONNECTION!, {}, (error) => {
   if (error) {
@@ -31,7 +34,7 @@ app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader(
     'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept, Authorization, AccountID, BlogPostID, CubeID, DeckID, EventID, MatchID'
+    'Origin, X-Requested-With, Content-Type, Accept, Authorization, AccountID, BlogPostID, ConversationID, CubeID, DeckID, EventID, MatchID'
   );
   res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, POST');
 
@@ -51,6 +54,12 @@ app.use(
 app.use(context);
 
 app.use('/graphql', graphqlHandler);
+
+// convertAvatars();
+// convertDecks();
+
+// pullScryfallData();
+// setInterval(pullScryfallData, 43200000);
 
 app.use(function (req, res) {
   res.status(404).send();

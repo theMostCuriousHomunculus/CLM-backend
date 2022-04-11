@@ -1,0 +1,7 @@
+enum ScryfallCardGameEnum {
+  arena
+  astral
+  mtgo
+  paper
+  sega
+}

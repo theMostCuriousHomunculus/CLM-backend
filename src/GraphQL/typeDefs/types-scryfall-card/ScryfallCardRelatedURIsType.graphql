@@ -1,0 +1,4 @@
+type ScryfallCardRelatedURIsType {
+  site: String!
+  uri: String!
+}

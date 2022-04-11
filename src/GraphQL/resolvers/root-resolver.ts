@@ -4,6 +4,7 @@ import authenticate from './account/query/authenticate.js';
 import deleteLocation from './account/mutation/delete-location.js';
 import editAccount from './account/mutation/edit-account.js';
 import fetchAccountByID from './account/query/fetch-account-by-id.js';
+import initiateBudRequest from './account/mutation/initiate-bud-request.js';
 import location from './account/field/location.js';
 import login from './account/mutation/login.js';
 import logoutAllDevices from './account/mutation/logout-all-devices.js';
@@ -11,8 +12,11 @@ import logoutSingleDevice from './account/mutation/logout-single-device.js';
 import postLocation from './account/mutation/post-location.js';
 import register from './account/mutation/register.js';
 import requestPasswordReset from './account/mutation/request-password-reset.js';
+import respondToBudRequest from './account/mutation/respond-to-bud-request.js';
+import revokeBudship from './account/mutation/revoke-budship.js';
 import searchAccounts from './account/query/search-accounts.js';
 import submitPasswordReset from './account/mutation/submit-password-reset.js';
+import subscribeAccount from './account/subscription/subscribe-account.js';
 import subscribeToPush from './account/mutation/subscribe-to-push.js';
 import unsubscribeFromPush from './account/mutation/unsubscribe-from-push.js';
 
@@ -25,6 +29,13 @@ import editBlogPost from './blog/mutation/edit-blog-post.js';
 import searchBlogPosts from './blog/query/search-blog-posts.js';
 import fetchBlogPostByID from './blog/query/fetch-blog-post-by-id.js';
 import subscribeBlogPost from './blog/subscription/subscribe-blog-post.js';
+
+// card
+import searchCard from './card/query/search-card.js';
+import searchPrintings from './card/query/search-printings.js';
+
+// conversation
+import createConversationMessage from './conversation/mutation/create-conversation-message.js';
 
 // cube
 import addCardToCube from './cube/mutation/add-card-to-cube.js';
@@ -45,15 +56,13 @@ import searchCubes from './cube/query/search-cubes.js';
 import subscribeCube from './cube/subscription/subscribe-cube.js';
 
 // deck
-import addCardsToDeck from './deck/mutation/add-cards-to-deck.js';
 import cloneDeck from './deck/mutation/clone-deck.js';
 import createDeck from './deck/mutation/create-deck.js';
 import deleteDeck from './deck/mutation/delete-deck.js';
 import editDeck from './deck/mutation/edit-deck.js';
 import fetchDeckByID from './deck/query/fetch-deck-by-id.js';
-import removeCardsFromDeck from './deck/mutation/remove-cards-from-deck.js';
+import setNumberOfDeckCardCopies from './deck/mutation/set-number-of-deck-card-copies.js';
 import subscribeDeck from './deck/subscription/subscribe-deck.js';
-import toggleMainboardSideboardDeck from './deck/mutation/toggle-mainboard-sideboard-deck.js';
 
 // event
 import addBasics from './event/mutation/add-basics.js';
@@ -102,29 +111,34 @@ import subscribeWebRTC from './web-rtc/subscription/subscribe-web-RTC.js';
 
 // misc
 import rtcPeerConnectionRelay from './misc/field/RTC-peer-connection-relay.js';
+// import scryfallCardLayout from './misc/field/scryfall-card-layout.js';
 import searchSite from './misc/query/search-site.js';
 import searchSiteResult from './misc/field/search-site-result.js';
 
 // custom field resolvers
 import account_decks from './account/field/decks.js';
-import author from './blog/field/author.js';
+import author from './misc/field/author.js';
+import avatar from './account/field/avatar.js';
 import buds from './account/field/buds.js';
-import cube_creator from './cube/field/cube-creator.js';
+import conversations from './account/field/conversations.js';
+import creator from './misc/field/creator.js';
 import cube from './match/cube.js';
 import cubes from './account/field/cubes.js';
 import current_pack from './event/field/current-pack.js';
-import deck_creator from './deck/field/deck-creator.js';
 import email from './account/field/email.js';
 import event from './match/event.js';
 import event_account from './event/field/event-account.js';
 import events from './account/field/events.js';
 import host from './event/field/host.js';
+import image from './misc/field/image.js';
 import match_account from './match/match-account.js';
 import match_decks from './match/decks.js';
 import matches from './account/field/matches.js';
 import nearby_users from './account/field/nearby-users.js';
+import participants from './conversation/field/participants.js';
 import received_bud_requests from './account/field/received-bud-requests.js';
 import remote_account from './web-rtc/field/remote-account.js';
+import scryfall_card from './misc/field/scryfall-card.js';
 import sent_bud_requests from './account/field/sent-bud-requests.js';
 import token from './account/field/token.js';
 import total_events from './account/field/total-events.js';
@@ -133,7 +147,9 @@ import unknownCard from './match/unknown-card.js';
 
 export default {
   AccountType: {
+    avatar,
     buds,
+    conversations,
     cubes,
     decks: account_decks,
     email,
@@ -149,14 +165,25 @@ export default {
   BlogPostType: {
     author
   },
+  ConversationType: {
+    participants
+  },
   MessageType: {
     author
   },
+  CubeCardType: {
+    scryfall_card
+  },
   CubeType: {
-    creator: cube_creator
+    creator,
+    image
+  },
+  DeckCardType: {
+    scryfall_card
   },
   DeckType: {
-    creator: deck_creator
+    creator,
+    image
   },
   EventPlayerType: {
     account: event_account,
@@ -187,12 +214,15 @@ export default {
     // deleteAccount,
     deleteLocation,
     editAccount,
+    initiateBudRequest,
     login,
     logoutAllDevices,
     logoutSingleDevice,
     postLocation,
     register,
     requestPasswordReset,
+    respondToBudRequest,
+    revokeBudship,
     submitPasswordReset,
     subscribeToPush,
     unsubscribeFromPush,
@@ -202,6 +232,8 @@ export default {
     deleteBlogPost,
     deleteComment,
     editBlogPost,
+    // conversation
+    createConversationMessage,
     // cube
     addCardToCube,
     cloneCube,
@@ -217,13 +249,11 @@ export default {
     editModule,
     editRotation,
     // deck
-    addCardsToDeck,
     cloneDeck,
     createDeck,
     deleteDeck,
     editDeck,
-    removeCardsFromDeck,
-    toggleMainboardSideboardDeck,
+    setNumberOfDeckCardCopies,
     // event
     addBasics,
     createEventChatMessage,
@@ -270,6 +300,9 @@ export default {
     // blog
     fetchBlogPostByID,
     searchBlogPosts,
+    // card
+    searchCard,
+    searchPrintings,
     // cube
     fetchCubeByID,
     searchCubes,
@@ -288,11 +321,15 @@ export default {
   RTCSessionDescription: {
     remote_account
   },
+  // ScryfallCardType: {
+  //   __resolveType: scryfallCardLayout
+  // },
   SearchSiteResult: {
     __resolveType: searchSiteResult
   },
   Subscription: {
     // account
+    subscribeAccount,
     // blog
     subscribeBlogPost,
     // cube

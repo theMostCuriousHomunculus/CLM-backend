@@ -1,0 +1,5 @@
+type ConversationType implements Document {
+  _id: ID!
+  messages: [MessageType]!
+  participants: [AccountType]!
+}

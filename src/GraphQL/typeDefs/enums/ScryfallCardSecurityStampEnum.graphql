@@ -1,0 +1,6 @@
+enum ScryfallCardSecurityStampEnum {
+  acorn
+  arena
+  oval
+  triangle
+}

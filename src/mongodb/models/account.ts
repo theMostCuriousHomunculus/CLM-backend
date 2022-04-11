@@ -17,6 +17,7 @@ const AccountSchema = new Schema<Account>({
     type: Boolean
   },
   avatar: {
+    ref: 'ScryfallCardModel',
     required: true,
     type: String
   },
@@ -34,6 +35,7 @@ const AccountSchema = new Schema<Account>({
     unique: true
   },
   location: LocationSchema,
+  mtgo_account: String,
   name: {
     index: {
       unique: true,
@@ -71,16 +73,14 @@ const AccountSchema = new Schema<Account>({
       type: 'ObjectId'
     }
   ],
-  settings: {
-    measurement_system: {
-      default: 'imperial',
-      enum: ['imperial', 'metric'],
-      type: String
-    },
-    radius: {
-      default: 10,
-      type: Number
-    }
+  measurement_system: {
+    default: 'imperial',
+    enum: ['imperial', 'metric'],
+    type: String
+  },
+  radius: {
+    default: 10,
+    type: Number
   },
   tokens: [
     {

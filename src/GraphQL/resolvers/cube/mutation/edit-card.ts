@@ -9,11 +9,11 @@ import returnComponent from '../../../../utils/return-component.js';
 interface EditCardArgs {
   cardID: string;
   componentID: string;
-  cmc: number;
-  color_identity: string[];
-  notes: string;
-  scryfall_id: string;
-  type_line: string;
+  cmc?: number;
+  color_identity?: string[];
+  notes?: string;
+  scryfall_id?: string;
+  type_line?: string;
 }
 
 export default async function (
@@ -52,7 +52,9 @@ export default async function (
   ];
 
   for (const prop of validCardProperties) {
-    (card[prop as keyof CubeCard] as any) = args[prop as keyof EditCardArgs];
+    if (typeof args[prop as keyof EditCardArgs] !== 'undefined') {
+      (card[prop as keyof CubeCard] as any) = args[prop as keyof EditCardArgs];
+    }
   }
 
   try {

@@ -1,6 +1,7 @@
 jest.config.json
 jest-config.js
 nodemon.json
+scryfall-card-data.json
 
 dist/
 node_modules/

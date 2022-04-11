@@ -1,0 +1,7 @@
+enum ScryfallCardBorderColorEnum {
+  black
+  borderless
+  gold
+  silver
+  white
+}

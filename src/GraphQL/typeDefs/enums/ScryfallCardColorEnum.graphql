@@ -1,0 +1,8 @@
+enum ScryfallCardColorEnum {
+  B
+  U
+  C
+  G
+  R
+  W
+}

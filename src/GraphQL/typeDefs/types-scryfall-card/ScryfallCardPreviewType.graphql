@@ -1,0 +1,5 @@
+type ScryfallCardPreviewType {
+  previewed_at: String
+  source: String
+  source_uri: String
+}

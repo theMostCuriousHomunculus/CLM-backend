@@ -1,0 +1,7 @@
+enum ScryfallCardFrameEnum {
+  _1993
+  _1997
+  _2003
+  _2015
+  future
+}

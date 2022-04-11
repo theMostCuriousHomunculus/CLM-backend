@@ -9,5 +9,7 @@ type Query {
   fetchDeckByID: DeckType!
   fetchEventByID: EventType!
   fetchMatchByID: MatchType!
+  searchCard(search: String): [ScryfallCardType]!
+  searchPrintings(oracle_id: String): [ScryfallCardType]!
   searchSite(search: String): [SearchSiteResult]!
 }

@@ -33,8 +33,8 @@ export default async function (
       $geoNear: {
         distanceField: 'meters_away',
         maxDistance:
-          bearer.settings.radius *
-          (bearer.settings.measurement_system === MeasurementSystem.IMPERIAL
+          bearer.radius! *
+          (bearer.measurement_system === MeasurementSystem.IMPERIAL
             ? 1609.344
             : 1000),
         near: {

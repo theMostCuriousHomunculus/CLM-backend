@@ -10,7 +10,7 @@ export default {
   ) {
     const { connectionParams } = context;
 
-    if (!('cubeID' in connectionParams!)) {
+    if (!connectionParams || !('cubeID' in connectionParams)) {
       throw new HTTPError('You did not provide a cubeID.', 400);
     }
 
